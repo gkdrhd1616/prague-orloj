@@ -47,6 +47,8 @@ enum OrlojDesignSystem {
     static let wornGilding = Color(red: 0.62, green: 0.47, blue: 0.22)
     static let shadowBrown = Color(red: 0.09, green: 0.055, blue: 0.033)
     static let burntUmber = Color(red: 0.32, green: 0.135, blue: 0.075)
+    static let ironGrey = Color(red: 0.25, green: 0.26, blue: 0.27)
+    static let ironHighlight = Color(red: 0.62, green: 0.64, blue: 0.65)
 
     static let drawerCornerRadius: CGFloat = 8
     static let controlCornerRadius: CGFloat = 8

@@ -318,6 +318,7 @@ struct OrlojClockView: View {
         let sunPoint = geometry.screenPoint(state.dialSunProjection)
         let handEnd = geometry.polarPoint(radius: geometry.oldCzechInnerRadius, degrees: goldenHandAngle.degrees)
 
+        drawCounterweightTail(degrees: goldenHandAngle.degrees + 180, in: &context, geometry: geometry, alpha: alpha)
         drawLine(
             from: geometry.center,
             to: handEnd,
@@ -361,28 +362,84 @@ struct OrlojClockView: View {
         OrlojSolarOrnaments.hand(in: &handContext, alpha: alpha)
     }
 
+    /// Iron counterweight arm opposite a hand: a plain rod ending in a flat
+    /// paddle with a cross-bar, as photographed on the dial.
+    private func drawCounterweightTail(degrees: Double, in context: inout GraphicsContext, geometry: OrlojDialGeometry, alpha: Double) {
+        var tail = context
+        tail.opacity *= alpha
+        tail.translateBy(x: geometry.center.x, y: geometry.center.y)
+        tail.rotate(by: .degrees(degrees))
+        tail.scaleBy(x: geometry.radius, y: geometry.radius)
+
+        // Local coordinates in dial radii; the arm points to negative y.
+        let length: CGFloat = 0.62
+        var shape = Path()
+        shape.addRect(CGRect(x: -0.0034, y: -length + 0.06, width: 0.0068, height: length - 0.06))
+        shape.addRect(CGRect(x: -0.008, y: -length + 0.012, width: 0.016, height: 0.05))
+        shape.addRect(CGRect(x: -0.026, y: -length, width: 0.052, height: 0.013))
+
+        var shadow = tail
+        shadow.translateBy(x: 0.002, y: 0.004)
+        shadow.fill(shape, with: .color(.black.opacity(0.45)))
+        tail.fill(shape, with: .linearGradient(
+            Gradient(colors: [OrlojDesignSystem.ironHighlight, OrlojDesignSystem.ironGrey, OrlojDesignSystem.shadowBrown]),
+            startPoint: CGPoint(x: -0.02, y: -length), endPoint: CGPoint(x: 0.02, y: -length + 0.04)))
+        tail.stroke(shape, with: .color(OrlojDesignSystem.shadowBrown.opacity(0.7)), lineWidth: 0.0012)
+    }
+
     private func drawEclipticLadder(in context: inout GraphicsContext, geometry: OrlojDialGeometry, alpha: Double) {
         let track = eclipticCircle(geometry: geometry)
         let center = track.center
         let trackRadius = track.radius
-        let innerRadius = trackRadius - geometry.radius * 0.024
+        let innerRadius = trackRadius - geometry.radius * 0.03
         let outerRadius = trackRadius
+
+        // On the Orloj the ladder is a solid gilded comb: broad bars with dark
+        // open slots between them, one bar per 5° of longitude.
+        var ladder = context
+        ladder.opacity *= alpha
+        let slotBand = annulusPath(center: center, innerRadius: innerRadius, outerRadius: outerRadius)
+        ladder.fill(slotBand, with: .color(OrlojDesignSystem.enamelDark.opacity(0.94)), style: FillStyle(eoFill: true))
+
+        var bars = Path()
+        for longitude in stride(from: 0.0, to: 360.0, by: 5.0) {
+            let direction = ladderDirection(longitude: longitude, center: center, geometry: geometry)
+            let before = ladderDirection(longitude: longitude - 2.5, center: center, geometry: geometry)
+            let after = ladderDirection(longitude: longitude + 2.5, center: center, geometry: geometry)
+            // Bars fill about half of the projected spacing, as on the dial.
+            let spacing = hypot(after.x - before.x, after.y - before.y) * trackRadius
+            let halfWidth = max(0.6, spacing * 0.27)
+            let normal = CGPoint(x: -direction.y, y: direction.x)
+            let innerPoint = CGPoint(x: center.x + direction.x * innerRadius, y: center.y + direction.y * innerRadius)
+            let outerPoint = CGPoint(x: center.x + direction.x * outerRadius, y: center.y + direction.y * outerRadius)
+            bars.move(to: CGPoint(x: innerPoint.x - normal.x * halfWidth, y: innerPoint.y - normal.y * halfWidth))
+            bars.addLine(to: CGPoint(x: outerPoint.x - normal.x * halfWidth, y: outerPoint.y - normal.y * halfWidth))
+            bars.addLine(to: CGPoint(x: outerPoint.x + normal.x * halfWidth, y: outerPoint.y + normal.y * halfWidth))
+            bars.addLine(to: CGPoint(x: innerPoint.x + normal.x * halfWidth, y: innerPoint.y + normal.y * halfWidth))
+            bars.closeSubpath()
+        }
+        var barShadow = ladder
+        barShadow.translateBy(x: geometry.radius * 0.0015, y: geometry.radius * 0.003)
+        barShadow.fill(bars, with: .color(.black.opacity(0.42)))
+        ladder.fill(bars, with: OrlojDialMaterials.gilding(in: CGRect(
+            x: center.x - outerRadius, y: center.y - outerRadius,
+            width: outerRadius * 2, height: outerRadius * 2)))
+        ladder.stroke(bars, with: .color(OrlojDesignSystem.darkBrass.opacity(0.55)), lineWidth: max(0.5, geometry.radius * 0.0008))
+
         for radius in [innerRadius, outerRadius] {
             let rim = circle(center: center, radius: radius)
             OrlojDialMaterials.raisedRim(rim, in: &context, bounds: rim.boundingRect,
                 width: geometry.radius * 0.0045, alpha: alpha)
         }
-        for longitude in stride(from: 0.0, to: 360.0, by: 5.0) {
-            let point = projectedEclipticPoint(longitude: longitude, geometry: geometry)
-            let dx = (point.x - center.x) / trackRadius
-            let dy = (point.y - center.y) / trackRadius
-            drawLine(
-                from: CGPoint(x: center.x + dx * innerRadius, y: center.y + dy * innerRadius),
-                to: CGPoint(x: center.x + dx * outerRadius, y: center.y + dy * outerRadius),
-                in: &context, color: OrlojDesignSystem.highlightGold.opacity(0.9 * alpha),
-                lineWidth: geometry.radius * (Int(longitude).isMultiple(of: 30) ? 0.005 : 0.003)
-            )
-        }
+    }
+
+    /// Unit vector from the ladder centre towards the projected ecliptic longitude.
+    private func ladderDirection(longitude: Double, center: CGPoint, geometry: OrlojDialGeometry) -> CGPoint {
+        let point = projectedEclipticPoint(longitude: longitude, geometry: geometry)
+        let dx = point.x - center.x
+        let dy = point.y - center.y
+        let length = max(0.0001, hypot(dx, dy))
+        return CGPoint(x: dx / length, y: dy / length)
     }
 
     private func eclipticCircle(geometry: OrlojDialGeometry) -> (center: CGPoint, radius: CGFloat) {
@@ -405,27 +462,36 @@ struct OrlojClockView: View {
     private func drawMoon(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
         let alpha = layerAlpha(.moon, representedLayers: [.moonMarker, .moonPhase, .lunarPosition])
         let moonPoint = geometry.screenPoint(state.dialMoonProjection)
+        let moonDegrees = Double(atan2(moonPoint.x - geometry.center.x, geometry.center.y - moonPoint.y)) * 180 / .pi
 
-        drawLine(
-            from: geometry.center,
-            to: moonPoint,
-            in: &context,
-            color: OrlojDesignSystem.shadowBrown.opacity(0.5 * alpha),
-            lineWidth: geometry.radius * 0.0065
+        // The Moon's arm is a dark iron rod that runs on past the sphere,
+        // balanced by a tail on the opposite side of the arbor.
+        drawCounterweightTail(degrees: moonDegrees + 180, in: &context, geometry: geometry, alpha: alpha)
+        let moonDistance = hypot(moonPoint.x - geometry.center.x, moonPoint.y - geometry.center.y)
+        let moonArmEnd = geometry.polarPoint(
+            radius: max(moonDistance, geometry.romanRadius - geometry.radius * 0.07),
+            degrees: moonDegrees
         )
         drawLine(
             from: geometry.center,
-            to: moonPoint,
+            to: moonArmEnd,
             in: &context,
-            color: OrlojDesignSystem.darkBrass.opacity(0.44 * alpha),
-            lineWidth: geometry.radius * 0.0042
+            color: OrlojDesignSystem.shadowBrown.opacity(0.6 * alpha),
+            lineWidth: geometry.radius * 0.0075
         )
         drawLine(
             from: geometry.center,
-            to: moonPoint,
+            to: moonArmEnd,
             in: &context,
-            color: OrlojDesignSystem.ivoryText.opacity(0.24 * alpha),
-            lineWidth: geometry.radius * 0.0016
+            color: OrlojDesignSystem.ironGrey.opacity(0.9 * alpha),
+            lineWidth: geometry.radius * 0.0048
+        )
+        drawLine(
+            from: geometry.center,
+            to: moonArmEnd,
+            in: &context,
+            color: OrlojDesignSystem.ironHighlight.opacity(0.4 * alpha),
+            lineWidth: geometry.radius * 0.0014
         )
         drawMoonIcon(at: moonPoint, radius: geometry.radius * (130.0 / 3000.0), in: &context, alpha: alpha,
             supportAngleRadians: Double(atan2(moonPoint.x - geometry.center.x, geometry.center.y - moonPoint.y)))
@@ -795,78 +861,149 @@ struct OrlojClockView: View {
     }
 
     private func drawLatinLabels(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
+        // On the dial ORTVS and OCCASVS are lettered along the horizon, just
+        // above it, and AVRORA and CREPVSCVLVM along the red twilight band
+        // below it, each following the curve of the horizon line. The dial has
+        // no inscription in the black night disk.
         let plateRadius = geometry.coloredPlateRadius
-        let shadow = Color.clear
-        drawReadablePlateInscription(
-            "AVRORA",
-            degrees: 236,
-            radius: plateRadius * 0.56,
-            rotationDegrees: -20,
-            width: plateRadius * 0.22,
-            in: &context,
-            geometry: geometry,
-            size: geometry.radius * 0.024,
-            weight: .semibold,
-            color: OrlojDesignSystem.ink.opacity(0.88),
-            shadowColor: shadow,
-            trackingScale: 0.018
-        )
-        drawReadablePlateInscription(
-            "CREPVSCVLVM",
-            degrees: 124,
-            radius: plateRadius * 0.58,
-            rotationDegrees: 20,
-            width: plateRadius * 0.34,
-            in: &context,
-            geometry: geometry,
-            size: geometry.radius * 0.0195,
-            weight: .semibold,
-            color: OrlojDesignSystem.ink.opacity(0.88),
-            shadowColor: shadow,
-            trackingScale: 0.01
-        )
-        drawReadablePlateInscription(
-            "ORTVS",
-            degrees: 288,
-            radius: plateRadius * 0.69,
-            rotationDegrees: -16,
-            width: plateRadius * 0.2,
-            in: &context,
-            geometry: geometry,
-            size: geometry.radius * 0.031,
-            weight: .black,
-            color: OrlojDesignSystem.ink.opacity(0.96),
-            shadowColor: shadow,
-            trackingScale: 0.014
-        )
-        drawReadablePlateInscription(
-            "OCCASVS",
-            degrees: 72,
-            radius: plateRadius * 0.69,
-            rotationDegrees: 16,
-            width: plateRadius * 0.26,
-            in: &context,
-            geometry: geometry,
-            size: geometry.radius * 0.03,
-            weight: .black,
-            color: OrlojDesignSystem.ink.opacity(0.96),
-            shadowColor: shadow,
-            trackingScale: 0.012
-        )
-        drawPlateInscription(
-            "NOX",
-            at: CGPoint(x: geometry.center.x, y: geometry.center.y + geometry.astrolabeRadius * 0.52),
-            rotationDegrees: 0,
-            width: plateRadius * 0.2,
-            in: &context,
-            geometry: geometry,
-            size: geometry.radius * 0.037,
-            weight: .black,
-            color: OrlojDesignSystem.ivoryText.opacity(0.36),
-            shadowColor: OrlojDesignSystem.ink.opacity(0.68),
-            showRule: false,
-            trackingScale: 0.09
-        )
+        let latitude = state.location.coordinates.latitude
+        let horizon = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: latitude, altitudeDegrees: 0)
+        let night = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: latitude, altitudeDegrees: -18)
+        let ink = OrlojDesignSystem.ink.opacity(0.9)
+
+        let labels: [(text: String, east: Bool, dialDistance: CGFloat, belowHorizon: Bool, size: CGFloat, fallbackDegrees: Double)] = [
+            ("ORTVS", true, plateRadius * 0.70, false, geometry.radius * 0.03, 288),
+            ("OCCASVS", false, plateRadius * 0.70, false, geometry.radius * 0.03, 72),
+            ("AVRORA", true, plateRadius * 0.84, true, geometry.radius * 0.027, 236),
+            ("CREPVSCVLVM", false, plateRadius * 0.84, true, geometry.radius * 0.025, 124)
+        ]
+
+        for label in labels {
+            guard case .circle(let horizonCircle) = horizon,
+                  let arc = horizonInscriptionArc(
+                      horizonCircle,
+                      night: night,
+                      east: label.east,
+                      dialDistance: label.dialDistance,
+                      belowHorizon: label.belowHorizon,
+                      size: label.size,
+                      geometry: geometry
+                  ) else {
+                // Equatorial (straight) horizon or no crossing at this distance.
+                drawReadablePlateInscription(
+                    label.text,
+                    degrees: label.fallbackDegrees,
+                    radius: plateRadius * (label.belowHorizon ? 0.6 : 0.69),
+                    rotationDegrees: label.east ? -16 : 16,
+                    width: plateRadius * 0.3,
+                    in: &context,
+                    geometry: geometry,
+                    size: label.size,
+                    weight: .semibold,
+                    color: ink,
+                    shadowColor: .clear,
+                    trackingScale: 0.012
+                )
+                continue
+            }
+            drawArcInscription(
+                label.text,
+                arcCenter: arc.center,
+                arcRadius: arc.radius,
+                midAngle: arc.angle,
+                in: &context,
+                size: label.size,
+                color: ink,
+                tracking: label.size * 0.08
+            )
+        }
+    }
+
+    /// Where an inscription sits along the projected horizon: the arc centre,
+    /// the radius the letters' baseline-centre follows, and the angle (screen
+    /// radians around that centre) of the word's middle.
+    private func horizonInscriptionArc(
+        _ horizon: OrlojProjectionCircle,
+        night: OrlojProjectionBoundary,
+        east: Bool,
+        dialDistance: CGFloat,
+        belowHorizon: Bool,
+        size: CGFloat,
+        geometry: OrlojDialGeometry
+    ) -> (center: CGPoint, radius: CGFloat, angle: CGFloat)? {
+        let arcCenter = geometry.screenPoint(horizon.center)
+        let horizonRadius = geometry.screenLength(horizon.radius)
+        // Horizon centre lies on the dial's vertical axis; offset h downward.
+        let h = arcCenter.y - geometry.center.y
+        guard abs(h) > 0.5 else { return nil }
+        let y = (h * h + dialDistance * dialDistance - horizonRadius * horizonRadius) / (2 * h)
+        guard abs(y) < dialDistance else { return nil }
+        let x = sqrt(dialDistance * dialDistance - y * y) * (east ? -1 : 1)
+        let angle = atan2(y - h, x)
+
+        // Which side of the horizon circle is the sky above the horizon.
+        let aboveIsOutside: CGFloat = horizon.lowerAltitudeIsInside ? 1 : -1
+        let radius: CGFloat
+        if belowHorizon {
+            // Middle of the twilight band, between horizon and astronomical night.
+            var bandEdge = horizonRadius - aboveIsOutside * size * 3
+            if case .circle(let nightCircle) = night {
+                let nightCenter = geometry.screenPoint(nightCircle.center)
+                let nightRadius = geometry.screenLength(nightCircle.radius)
+                let direction = CGPoint(x: cos(angle), y: sin(angle))
+                let offset = CGPoint(x: arcCenter.x - nightCenter.x, y: arcCenter.y - nightCenter.y)
+                let b = offset.x * direction.x + offset.y * direction.y
+                let c = offset.x * offset.x + offset.y * offset.y - nightRadius * nightRadius
+                let discriminant = b * b - c
+                if discriminant >= 0 {
+                    let roots = [-b - sqrt(discriminant), -b + sqrt(discriminant)].filter { $0 > 0 }
+                    if let nearest = roots.min(by: { abs($0 - horizonRadius) < abs($1 - horizonRadius) }) {
+                        bandEdge = nearest
+                    }
+                }
+            }
+            radius = (horizonRadius + bandEdge) / 2
+        } else {
+            radius = horizonRadius + aboveIsOutside * size * 0.85
+        }
+        guard radius > size else { return nil }
+        return (arcCenter, radius, angle)
+    }
+
+    /// Capitals set one by one along a circle, reading clockwise with their
+    /// tops away from the arc centre, like lettering painted along the horizon.
+    private func drawArcInscription(
+        _ string: String,
+        arcCenter: CGPoint,
+        arcRadius: CGFloat,
+        midAngle: CGFloat,
+        in context: inout GraphicsContext,
+        size: CGFloat,
+        color: Color,
+        tracking: CGFloat
+    ) {
+        let font = Font.system(size: max(6, size), weight: .semibold, design: .serif)
+        let glyphs = string.map { character in
+            context.resolve(Text(String(character)).font(font).foregroundStyle(color))
+        }
+        let widths = glyphs.map { $0.measure(in: CGSize(width: size * 4, height: size * 4)).width + tracking }
+        let total = widths.reduce(0, +) - tracking
+        // Under the arc centre, outward-facing letters would stand on their
+        // heads; there they face the centre and read anticlockwise instead.
+        let direction: CGFloat = sin(midAngle) > 0.5 ? -1 : 1
+        var angle = midAngle - direction * total / 2 / arcRadius
+        for (glyph, width) in zip(glyphs, widths) {
+            let glyphWidth = width - tracking
+            let centreAngle = angle + direction * glyphWidth / 2 / arcRadius
+            var letter = context
+            letter.translateBy(
+                x: arcCenter.x + cos(centreAngle) * arcRadius,
+                y: arcCenter.y + sin(centreAngle) * arcRadius
+            )
+            letter.rotate(by: .radians(Double(centreAngle) + .pi / 2 * Double(direction)))
+            letter.draw(glyph, at: .zero, anchor: .center)
+            angle += direction * width / arcRadius
+        }
     }
 
     private func drawReadablePlateInscription(
