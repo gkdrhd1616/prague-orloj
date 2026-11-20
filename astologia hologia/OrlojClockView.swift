@@ -120,7 +120,6 @@ struct OrlojClockView: View {
         clipped.clip(to: disk)
         clipped.fill(disk, with: .color(OrlojDesignSystem.plateNight))
         clipped.fill(boundaryLowerRegionPath(horizon, geometry: geometry), with: .color(OrlojDesignSystem.plateTwilight.opacity(0.92)), style: FillStyle(eoFill: true))
-        clipped.fill(boundaryLowerRegionPath(horizon, geometry: geometry), with: .color(OrlojDesignSystem.burntUmber.opacity(0.12)), style: FillStyle(eoFill: true))
         clipped.fill(boundaryLowerRegionPath(night, geometry: geometry), with: .color(OrlojDesignSystem.plateNight.opacity(0.98)), style: FillStyle(eoFill: true))
 
         let dayPath = dayRegionPath(horizon, plateRect: geometry.coloredPlateRect, geometry: geometry)
@@ -646,7 +645,7 @@ struct OrlojClockView: View {
             innerRadius: geometry.oldCzechInnerRadius,
             outerRadius: geometry.oldCzechOuterRadius
         )
-        context.fill(ring, with: .color(OrlojDesignSystem.enamelBlueBlack.opacity(0.98 * alpha)), style: FillStyle(eoFill: true))
+        context.fill(ring, with: .color(OrlojDesignSystem.outerRingSlate.opacity(0.98 * alpha)), style: FillStyle(eoFill: true))
         context.fill(ring, with: .color(OrlojDesignSystem.ink.opacity(0.24 * alpha)), style: FillStyle(eoFill: true))
         var enamel = context
         enamel.clip(to: ring, style: FillStyle(eoFill: true))

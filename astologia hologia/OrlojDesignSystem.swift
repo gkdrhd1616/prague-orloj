@@ -17,10 +17,13 @@ enum OrlojDesignSystem {
     static let night = Color(red: 0.035, green: 0.045, blue: 0.065)
     static let twilight = Color(red: 0.55, green: 0.27, blue: 0.21)
     static let daylight = Color(red: 0.20, green: 0.48, blue: 0.66)
-    static let plateDay = Color(red: 0.54, green: 0.73, blue: 0.81)
+    // Plate paint sampled from a 2013 daylight photograph of the dial and
+    // neutralised for the warm sunlight in it: teal sky, ochre twilight,
+    // charcoal night, slate-blue zodiac band and outer ring.
+    static let plateDay = Color(red: 0.50, green: 0.68, blue: 0.69)
     static let plateBelowHorizon = Color(red: 0.18, green: 0.095, blue: 0.075)
-    static let plateTwilight = Color(red: 0.65, green: 0.16, blue: 0.14)
-    static let plateNight = Color(red: 0.035, green: 0.045, blue: 0.065)
+    static let plateTwilight = Color(red: 0.79, green: 0.56, blue: 0.21)
+    static let plateNight = Color(red: 0.085, green: 0.092, blue: 0.11)
     static let earth = Color(red: 0.12, green: 0.31, blue: 0.39)
     static let gold = Color(red: 0.84, green: 0.68, blue: 0.30)
     static let sun = Color(red: 0.96, green: 0.84, blue: 0.49)
@@ -39,7 +42,8 @@ enum OrlojDesignSystem {
     static let ivoryText = Color(red: 0.92, green: 0.82, blue: 0.56)
     static let enamelDark = Color(red: 0.035, green: 0.029, blue: 0.023)
     static let enamelBlueBlack = Color(red: 0.055, green: 0.075, blue: 0.11)
-    static let zodiacBlue = Color(red: 0.065, green: 0.085, blue: 0.12)
+    static let zodiacBlue = Color(red: 0.36, green: 0.40, blue: 0.49)
+    static let outerRingSlate = Color(red: 0.36, green: 0.40, blue: 0.51)
     static let agedGoldEdge = Color(red: 0.64, green: 0.47, blue: 0.18)
     static let moonSilver = Color(red: 0.82, green: 0.84, blue: 0.80)
     static let moonDarkMetal = Color(red: 0.09, green: 0.086, blue: 0.078)
