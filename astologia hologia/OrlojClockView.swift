@@ -20,11 +20,7 @@ struct OrlojClockView: View {
     /// Sunlight for the dial's location and moment: it decides the direction
     /// and length of every cast shadow and where the gilding catches the light.
     var lighting: OrlojDialLighting {
-        OrlojDialLighting(
-            sunAltitudeDegrees: state.solar.altitudeDegrees,
-            sunAzimuthDegrees: state.solar.azimuthDegrees,
-            latitudeDegrees: state.location.coordinates.latitude
-        )
+        state.dialLighting
     }
 
     var body: some View {
@@ -725,8 +721,13 @@ struct OrlojClockView: View {
     private func drawFixedEarth(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
         // 2019 restoration reference: a blue globe with curved gold graticule.
         // Historical dimensions give globe/equator radii of 36 cm / 82.5 cm.
-        OrlojEarthRenderer.draw(center: geometry.center, radius: geometry.screenLength(1) * (36.0 / 82.5), in: &context,
+        OrlojEarthRenderer.draw(center: geometry.center, radius: earthRadius(geometry: geometry), in: &context,
             light: geometry.lighting)
+    }
+
+    /// Historical dimensions give globe and equator radii of 36 cm and 82.5 cm.
+    private func earthRadius(geometry: OrlojDialGeometry) -> CGFloat {
+        geometry.screenLength(1) * (36.0 / 82.5)
     }
 
     private func drawAxle(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
@@ -828,8 +829,8 @@ struct OrlojClockView: View {
         if layers.containsAny(.horizonCurve, .ortusLabel, .occasusLabel) {
             let horizon = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: state.location.coordinates.latitude, altitudeDegrees: 0)
             context.stroke(boundaryStrokePath(horizon, geometry: geometry), with: .color(highlight.opacity(0.9)), style: StrokeStyle(lineWidth: geometry.radius * 0.008, lineCap: .round, lineJoin: .round))
-            drawSmallLabel("ORTVS", at: CGPoint(x: geometry.center.x - geometry.astrolabeRadius * 0.78, y: geometry.center.y - geometry.astrolabeRadius * 0.1), in: &context, geometry: geometry, color: highlight.opacity(0.96))
-            drawSmallLabel("OCCASVS", at: CGPoint(x: geometry.center.x + geometry.astrolabeRadius * 0.78, y: geometry.center.y - geometry.astrolabeRadius * 0.1), in: &context, geometry: geometry, color: highlight.opacity(0.96))
+            // The painted words themselves, lifted above the zodiac ring.
+            drawLatinLabels(in: &context, geometry: geometry, color: highlight, only: ["ORTVS", "OCCASVS"])
         }
 
         if layers.containsAny(.twilightBand, .auroraLabel, .crepusculumLabel, .nightBoundary) {
@@ -837,8 +838,7 @@ struct OrlojClockView: View {
             let night = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: state.location.coordinates.latitude, altitudeDegrees: -18)
             context.stroke(boundaryStrokePath(horizon, geometry: geometry), with: .color(OrlojDesignSystem.twilightOchre.opacity(0.9)), style: StrokeStyle(lineWidth: geometry.radius * 0.006, dash: [7, 4]))
             context.stroke(boundaryStrokePath(night, geometry: geometry), with: .color(highlight.opacity(0.82)), style: StrokeStyle(lineWidth: geometry.radius * 0.007, dash: [6, 4]))
-            drawSmallLabel("AVRORA", at: CGPoint(x: geometry.center.x - geometry.astrolabeRadius * 0.62, y: geometry.center.y + geometry.astrolabeRadius * 0.1), in: &context, geometry: geometry, color: highlight.opacity(0.9))
-            drawSmallLabel("CREPVSCVLVM", at: CGPoint(x: geometry.center.x + geometry.astrolabeRadius * 0.58, y: geometry.center.y + geometry.astrolabeRadius * 0.1), in: &context, geometry: geometry, color: highlight.opacity(0.9))
+            drawLatinLabels(in: &context, geometry: geometry, color: highlight, only: ["AVRORA", "CREPVSCVLVM"])
         }
 
         if layers.containsAny(.unequalHourLines, .daylightHourCurves) {
@@ -881,6 +881,58 @@ struct OrlojClockView: View {
             context.stroke(projectedEclipticPath(geometry: geometry, stepDegrees: 3), with: .color(highlight.opacity(0.38)), style: StrokeStyle(lineWidth: geometry.radius * 0.005, dash: [5, 5]))
             context.stroke(circle(center: geometry.screenPoint(state.dialSunProjection), radius: geometry.radius * 0.072), with: .color(highlight.opacity(0.85)), lineWidth: geometry.radius * 0.006)
         }
+
+        if layers.contains(.earthDisk) {
+            // The globe, and the fixed plate's edge around it.
+            let radius = earthRadius(geometry: geometry)
+            context.stroke(circle(center: geometry.center, radius: radius + geometry.radius * 0.012), with: .color(highlight.opacity(0.9)), lineWidth: geometry.radius * 0.007)
+            context.stroke(circle(center: geometry.center, radius: geometry.coloredPlateRadius - geometry.radius * 0.006), with: .color(highlight.opacity(0.5)), style: StrokeStyle(lineWidth: geometry.radius * 0.005, dash: [6, 5]))
+        }
+
+        if layers.contains(.castShadows) {
+            drawLightDirectionGuide(in: &context, geometry: geometry, color: highlight)
+        }
+    }
+
+    /// An arrow from the side the light comes from towards the centre, and a
+    /// shorter one showing where shadows fall. Without direct sun, only a
+    /// soft arrow from above for the open sky.
+    private func drawLightDirectionGuide(in context: inout GraphicsContext, geometry: OrlojDialGeometry, color: Color) {
+        let light = geometry.lighting
+        let direction = light.lightDirection
+        let start = CGPoint(x: geometry.center.x + direction.width * geometry.radius * 0.7,
+                            y: geometry.center.y + direction.height * geometry.radius * 0.7)
+        let end = CGPoint(x: geometry.center.x + direction.width * geometry.radius * 0.28,
+                          y: geometry.center.y + direction.height * geometry.radius * 0.28)
+        let strength = 0.4 + 0.55 * light.sunlit
+        drawArrow(from: start, to: end, in: &context, color: color.opacity(strength), width: geometry.radius * 0.01)
+
+        let shift = light.shadowOffset(relief: 0.12)
+        if hypot(shift.width, shift.height) > 0.004 {
+            let sun = geometry.screenPoint(state.dialSunProjection)
+            let shadowEnd = CGPoint(x: sun.x + shift.width * geometry.radius, y: sun.y + shift.height * geometry.radius)
+            drawArrow(from: sun, to: shadowEnd, in: &context, color: OrlojDesignSystem.ink.opacity(0.75 * strength), width: geometry.radius * 0.007)
+        }
+    }
+
+    private func drawArrow(from start: CGPoint, to end: CGPoint, in context: inout GraphicsContext, color: Color, width: CGFloat) {
+        let dx = end.x - start.x
+        let dy = end.y - start.y
+        let length = hypot(dx, dy)
+        guard length > 1 else { return }
+        let ux = dx / length
+        let uy = dy / length
+        let head = min(length * 0.4, width * 4)
+        var shaft = Path()
+        shaft.move(to: start)
+        shaft.addLine(to: CGPoint(x: end.x - ux * head * 0.6, y: end.y - uy * head * 0.6))
+        context.stroke(shaft, with: .color(color), style: StrokeStyle(lineWidth: width, lineCap: .round))
+        var tip = Path()
+        tip.move(to: end)
+        tip.addLine(to: CGPoint(x: end.x - ux * head - uy * head * 0.55, y: end.y - uy * head + ux * head * 0.55))
+        tip.addLine(to: CGPoint(x: end.x - ux * head + uy * head * 0.55, y: end.y - uy * head - ux * head * 0.55))
+        tip.closeSubpath()
+        context.fill(tip, with: .color(color))
     }
 
     private func guideCallout(for item: OrlojGuideItem, geometry: OrlojDialGeometry) -> OrlojGuideCallout {
@@ -914,6 +966,10 @@ struct OrlojClockView: View {
         case .siderealAries:
             return ariesStarPoint(geometry: geometry)
         case .tropics:
+            return geometry.screenPoint(state.dialSunProjection)
+        case .earthAndPlate:
+            return geometry.polarPoint(radius: earthRadius(geometry: geometry), degrees: 225)
+        case .lightAndShadow:
             return geometry.screenPoint(state.dialSunProjection)
         }
     }
@@ -1008,7 +1064,12 @@ struct OrlojClockView: View {
         return CGPoint(x: x, y: y)
     }
 
-    private func drawLatinLabels(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
+    private func drawLatinLabels(
+        in context: inout GraphicsContext,
+        geometry: OrlojDialGeometry,
+        color: Color? = nil,
+        only words: Set<String>? = nil
+    ) {
         // On the dial ORTVS and OCCASVS are lettered along the horizon, just
         // above it, and AVRORA and CREPVSCVLVM along the red twilight band
         // below it, each following the curve of the horizon line. The dial has
@@ -1017,7 +1078,7 @@ struct OrlojClockView: View {
         let latitude = state.location.coordinates.latitude
         let horizon = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: latitude, altitudeDegrees: 0)
         let night = OrlojProjection.constantAltitudeBoundary(latitudeDegrees: latitude, altitudeDegrees: -18)
-        let ink = OrlojDesignSystem.ink.opacity(0.9)
+        let ink = color ?? OrlojDesignSystem.ink.opacity(0.9)
 
         let labels: [(text: String, east: Bool, dialDistance: CGFloat, belowHorizon: Bool, size: CGFloat, fallbackDegrees: Double)] = [
             // Distances and letter heights measured on the photographed dial,
@@ -1028,7 +1089,7 @@ struct OrlojClockView: View {
             ("CREPVSCVLVM", false, plateRadius * 0.74, true, geometry.radius * 0.04, 124)
         ]
 
-        for label in labels {
+        for label in labels where words?.contains(label.text) ?? true {
             guard case .circle(let horizonCircle) = horizon,
                   let arc = horizonInscriptionArc(
                       horizonCircle,

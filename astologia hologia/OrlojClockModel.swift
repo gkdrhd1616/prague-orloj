@@ -33,6 +33,15 @@ struct OrlojClockState {
         location.id == OrlojClockLocation.prague.id
     }
 
+    /// Sunlight on the dial's face for this place and moment.
+    var dialLighting: OrlojDialLighting {
+        OrlojDialLighting(
+            sunAltitudeDegrees: solar.altitudeDegrees,
+            sunAzimuthDegrees: solar.azimuthDegrees,
+            latitudeDegrees: location.coordinates.latitude
+        )
+    }
+
     private var dialOffsetMinutes: Double {
         isPragueMechanism ? 60 - Double(location.timeZone.secondsFromGMT(for: date)) / 60 : 0
     }

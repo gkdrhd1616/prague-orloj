@@ -42,6 +42,7 @@ struct OrlojAstronomyReadout {
     let ancientDayBoundary: String
     let babylonianHour: String
     let daylightProgress: String
+    let lighting: String
 
     init(state: OrlojClockState) {
         isPragueMechanism = state.isPragueMechanism
@@ -78,6 +79,7 @@ struct OrlojAstronomyReadout {
         ancientDayBoundary = state.ancientDayBoundaryLabel
         babylonianHour = state.babylonianHourLabel
         daylightProgress = state.daylightProgressLabel
+        lighting = state.dialLighting.summary
     }
 
     var primaryMetrics: [OrlojReadoutMetric] {

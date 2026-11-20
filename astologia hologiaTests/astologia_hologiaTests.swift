@@ -501,6 +501,8 @@ struct astologia_hologiaTests {
         #expect(OrlojGuideCatalog.item(for: .unequalHours)?.targetLayers.contains(.unequalHourLines) == true)
         #expect(OrlojGuideCatalog.item(for: .siderealAries)?.targetLayers.contains(.ariesStar) == true)
         #expect(OrlojGuideCatalog.item(for: .tropics)?.targetLayers.contains(.tropicCancer) == true)
+        #expect(OrlojGuideCatalog.item(for: .earthAndPlate)?.targetLayers.contains(.earthDisk) == true)
+        #expect(OrlojGuideCatalog.item(for: .lightAndShadow)?.targetLayers.contains(.castShadows) == true)
         #expect(OrlojGuideCatalog.items.allSatisfy { !$0.targetLayers.isEmpty })
     }
 

@@ -149,6 +149,8 @@ enum OrlojGuideLayerID: String, CaseIterable, Identifiable {
     case zodiacZeroPoint
     case tropicCancer
     case tropicCapricorn
+    case earthDisk
+    case castShadows
     case debugProjectionLines
 
     var id: String {
@@ -167,6 +169,8 @@ enum OrlojGuideTopicID: String, CaseIterable, Identifiable {
     case unequalHours
     case siderealAries
     case tropics
+    case earthAndPlate
+    case lightAndShadow
 
     var id: String {
         rawValue

@@ -114,6 +114,28 @@ struct OrlojDialLighting: Equatable {
         )
     }
 
+    /// A short description of the light for the reading guide. Directions
+    /// are as the viewer sees the face, so they hold for either hemisphere.
+    var summary: String {
+        if daylight < 0.5 {
+            return "Night: no direct sunlight"
+        }
+        if sunlit < 0.5 {
+            return "Face in shade: soft skylight only"
+        }
+        let length = hypot(shadowShift.width, shadowShift.height)
+        let size = length < 0.5 ? "Short" : (length < 1.3 ? "Medium" : "Long")
+        let side: String
+        if shadowShift.width < -0.2 {
+            side = "down and to the left"
+        } else if shadowShift.width > 0.2 {
+            side = "down and to the right"
+        } else {
+            side = "straight down"
+        }
+        return "\(size) shadows fall \(side)" + (warmth > 0.3 ? " · low, warm Sun" : "")
+    }
+
     /// Shadow displacement, in dial radii, for a part `relief` radii in front of the plate.
     func shadowOffset(relief: CGFloat) -> CGSize {
         CGSize(width: shadowShift.width * relief, height: shadowShift.height * relief)

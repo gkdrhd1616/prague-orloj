@@ -370,20 +370,53 @@ struct OrlojControlDrawer: View {
             }
 
             if let selectedGuideItem {
-                SelectedGuideCard(item: selectedGuideItem)
-
-                Divider()
-                    .overlay(OrlojDesignSystem.textMuted.opacity(0.24))
-            }
-
-            ForEach(guideItems) { item in
-                GuideTopicRow(
-                    item: item,
-                    isSelected: dialFocus.activeGuideItemId == item.id && dialFocus.mode == .guide
-                ) {
-                    inspect(item)
+                SelectedGuideCard(
+                    item: selectedGuideItem,
+                    previous: neighbourAction(of: selectedGuideItem, offset: -1),
+                    next: neighbourAction(of: selectedGuideItem, offset: 1)
+                )
+            } else {
+                GuideIntroCard(isPragueMechanism: readout?.isPragueMechanism ?? true) {
+                    if let first = guideItems.first {
+                        inspect(first)
+                    }
                 }
             }
+
+            ForEach(OrlojGuideSection.allCases) { section in
+                let sectionItems = guideItems.filter { $0.section == section }
+                if !sectionItems.isEmpty {
+                    VStack(alignment: .leading, spacing: 4) {
+                        DrawerSectionTitle(section.rawValue)
+                            .padding(.top, 4)
+
+                        ForEach(sectionItems) { item in
+                            GuideTopicRow(
+                                item: item,
+                                isSelected: dialFocus.activeGuideItemId == item.id && dialFocus.mode == .guide
+                            ) {
+                                inspect(item)
+                            }
+                        }
+                    }
+                }
+            }
+
+            Divider()
+                .overlay(OrlojDesignSystem.textMuted.opacity(0.24))
+
+            GuideSourcesFooter()
+        }
+    }
+
+    /// Steps to the topic before or after `item`, or nil at either end of the guide.
+    private func neighbourAction(of item: OrlojResolvedGuideItem, offset: Int) -> (() -> Void)? {
+        guard let neighbour = OrlojGuideCatalog.neighbour(of: item.id, offset: offset),
+              let resolved = guideItems.first(where: { $0.id == neighbour.id }) else {
+            return nil
+        }
+        return {
+            inspect(resolved)
         }
     }
 
@@ -812,24 +845,130 @@ private struct SettingNumberField: View {
 
 private struct SelectedGuideCard: View {
     let item: OrlojResolvedGuideItem
+    let previous: (() -> Void)?
+    let next: (() -> Void)?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Label(item.title, systemImage: item.systemImage)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(OrlojDesignSystem.highlightGold)
+        VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 3) {
+                Label(item.title, systemImage: item.systemImage)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(OrlojDesignSystem.highlightGold)
+
+                if let subtitle = item.subtitle {
+                    Text(subtitle)
+                        .font(.caption2)
+                        .foregroundStyle(OrlojDesignSystem.text.opacity(0.78))
+                }
+            }
 
             if let currentValue = item.currentValue {
                 Text("Current: \(currentValue)")
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundStyle(OrlojDesignSystem.text)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             Text(item.shortDescription)
+                .font(.caption)
+                .foregroundStyle(OrlojDesignSystem.text.opacity(0.9))
+                .fixedSize(horizontal: false, vertical: true)
+
+            if let longDescription = item.longDescription {
+                Text(longDescription)
+                    .font(.caption2)
+                    .foregroundStyle(OrlojDesignSystem.textMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            if !item.readingSteps.isEmpty {
+                GuideNumberedSteps(title: "How to read it", steps: item.readingSteps)
+            }
+
+            if let pragueNote = item.pragueNote {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("On the Prague Orloj")
+                        .font(.caption2.weight(.semibold))
+                        .textCase(.uppercase)
+                        .foregroundStyle(OrlojDesignSystem.textMuted)
+                    Text(pragueNote)
+                        .font(.caption2)
+                        .foregroundStyle(OrlojDesignSystem.text.opacity(0.82))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            HStack {
+                Button {
+                    previous?()
+                } label: {
+                    Label("Previous", systemImage: "chevron.left")
+                }
+                .disabled(previous == nil)
+                .accessibilityIdentifier("guidePrevious")
+
+                Spacer()
+
+                Button {
+                    next?()
+                } label: {
+                    Label("Next", systemImage: "chevron.right")
+                        .labelStyle(TrailingIconLabelStyle())
+                }
+                .disabled(next == nil)
+                .accessibilityIdentifier("guideNext")
+            }
+            .buttonStyle(.borderless)
+            .font(.caption.weight(.semibold))
+            .tint(OrlojDesignSystem.highlightGold)
+        }
+        .padding(12)
+        .background(OrlojDesignSystem.ink.opacity(0.34), in: RoundedRectangle(cornerRadius: OrlojDesignSystem.controlCornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: OrlojDesignSystem.controlCornerRadius, style: .continuous)
+                .stroke(OrlojDesignSystem.gold.opacity(0.28), lineWidth: 1)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("selectedGuideCard-\(item.id.rawValue)")
+    }
+}
+
+/// Quick start shown at the top of the guide before a topic is chosen.
+private struct GuideIntroCard: View {
+    let isPragueMechanism: Bool
+    let begin: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("How to read the dial", systemImage: "book.closed")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(OrlojDesignSystem.highlightGold)
+
+            Text(OrlojGuideCatalog.overview)
+                .font(.caption2)
+                .foregroundStyle(OrlojDesignSystem.text.opacity(0.88))
+                .fixedSize(horizontal: false, vertical: true)
+
+            GuideNumberedSteps(title: "In four steps", steps: OrlojGuideCatalog.quickSteps)
+
+            Text(isPragueMechanism ? OrlojGuideCatalog.pragueModeNote : OrlojGuideCatalog.mySkyModeNote)
                 .font(.caption2)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Text(OrlojGuideCatalog.history)
+                .font(.caption2)
+                .foregroundStyle(OrlojDesignSystem.textMuted)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button(action: begin) {
+                Label("Start the tour", systemImage: "play.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .tint(OrlojDesignSystem.gold)
+            .accessibilityIdentifier("guideStartTour")
         }
         .padding(12)
         .background(OrlojDesignSystem.ink.opacity(0.34), in: RoundedRectangle(cornerRadius: OrlojDesignSystem.controlCornerRadius, style: .continuous))
@@ -837,8 +976,67 @@ private struct SelectedGuideCard: View {
             RoundedRectangle(cornerRadius: OrlojDesignSystem.controlCornerRadius, style: .continuous)
                 .stroke(OrlojDesignSystem.textMuted.opacity(0.22), lineWidth: 1)
         }
-        .accessibilityIdentifier("selectedGuideCard-\(item.id.rawValue)")
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("guideIntroCard")
+    }
+}
+
+private struct GuideNumberedSteps: View {
+    let title: String
+    let steps: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title)
+                .font(.caption2.weight(.semibold))
+                .textCase(.uppercase)
+                .foregroundStyle(OrlojDesignSystem.textMuted)
+
+            ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                HStack(alignment: .firstTextBaseline, spacing: 7) {
+                    Text("\(index + 1)")
+                        .font(.caption2.weight(.bold))
+                        .monospacedDigit()
+                        .foregroundStyle(OrlojDesignSystem.highlightGold)
+                        .frame(width: 14, alignment: .trailing)
+                    Text(step)
+                        .font(.caption2)
+                        .foregroundStyle(OrlojDesignSystem.text.opacity(0.88))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+    }
+}
+
+private struct GuideSourcesFooter: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            DrawerSectionTitle("Sources")
+
+            ForEach(OrlojGuideCatalog.sources) { source in
+                Link(destination: source.url) {
+                    Label(source.title, systemImage: "link")
+                        .font(.caption2)
+                }
+                .tint(OrlojDesignSystem.highlightGold)
+            }
+
+            Text(OrlojGuideCatalog.creditNote)
+                .font(.caption2)
+                .foregroundStyle(OrlojDesignSystem.textMuted)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+/// Title first, icon after: for a "Next" button.
+private struct TrailingIconLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 4) {
+            configuration.title
+            configuration.icon
+        }
     }
 }
 
