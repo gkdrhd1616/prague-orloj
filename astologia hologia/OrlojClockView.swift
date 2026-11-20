@@ -31,7 +31,7 @@ struct OrlojClockView: View {
         .aspectRatio(1, contentMode: .fit)
         .accessibilityLabel("Prague Orloj astronomical dial")
         .accessibilityIdentifier("orlojDial")
-        .accessibilityValue("\(state.dialTimeString) \(state.dialTimeZoneLabel), \(state.skyPhaseLabel), \(state.dialZodiacSign.name), \(state.lunar.phaseName)")
+        .accessibilityValue("\(state.dialTimeString) \(state.dialTimeZoneLabel), \(state.skyPhaseLabel), \(orlojLocalized(state.dialZodiacSign.name)), \(orlojLocalized(state.lunar.phaseName))")
     }
 
     private func drawDial(in context: inout GraphicsContext, size: CGSize) {
@@ -937,9 +937,9 @@ struct OrlojClockView: View {
 
     private func guideCallout(for item: OrlojGuideItem, geometry: OrlojDialGeometry) -> OrlojGuideCallout {
         OrlojGuideCallout(
-            title: item.title,
+            title: orlojLocalized(item.title),
             value: OrlojGuideCatalog.currentValue(for: item, state: state) ?? "",
-            detail: item.calloutLabel ?? item.subtitle ?? item.shortDescription,
+            detail: orlojLocalized(item.calloutLabel ?? item.subtitle ?? item.shortDescription),
             anchor: guideCalloutAnchor(for: item, geometry: geometry)
         )
     }

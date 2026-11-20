@@ -30,7 +30,7 @@ struct OrlojControlDrawer: View {
             if readout != nil {
                 Picker("Drawer tab", selection: $selectedTab) {
                     ForEach(OrlojDrawerTab.allCases) { tab in
-                        Label(tab.rawValue, systemImage: tab.systemImage)
+                        Label(tab.title, systemImage: tab.systemImage)
                             .tag(tab)
                     }
                 }
@@ -177,7 +177,7 @@ struct OrlojControlDrawer: View {
 
             SettingsChoiceRow(
                 title: OrlojLocationMode.device.title,
-                detail: isLocating ? "Checking device location..." : "Personal sky from a one-time device location request.",
+                detail: isLocating ? orlojLocalized("Checking device location...") : orlojLocalized("Personal sky from a one-time device location request."),
                 systemImage: "location.viewfinder",
                 isActive: locationState.mode == .device || isLocating
             ) {
@@ -279,7 +279,7 @@ struct OrlojControlDrawer: View {
 
             InstrumentControlRow(
                 title: "Viewing mode",
-                detail: dialFocus.mode.rawValue,
+                detail: dialFocus.mode.title,
                 systemImage: "eye"
             ) {
                 Text(dialFocus.mode.detail)
@@ -311,7 +311,7 @@ struct OrlojControlDrawer: View {
 
             Picker("Layer focus", selection: displayFocusSelection) {
                 ForEach(OrlojLayerFocus.allCases) { option in
-                    Text(option.rawValue).tag(option)
+                    Text(option.title).tag(option)
                 }
             }
             .pickerStyle(.menu)
@@ -438,7 +438,7 @@ struct OrlojControlDrawer: View {
     }
 
     private var locationTitle: String {
-        "\(locationState.label) · \(locationState.timezone)"
+        "\(orlojLocalized(locationState.label)) · \(locationState.timezone)"
     }
 
     private var locationCoordinateSummary: String {
@@ -639,7 +639,7 @@ private struct DrawerSectionTitle: View {
     }
 
     var body: some View {
-        Text(title)
+        Text(orlojLocalized(title))
             .font(.caption)
             .fontWeight(.semibold)
             .textCase(.uppercase)
@@ -662,11 +662,11 @@ private struct InstrumentControlRow<Accessory: View>: View {
                 .frame(width: 22)
 
             VStack(alignment: .leading, spacing: 3) {
-                Text(title)
+                Text(orlojLocalized(title))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(OrlojDesignSystem.text)
 
-                Text(detail)
+                Text(orlojLocalized(detail))
                     .font(.caption2)
                     .foregroundStyle(OrlojDesignSystem.textMuted)
                     .lineLimit(2)
@@ -703,11 +703,11 @@ private struct SettingsChoiceRow: View {
                     .frame(width: 22)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(title)
+                    Text(orlojLocalized(title))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(titleColor)
 
-                    Text(detail)
+                    Text(orlojLocalized(detail))
                         .font(.caption2)
                         .foregroundStyle(detailColor)
                         .fixedSize(horizontal: false, vertical: true)
@@ -791,7 +791,7 @@ private struct InteractiveReadoutMetricRow: View {
                 .buttonStyle(.plain)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
                 .accessibilityLabel("Learn about \(metric.title)")
-                .accessibilityIdentifier("learn-\(metric.title)")
+                .accessibilityIdentifier("learn-\(metric.key)")
             }
         }
         .padding(.vertical, isPrimary ? 8 : 5)
@@ -806,8 +806,8 @@ private struct InteractiveReadoutMetricRow: View {
         .onTapGesture(perform: action)
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isButton)
-        .accessibilityIdentifier("readout-\(metric.title)")
-        .accessibilityHint("Highlights \(targetFocus.rawValue) on the dial")
+        .accessibilityIdentifier("readout-\(metric.key)")
+        .accessibilityHint("Highlights \(targetFocus.title) on the dial")
     }
 }
 
@@ -827,16 +827,17 @@ private struct SettingNumberField: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 7) {
-            Label(title, systemImage: systemImage)
+            Label(orlojLocalized(title), systemImage: systemImage)
                 .font(.caption)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
 
             HStack(spacing: 10) {
-                TextField(title, value: constrainedValue, format: .number.precision(.fractionLength(3)))
+                TextField(orlojLocalized(title), value: constrainedValue, format: .number.precision(.fractionLength(3)))
                     .textFieldStyle(.roundedBorder)
                     .monospacedDigit()
+                    .accessibilityIdentifier(title)
 
-                Stepper(title, value: constrainedValue, in: range, step: step)
+                Stepper(orlojLocalized(title), value: constrainedValue, in: range, step: step)
                     .labelsHidden()
             }
         }
@@ -945,19 +946,19 @@ private struct GuideIntroCard: View {
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(OrlojDesignSystem.highlightGold)
 
-            Text(OrlojGuideCatalog.overview)
+            Text(orlojLocalized(OrlojGuideCatalog.overview))
                 .font(.caption2)
                 .foregroundStyle(OrlojDesignSystem.text.opacity(0.88))
                 .fixedSize(horizontal: false, vertical: true)
 
             GuideNumberedSteps(title: "In four steps", steps: OrlojGuideCatalog.quickSteps)
 
-            Text(isPragueMechanism ? OrlojGuideCatalog.pragueModeNote : OrlojGuideCatalog.mySkyModeNote)
+            Text(orlojLocalized(isPragueMechanism ? OrlojGuideCatalog.pragueModeNote : OrlojGuideCatalog.mySkyModeNote))
                 .font(.caption2)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text(OrlojGuideCatalog.history)
+            Text(orlojLocalized(OrlojGuideCatalog.history))
                 .font(.caption2)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
                 .fixedSize(horizontal: false, vertical: true)
@@ -987,7 +988,7 @@ private struct GuideNumberedSteps: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(title)
+            Text(orlojLocalized(title))
                 .font(.caption2.weight(.semibold))
                 .textCase(.uppercase)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
@@ -999,7 +1000,7 @@ private struct GuideNumberedSteps: View {
                         .monospacedDigit()
                         .foregroundStyle(OrlojDesignSystem.highlightGold)
                         .frame(width: 14, alignment: .trailing)
-                    Text(step)
+                    Text(orlojLocalized(step))
                         .font(.caption2)
                         .foregroundStyle(OrlojDesignSystem.text.opacity(0.88))
                         .fixedSize(horizontal: false, vertical: true)
@@ -1016,13 +1017,13 @@ private struct GuideSourcesFooter: View {
 
             ForEach(OrlojGuideCatalog.sources) { source in
                 Link(destination: source.url) {
-                    Label(source.title, systemImage: "link")
+                    Label(orlojLocalized(source.title), systemImage: "link")
                         .font(.caption2)
                 }
                 .tint(OrlojDesignSystem.highlightGold)
             }
 
-            Text(OrlojGuideCatalog.creditNote)
+            Text(orlojLocalized(OrlojGuideCatalog.creditNote))
                 .font(.caption2)
                 .foregroundStyle(OrlojDesignSystem.textMuted)
                 .fixedSize(horizontal: false, vertical: true)

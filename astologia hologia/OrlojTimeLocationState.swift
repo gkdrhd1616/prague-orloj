@@ -62,11 +62,11 @@ enum OrlojLocationMode: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .prague:
-            "Prague Orloj"
+            orlojLocalized("Prague Orloj")
         case .device:
-            "My device sky"
+            orlojLocalized("My device sky")
         case .manual:
-            "Manual sky"
+            orlojLocalized("Manual sky")
         }
     }
 }
@@ -79,11 +79,11 @@ enum OrlojLocationBasis: String, Equatable {
     var label: String {
         switch self {
         case .praguePreset:
-            "Prague Orloj preset"
+            orlojLocalized("Prague Orloj preset")
         case .gps:
-            "GPS"
+            orlojLocalized("GPS")
         case .manual:
-            "Manual"
+            orlojLocalized("Manual")
         }
     }
 }
@@ -96,11 +96,11 @@ enum OrlojLocationPrecision: String, Equatable {
     var label: String {
         switch self {
         case .exact:
-            "Exact"
+            orlojLocalized("Exact")
         case .precise:
-            "Precise"
+            orlojLocalized("Precise")
         case .approximate:
-            "Approximate"
+            orlojLocalized("Approximate")
         }
     }
 }
@@ -115,7 +115,7 @@ struct OrlojLocationFix: Equatable {
         let unitValue = horizontalAccuracyMeters < 1_000
             ? "\(accuracy) m"
             : "\((horizontalAccuracyMeters / 1_000).formatted(.number.precision(.fractionLength(1)))) km"
-        return "Using device location · ±\(unitValue)"
+        return orlojLocalized("Using device location · ±%@", unitValue)
     }
 }
 
@@ -157,7 +157,7 @@ struct OrlojLocationState: Equatable {
         timezone: OrlojClockLocation.prague.timeZone.identifier,
         precision: .exact,
         horizontalAccuracyMeters: nil,
-        statusMessage: "Location basis: Prague preset"
+        statusMessage: orlojLocalized("Location basis: Prague preset")
     )
 
     static let currentLocationPending = OrlojLocationState(
@@ -169,7 +169,7 @@ struct OrlojLocationState: Equatable {
         timezone: TimeZone.autoupdatingCurrent.identifier,
         precision: nil,
         horizontalAccuracyMeters: nil,
-        statusMessage: "Finding current location…"
+        statusMessage: orlojLocalized("Finding current location…")
     )
 
     init(
@@ -233,26 +233,26 @@ struct OrlojLocationState: Equatable {
     var conceptualModeTitle: String {
         switch mode {
         case .prague:
-            "Prague Orloj"
+            orlojLocalized("Prague Orloj")
         case .device, .manual:
-            "My Sky"
+            orlojLocalized("My Sky")
         }
     }
 
     var conceptualModeDetail: String {
         switch mode {
         case .prague:
-            "Historical Prague astronomical clock location"
+            orlojLocalized("Historical Prague astronomical clock location")
         case .device:
-            "Personal sky from device location"
+            orlojLocalized("Personal sky from device location")
         case .manual:
-            "Personal sky from manual location"
+            orlojLocalized("Personal sky from manual location")
         }
     }
 
     var precisionLabel: String {
         guard let precision else {
-            return "Unspecified"
+            return orlojLocalized("Unspecified")
         }
         guard let horizontalAccuracyMeters else {
             return precision.label
@@ -261,7 +261,7 @@ struct OrlojLocationState: Equatable {
         let accuracy = horizontalAccuracyMeters < 1_000
             ? "\(horizontalAccuracyMeters.formatted(.number.precision(.fractionLength(0)))) m"
             : "\((horizontalAccuracyMeters / 1_000).formatted(.number.precision(.fractionLength(1)))) km"
-        return "\(precision.label) · ±\(accuracy)"
+        return orlojLocalized("%1$@ · ±%2$@", precision.label, accuracy)
     }
 
     var resolvedLocation: OrlojClockLocation {
@@ -289,7 +289,7 @@ struct OrlojLocationState: Equatable {
         }
     }
 
-    mutating func applyPraguePreset(statusMessage: String? = "Location basis: Prague preset") {
+    mutating func applyPraguePreset(statusMessage: String? = orlojLocalized("Location basis: Prague preset")) {
         self = .prague
         self.statusMessage = statusMessage
     }
@@ -301,7 +301,7 @@ struct OrlojLocationState: Equatable {
             basis: .manual,
             precision: .exact,
             horizontalAccuracyMeters: nil,
-            statusMessage: "Location basis: Manual"
+            statusMessage: orlojLocalized("Location basis: Manual")
         )
     }
 
@@ -337,7 +337,7 @@ struct OrlojLocationState: Equatable {
         label = "Manual"
         precision = .exact
         horizontalAccuracyMeters = nil
-        statusMessage = "Location basis: Manual"
+        statusMessage = orlojLocalized("Location basis: Manual")
     }
 
     mutating func recordLocationRequestFailure(_ message: String) {

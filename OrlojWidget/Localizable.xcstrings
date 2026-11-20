@@ -1,0 +1,435 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ %@, %@, %@, %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@, %3$@, %4$@, %5$@"
+          }
+        }
+      }
+    },
+    "Aquarius": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "물병자리"
+          }
+        }
+      }
+    },
+    "Aries": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "양자리"
+          }
+        }
+      }
+    },
+    "Astronomical Clock · 2×2": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천문시계 · 2×2"
+          }
+        }
+      }
+    },
+    "Astronomical clock for %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@의 천문시계"
+          }
+        }
+      }
+    },
+    "CET": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CET"
+          }
+        }
+      }
+    },
+    "Cancer": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "게자리"
+          }
+        }
+      }
+    },
+    "Capricorn": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "염소자리"
+          }
+        }
+      }
+    },
+    "Current Location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 위치"
+          }
+        }
+      }
+    },
+    "Day": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "낮"
+          }
+        }
+      }
+    },
+    "Device location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치"
+          }
+        }
+      }
+    },
+    "First quarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "상현달"
+          }
+        }
+      }
+    },
+    "Full": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보름달"
+          }
+        }
+      }
+    },
+    "Gemini": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "쌍둥이자리"
+          }
+        }
+      }
+    },
+    "Last quarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하현달"
+          }
+        }
+      }
+    },
+    "Leo": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사자자리"
+          }
+        }
+      }
+    },
+    "Libra": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천칭자리"
+          }
+        }
+      }
+    },
+    "Local time %@, dial %@ %@, %@, %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현지 시각 %1$@, 다이얼 %2$@ %3$@, %4$@, %5$@"
+          }
+        }
+      }
+    },
+    "Manual": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수동"
+          }
+        }
+      }
+    },
+    "New": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭"
+          }
+        }
+      }
+    },
+    "Night": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "밤"
+          }
+        }
+      }
+    },
+    "OPEN APP TO SET LOCATION": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱을 열어 위치를 설정하세요"
+          }
+        }
+      }
+    },
+    "Open the astronomical clock app to set a location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천문시계 앱을 열어 위치를 설정하세요"
+          }
+        }
+      }
+    },
+    "Pisces": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "물고기자리"
+          }
+        }
+      }
+    },
+    "Prague": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하"
+          }
+        }
+      }
+    },
+    "Prague Orloj": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이"
+          }
+        }
+      }
+    },
+    "Prague Orloj astronomical dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이 천문 다이얼"
+          }
+        }
+      }
+    },
+    "Sagittarius": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "궁수자리"
+          }
+        }
+      }
+    },
+    "Scorpio": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전갈자리"
+          }
+        }
+      }
+    },
+    "Seoul": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서울"
+          }
+        }
+      }
+    },
+    "Taurus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황소자리"
+          }
+        }
+      }
+    },
+    "The full astronomical dial, calculated for your current location and sky.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 위치의 하늘로 계산한 천문 다이얼 전체를 보여 줍니다."
+          }
+        }
+      }
+    },
+    "Twilight": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "박명"
+          }
+        }
+      }
+    },
+    "Virgo": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "처녀자리"
+          }
+        }
+      }
+    },
+    "Waning crescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그믐달"
+          }
+        }
+      }
+    },
+    "Waning gibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기우는 달"
+          }
+        }
+      }
+    },
+    "Waxing crescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "초승달"
+          }
+        }
+      }
+    },
+    "Waxing gibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차오르는 달"
+          }
+        }
+      }
+    },
+    "solar": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시태양시"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

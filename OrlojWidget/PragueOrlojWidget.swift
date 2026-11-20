@@ -72,8 +72,8 @@ private struct PragueOrlojWidgetView: View {
                     OrlojClockView(state: state)
                         .frame(width: proxy.size.width, height: proxy.size.height)
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("Astronomical clock for \(state.location.name)")
-                        .accessibilityValue("Local time \(state.localTimeString), dial \(state.dialTimeString) \(state.dialTimeZoneLabel), \(state.skyPhaseLabel), \(state.lunar.phaseName)")
+                        .accessibilityLabel("Astronomical clock for \(orlojLocalized(state.location.name))")
+                        .accessibilityValue("Local time \(state.localTimeString), dial \(state.dialTimeString) \(state.dialTimeZoneLabel), \(state.skyPhaseLabel), \(orlojLocalized(state.lunar.phaseName))")
                 } else {
                     VStack(spacing: 5) {
                         Image(systemName: "location.circle")

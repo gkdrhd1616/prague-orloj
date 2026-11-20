@@ -4,6 +4,10 @@ import Testing
 
 /// The reading guide: complete, consistently worded and in order.
 struct OrlojGuideContentTests {
+    init() {
+        OrlojLocalization.useSourceLanguageForTests()
+    }
+
     @Test func everyTopicExplainsHowToReadIt() {
         for item in OrlojGuideCatalog.items {
             #expect(!item.shortDescription.isEmpty, "\(item.id)")

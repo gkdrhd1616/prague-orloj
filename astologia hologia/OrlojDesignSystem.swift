@@ -58,6 +58,27 @@ enum OrlojDesignSystem {
     static let controlCornerRadius: CGFloat = 8
 }
 
+/// Text shown to people, looked up in the string catalog for the system
+/// language. English is the source; Korean is the translation. Text that has
+/// no catalog entry, such as a place name someone typed, is returned as is.
+nonisolated func orlojLocalized(_ english: String) -> String {
+    NSLocalizedString(english, bundle: OrlojLocalization.bundle, comment: "")
+}
+
+/// A catalog format such as "Hour %@", filled with values that are already
+/// formatted as text. Translations may reorder them with %1$@, %2$@.
+nonisolated func orlojLocalized(_ format: String, _ arguments: String...) -> String {
+    String(format: NSLocalizedString(format, bundle: OrlojLocalization.bundle, comment: ""),
+           arguments: arguments.map { $0 as CVarArg })
+}
+
+enum OrlojLocalization {
+    /// The bundle strings are looked up in. Unit tests point it at a bundle
+    /// without translations so they compare against the English source text
+    /// whatever language the simulator is set to.
+    nonisolated(unsafe) static var bundle: Bundle = .main
+}
+
 enum OrlojLayerFocus: String, CaseIterable, Identifiable {
     case all = "All"
     case sun = "Sun"
@@ -71,6 +92,10 @@ enum OrlojLayerFocus: String, CaseIterable, Identifiable {
 
     var id: String {
         rawValue
+    }
+
+    var title: String {
+        orlojLocalized(rawValue)
     }
 
     var systemImage: String {
@@ -106,14 +131,18 @@ enum OrlojDialMode: String, CaseIterable, Identifiable {
         rawValue
     }
 
+    var title: String {
+        orlojLocalized(rawValue)
+    }
+
     var detail: String {
         switch self {
         case .display:
-            "Finished dial with minimal labels."
+            orlojLocalized("Finished dial with minimal labels.")
         case .guide:
-            "Teaching view for the selected concept."
+            orlojLocalized("Teaching view for the selected concept.")
         case .debug:
-            "Projection labels and technical readouts."
+            orlojLocalized("Projection labels and technical readouts.")
         }
     }
 }
@@ -184,6 +213,10 @@ enum OrlojDrawerTab: String, CaseIterable, Identifiable {
 
     var id: String {
         rawValue
+    }
+
+    var title: String {
+        orlojLocalized(rawValue)
     }
 
     var systemImage: String {

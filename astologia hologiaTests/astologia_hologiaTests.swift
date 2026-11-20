@@ -12,6 +12,10 @@ import Testing
 @testable import astologia_hologia
 
 struct astologia_hologiaTests {
+    init() {
+        OrlojLocalization.useSourceLanguageForTests()
+    }
+
     @Test func springSunFallsInAries() {
         let state = OrlojCalculator.state(for: utcDate(year: 2026, month: 3, day: 22, hour: 12))
 

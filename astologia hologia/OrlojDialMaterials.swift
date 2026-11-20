@@ -118,10 +118,10 @@ struct OrlojDialLighting: Equatable {
     /// are as the viewer sees the face, so they hold for either hemisphere.
     var summary: String {
         if daylight < 0.5 {
-            return "Night: no direct sunlight"
+            return orlojLocalized("Night: no direct sunlight")
         }
         if sunlit < 0.5 {
-            return "Face in shade: soft skylight only"
+            return orlojLocalized("Face in shade: soft skylight only")
         }
         let length = hypot(shadowShift.width, shadowShift.height)
         let size = length < 0.5 ? "Short" : (length < 1.3 ? "Medium" : "Long")
@@ -133,7 +133,8 @@ struct OrlojDialLighting: Equatable {
         } else {
             side = "straight down"
         }
-        return "\(size) shadows fall \(side)" + (warmth > 0.3 ? " · low, warm Sun" : "")
+        let shadows = orlojLocalized("%1$@ shadows fall %2$@", orlojLocalized(size), orlojLocalized(side))
+        return warmth > 0.3 ? orlojLocalized("%@ · low, warm Sun", shadows) : shadows
     }
 
     /// Shadow displacement, in dial radii, for a part `relief` radii in front of the plate.

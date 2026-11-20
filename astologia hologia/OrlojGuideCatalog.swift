@@ -53,28 +53,30 @@ struct OrlojResolvedGuideItem: Identifiable, Equatable {
         item.section
     }
 
+    // Resolved items are for display, so their text is in the system language.
+
     var title: String {
-        item.title
+        orlojLocalized(item.title)
     }
 
     var subtitle: String? {
-        item.subtitle
+        item.subtitle.map(orlojLocalized)
     }
 
     var shortDescription: String {
-        item.shortDescription
+        orlojLocalized(item.shortDescription)
     }
 
     var longDescription: String? {
-        item.longDescription
+        item.longDescription.map(orlojLocalized)
     }
 
     var readingSteps: [String] {
-        item.readingSteps
+        item.readingSteps.map(orlojLocalized)
     }
 
     var pragueNote: String? {
-        item.pragueNote
+        item.pragueNote.map(orlojLocalized)
     }
 
     var targetLayers: [OrlojGuideLayerID] {
@@ -86,7 +88,7 @@ struct OrlojResolvedGuideItem: Identifiable, Equatable {
     }
 
     var calloutLabel: String? {
-        item.calloutLabel
+        item.calloutLabel.map(orlojLocalized)
     }
 
     var systemImage: String {
@@ -427,23 +429,23 @@ enum OrlojGuideCatalog {
         case .oldCzechTime:
             return readout.oldCzechHour
         case .sun:
-            return "Sky: \(readout.zodiacName) · altitude \(readout.sunAltitude)"
+            return orlojLocalized("Sky: %1$@ · altitude %2$@", readout.zodiacName, readout.sunAltitude)
         case .moon:
-            return "\(readout.moonPhase) · \(readout.moonIllumination) lit"
+            return orlojLocalized("%1$@ · %2$@ lit", readout.moonPhase, readout.moonIllumination)
         case .zodiac:
-            return "Sky: \(readout.zodiacName) · \(readout.solarEclipticLongitude)"
+            return orlojLocalized("Sky: %1$@ · %2$@", readout.zodiacName, readout.solarEclipticLongitude)
         case .horizon:
             return "\(readout.sunrise) / \(readout.sunset)"
         case .twilight:
             return readout.dawnDusk
         case .unequalHours:
-            return "\(readout.babylonianHour) · daylight \(readout.daylightProgress)"
+            return orlojLocalized("%1$@ · daylight %2$@", readout.babylonianHour, readout.daylightProgress)
         case .sidereal:
             return readout.siderealTime
         case .tropics:
             return "\(readout.solarTropicPosition) · \(readout.solarDeclination)"
         case .earth:
-            return "Sky for \(readout.locationName) · \(readout.coordinates)"
+            return orlojLocalized("Sky for %1$@ · %2$@", readout.locationName, readout.coordinates)
         case .light:
             return readout.lighting
         }
@@ -460,23 +462,23 @@ enum OrlojGuideCatalog {
         case .oldCzechTime:
             return state.oldCzechHourLabel
         case .sun:
-            return "Sky: \(state.zodiacSign.name) · altitude \(state.sunAltitudeLabel)"
+            return orlojLocalized("Sky: %1$@ · altitude %2$@", orlojLocalized(state.zodiacSign.name), state.sunAltitudeLabel)
         case .moon:
-            return "\(state.lunar.phaseName) · \(state.moonIlluminationLabel) lit"
+            return orlojLocalized("%1$@ · %2$@ lit", orlojLocalized(state.lunar.phaseName), state.moonIlluminationLabel)
         case .zodiac:
-            return "Sky: \(state.zodiacSign.name) · \(state.solarEclipticLongitudeLabel)"
+            return orlojLocalized("Sky: %1$@ · %2$@", orlojLocalized(state.zodiacSign.name), state.solarEclipticLongitudeLabel)
         case .horizon:
             return "\(state.sunriseTimeString) / \(state.sunsetTimeString)"
         case .twilight:
             return state.twilightIntervalLabel
         case .unequalHours:
-            return "\(state.babylonianHourLabel) · \(state.daylightProgressLabel)"
+            return orlojLocalized("%1$@ · daylight %2$@", state.babylonianHourLabel, state.daylightProgressLabel)
         case .sidereal:
             return state.siderealTimeString
         case .tropics:
             return "\(state.solarTropicPositionLabel) · \(state.solarDeclinationLabel)"
         case .earth:
-            return "Sky for \(state.location.name)"
+            return orlojLocalized("Sky for %@", orlojLocalized(state.location.name))
         case .light:
             return state.dialLighting.summary
         }

@@ -87,7 +87,7 @@ struct ContentView: View {
             timezone: snapshot.timeZoneIdentifier,
             precision: nil,
             horizontalAccuracyMeters: nil,
-            statusMessage: "Using saved location · \(snapshot.timeZone.abbreviation() ?? snapshot.timeZoneIdentifier)"
+            statusMessage: orlojLocalized("Using saved location · %@", snapshot.timeZone.abbreviation() ?? snapshot.timeZoneIdentifier)
         )
     }
 
@@ -138,7 +138,7 @@ struct ContentView: View {
                 hasResolvedLocation = true
             },
             failure: { message in
-                locationState.recordLocationRequestFailure(hasResolvedLocation ? message : "Location unavailable. Allow location access or choose a location in Settings.")
+                locationState.recordLocationRequestFailure(hasResolvedLocation ? message : orlojLocalized("Location unavailable. Allow location access or choose a location in Settings."))
             }
         )
     }
@@ -168,11 +168,11 @@ struct ContentView: View {
 
         switch locationState.basis {
         case .praguePreset:
-            return "Mode: Prague Orloj"
+            return orlojLocalized("Mode: Prague Orloj")
         case .gps:
-            return locationState.statusMessage ?? "My Sky: device location"
+            return locationState.statusMessage ?? orlojLocalized("My Sky: device location")
         case .manual:
-            return "Mode: My Sky manual"
+            return orlojLocalized("Mode: My Sky manual")
         }
     }
 }
