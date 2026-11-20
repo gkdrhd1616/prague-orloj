@@ -1,0 +1,726 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		4A7C4CF32FAB3DCA00422CA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A7C4CDB2FAB3DC700422CA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A7C4CE22FAB3DC700422CA0;
+			remoteInfo = "astologia hologia";
+		};
+		4A7C4CFD2FAB3DCA00422CA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A7C4CDB2FAB3DC700422CA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A7C4CE22FAB3DC700422CA0;
+			remoteInfo = "astologia hologia";
+		};
+		9F100000000000000000001B /* Widget container proxy */ = {isa = PBXContainerItemProxy; containerPortal = 4A7C4CDB2FAB3DC700422CA0 /* Project object */; proxyType = 1; remoteGlobalIDString = 9F1000000000000000000014; remoteInfo = PragueOrlojWidget; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXBuildFile section */
+		9F1000000000000000000016 /* PragueOrlojWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000017 /* PragueOrlojWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F100000000000000000004B /* Assets.xcassets in widget Resources */ = {isa = PBXBuildFile; fileRef = 9F100000000000000000003B /* Assets.xcassets */; };
+				9F1000000000000000000021 /* OrlojWidgetLocationSnapshot.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000022 /* OrlojWidgetLocationSnapshot.swift */; };
+		9F1000000000000000000040 /* OrlojAstronomyReadout.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000030 /* OrlojAstronomyReadout.swift */; };
+		9F1000000000000000000041 /* OrlojClockModel.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000031 /* OrlojClockModel.swift */; };
+		9F1000000000000000000042 /* OrlojClockView.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000032 /* OrlojClockView.swift */; };
+		9F1000000000000000000043 /* OrlojDesignSystem.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000033 /* OrlojDesignSystem.swift */; };
+		9F1000000000000000000044 /* OrlojDialFocusState.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000034 /* OrlojDialFocusState.swift */; };
+		9F1000000000000000000045 /* OrlojDialMaterials.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000035 /* OrlojDialMaterials.swift */; };
+		9F1000000000000000000046 /* OrlojEarthRenderer.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000036 /* OrlojEarthRenderer.swift */; };
+		9F1000000000000000000047 /* OrlojGuideCatalog.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000037 /* OrlojGuideCatalog.swift */; };
+		9F1000000000000000000048 /* OrlojMoonRenderer.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000038 /* OrlojMoonRenderer.swift */; };
+		9F1000000000000000000049 /* OrlojRomanNumerals.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F1000000000000000000039 /* OrlojRomanNumerals.swift */; };
+		9F100000000000000000004A /* OrlojSolarOrnaments.swift in widget Sources */ = {isa = PBXBuildFile; fileRef = 9F100000000000000000003A /* OrlojSolarOrnaments.swift */; };
+/* End PBXBuildFile section */
+/* Begin PBXFileReference section */
+		4A7C4CE32FAB3DC700422CA0 /* astologia hologia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "astologia hologia.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A7C4CF22FAB3DCA00422CA0 /* astologia hologiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "astologia hologiaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A7C4CFC2FAB3DCA00422CA0 /* astologia hologiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "astologia hologiaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F1000000000000000000017 /* PragueOrlojWidget.appex */ = {isa = PBXFileReference; explicitFileType = wrapper.app-extension; includeInIndex = 0; path = PragueOrlojWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F1000000000000000000022 /* OrlojWidgetLocationSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojWidgetLocationSnapshot.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000030 /* OrlojAstronomyReadout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojAstronomyReadout.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000031 /* OrlojClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojClockModel.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000032 /* OrlojClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojClockView.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000033 /* OrlojDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojDesignSystem.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000034 /* OrlojDialFocusState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojDialFocusState.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000035 /* OrlojDialMaterials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojDialMaterials.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000036 /* OrlojEarthRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojEarthRenderer.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000037 /* OrlojGuideCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojGuideCatalog.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000038 /* OrlojMoonRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojMoonRenderer.swift"; sourceTree = "<group>"; };
+		9F1000000000000000000039 /* OrlojRomanNumerals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojRomanNumerals.swift"; sourceTree = "<group>"; };
+		9F100000000000000000003A /* OrlojSolarOrnaments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "astologia hologia/OrlojSolarOrnaments.swift"; sourceTree = "<group>"; };
+		9F100000000000000000003B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "astologia hologia/Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F1000000000000000000015 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (9F1000000000000000000016 /* PragueOrlojWidget.appex in Embed App Extensions */, ); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4A7C4CE52FAB3DC700422CA0 /* astologia hologia */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "astologia hologia";
+			sourceTree = "<group>";
+		};
+		4A7C4CF52FAB3DCA00422CA0 /* astologia hologiaTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "astologia hologiaTests";
+			sourceTree = "<group>";
+		};
+		4A7C4CFF2FAB3DCA00422CA0 /* astologia hologiaUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "astologia hologiaUITests";
+			sourceTree = "<group>";
+		};
+		9F1000000000000000000001 /* OrlojWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; path = OrlojWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4A7C4CE02FAB3DC700422CA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CEF2FAB3DCA00422CA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CF92FAB3DCA00422CA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F1000000000000000000019 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A7C4CDA2FAB3DC700422CA0 = {
+			isa = PBXGroup;
+			children = (
+				9F1000000000000000000001 /* OrlojWidget */,
+				9F1000000000000000000022 /* OrlojWidgetLocationSnapshot.swift */,
+				9F1000000000000000000030 /* OrlojAstronomyReadout.swift */,
+				9F1000000000000000000031 /* OrlojClockModel.swift */,
+				9F1000000000000000000032 /* OrlojClockView.swift */,
+				9F1000000000000000000033 /* OrlojDesignSystem.swift */,
+				9F1000000000000000000034 /* OrlojDialFocusState.swift */,
+				9F1000000000000000000035 /* OrlojDialMaterials.swift */,
+				9F1000000000000000000036 /* OrlojEarthRenderer.swift */,
+				9F1000000000000000000037 /* OrlojGuideCatalog.swift */,
+				9F1000000000000000000038 /* OrlojMoonRenderer.swift */,
+				9F1000000000000000000039 /* OrlojRomanNumerals.swift */,
+				9F100000000000000000003A /* OrlojSolarOrnaments.swift */,
+				9F100000000000000000003B /* Assets.xcassets */,
+				4A7C4CE52FAB3DC700422CA0 /* astologia hologia */,
+				4A7C4CF52FAB3DCA00422CA0 /* astologia hologiaTests */,
+				4A7C4CFF2FAB3DCA00422CA0 /* astologia hologiaUITests */,
+				4A7C4CE42FAB3DC700422CA0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4A7C4CE42FAB3DC700422CA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A7C4CE32FAB3DC700422CA0 /* astologia hologia.app */,
+				4A7C4CF22FAB3DCA00422CA0 /* astologia hologiaTests.xctest */,
+				4A7C4CFC2FAB3DCA00422CA0 /* astologia hologiaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4A7C4CE22FAB3DC700422CA0 /* astologia hologia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A7C4D062FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologia" */;
+			buildPhases = (
+				4A7C4CDF2FAB3DC700422CA0 /* Sources */,
+				4A7C4CE02FAB3DC700422CA0 /* Frameworks */,
+				4A7C4CE12FAB3DC700422CA0 /* Resources */,
+				9F1000000000000000000015 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F100000000000000000001C /* Widget dependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4A7C4CE52FAB3DC700422CA0 /* astologia hologia */,
+			);
+			name = "astologia hologia";
+			packageProductDependencies = (
+			);
+			productName = "astologia hologia";
+			productReference = 4A7C4CE32FAB3DC700422CA0 /* astologia hologia.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4A7C4CF12FAB3DCA00422CA0 /* astologia hologiaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A7C4D092FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologiaTests" */;
+			buildPhases = (
+				4A7C4CEE2FAB3DCA00422CA0 /* Sources */,
+				4A7C4CEF2FAB3DCA00422CA0 /* Frameworks */,
+				4A7C4CF02FAB3DCA00422CA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A7C4CF42FAB3DCA00422CA0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4A7C4CF52FAB3DCA00422CA0 /* astologia hologiaTests */,
+			);
+			name = "astologia hologiaTests";
+			packageProductDependencies = (
+			);
+			productName = "astologia hologiaTests";
+			productReference = 4A7C4CF22FAB3DCA00422CA0 /* astologia hologiaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4A7C4CFB2FAB3DCA00422CA0 /* astologia hologiaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A7C4D0C2FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologiaUITests" */;
+			buildPhases = (
+				4A7C4CF82FAB3DCA00422CA0 /* Sources */,
+				4A7C4CF92FAB3DCA00422CA0 /* Frameworks */,
+				4A7C4CFA2FAB3DCA00422CA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A7C4CFE2FAB3DCA00422CA0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4A7C4CFF2FAB3DCA00422CA0 /* astologia hologiaUITests */,
+			);
+			name = "astologia hologiaUITests";
+			packageProductDependencies = (
+			);
+			productName = "astologia hologiaUITests";
+			productReference = 4A7C4CFC2FAB3DCA00422CA0 /* astologia hologiaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		9F1000000000000000000014 /* PragueOrlojWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F100000000000000000001D /* Widget build configurations */;
+			buildPhases = (9F1000000000000000000018 /* Sources */, 9F1000000000000000000019 /* Frameworks */, 9F100000000000000000001A /* Resources */, );
+			buildRules = ();
+			dependencies = ();
+			fileSystemSynchronizedGroups = (9F1000000000000000000001 /* OrlojWidget */, );
+			name = PragueOrlojWidget;
+			packageProductDependencies = ();
+			productName = PragueOrlojWidget;
+			productReference = 9F1000000000000000000017 /* PragueOrlojWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4A7C4CDB2FAB3DC700422CA0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					9F1000000000000000000014 = { CreatedOnToolsVersion = 27.0; };
+					4A7C4CE22FAB3DC700422CA0 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					4A7C4CF12FAB3DCA00422CA0 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 4A7C4CE22FAB3DC700422CA0;
+					};
+					4A7C4CFB2FAB3DCA00422CA0 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 4A7C4CE22FAB3DC700422CA0;
+					};
+				};
+			};
+			buildConfigurationList = 4A7C4CDE2FAB3DC700422CA0 /* Build configuration list for PBXProject "astologia hologia" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4A7C4CDA2FAB3DC700422CA0;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4A7C4CE42FAB3DC700422CA0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4A7C4CE22FAB3DC700422CA0 /* astologia hologia */,
+				4A7C4CF12FAB3DCA00422CA0 /* astologia hologiaTests */,
+				4A7C4CFB2FAB3DCA00422CA0 /* astologia hologiaUITests */,
+				9F1000000000000000000014 /* PragueOrlojWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4A7C4CE12FAB3DC700422CA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CF02FAB3DCA00422CA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CFA2FAB3DCA00422CA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F100000000000000000001A /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (9F100000000000000000004B /* Assets.xcassets in widget Resources */, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4A7C4CDF2FAB3DC700422CA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CEE2FAB3DCA00422CA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A7C4CF82FAB3DCA00422CA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F1000000000000000000018 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (9F1000000000000000000021 /* OrlojWidgetLocationSnapshot.swift in widget Sources */, 9F1000000000000000000040 /* OrlojAstronomyReadout.swift in widget Sources */, 9F1000000000000000000041 /* OrlojClockModel.swift in widget Sources */, 9F1000000000000000000042 /* OrlojClockView.swift in widget Sources */, 9F1000000000000000000043 /* OrlojDesignSystem.swift in widget Sources */, 9F1000000000000000000044 /* OrlojDialFocusState.swift in widget Sources */, 9F1000000000000000000045 /* OrlojDialMaterials.swift in widget Sources */, 9F1000000000000000000046 /* OrlojEarthRenderer.swift in widget Sources */, 9F1000000000000000000047 /* OrlojGuideCatalog.swift in widget Sources */, 9F1000000000000000000048 /* OrlojMoonRenderer.swift in widget Sources */, 9F1000000000000000000049 /* OrlojRomanNumerals.swift in widget Sources */, 9F100000000000000000004A /* OrlojSolarOrnaments.swift in widget Sources */, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A7C4CF42FAB3DCA00422CA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A7C4CE22FAB3DC700422CA0 /* astologia hologia */;
+			targetProxy = 4A7C4CF32FAB3DCA00422CA0 /* PBXContainerItemProxy */;
+		};
+		4A7C4CFE2FAB3DCA00422CA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A7C4CE22FAB3DC700422CA0 /* astologia hologia */;
+			targetProxy = 4A7C4CFD2FAB3DCA00422CA0 /* PBXContainerItemProxy */;
+		};
+		9F100000000000000000001C /* Widget dependency */ = {isa = PBXTargetDependency; target = 9F1000000000000000000014 /* PragueOrlojWidget */; targetProxy = 9F100000000000000000001B /* Widget container proxy */; };
+/* End PBXTargetDependency section */
+
+		9F100000000000000000001E /* Widget Debug */ = {isa = XCBuildConfiguration; buildSettings = { APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_ENTITLEMENTS = Shared/OrlojWidget.entitlements; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Shared/OrlojWidget-Info.plist; MARKETING_VERSION = 1.0; IPHONEOS_DEPLOYMENT_TARGET = 26.2; MACOSX_DEPLOYMENT_TARGET = 26.2; PRODUCT_BUNDLE_IDENTIFIER = com.shubeux.astologiahologia.v1.widget; PRODUCT_NAME = "$(TARGET_NAME)"; SKIP_INSTALL = YES; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx"; SWIFT_APPROACHABLE_CONCURRENCY = YES; SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		9F100000000000000000001F /* Widget Release */ = {isa = XCBuildConfiguration; buildSettings = { APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_ENTITLEMENTS = Shared/OrlojWidget.entitlements; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Shared/OrlojWidget-Info.plist; MARKETING_VERSION = 1.0; IPHONEOS_DEPLOYMENT_TARGET = 26.2; MACOSX_DEPLOYMENT_TARGET = 26.2; PRODUCT_BUNDLE_IDENTIFIER = com.shubeux.astologiahologia.v1.widget; PRODUCT_NAME = "$(TARGET_NAME)"; SKIP_INSTALL = YES; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx"; SWIFT_APPROACHABLE_CONCURRENCY = YES; SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+/* Begin XCBuildConfiguration section */
+		4A7C4D042FAB3DCA00422CA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4A7C4D052FAB3DCA00422CA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		4A7C4D072FAB3DCA00422CA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				CODE_SIGN_ENTITLEMENTS = Shared/OrlojWidget.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationUsageDescription = "Use your location to set the astronomical clock coordinates and local time zone.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use your location to set the astronomical clock coordinates and local time zone.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shubeux.astologiahologia.v1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		4A7C4D082FAB3DCA00422CA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				CODE_SIGN_ENTITLEMENTS = Shared/OrlojWidget.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationUsageDescription = "Use your location to set the astronomical clock coordinates and local time zone.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use your location to set the astronomical clock coordinates and local time zone.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shubeux.astologiahologia.v1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		4A7C4D0A2FAB3DCA00422CA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-23.astologia-hologiaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/astologia hologia.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/astologia hologia";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		4A7C4D0B2FAB3DCA00422CA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-23.astologia-hologiaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/astologia hologia.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/astologia hologia";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		4A7C4D0D2FAB3DCA00422CA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-23.astologia-hologiaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = "astologia hologia";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		4A7C4D0E2FAB3DCA00422CA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "-23.astologia-hologiaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = "astologia hologia";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A7C4CDE2FAB3DC700422CA0 /* Build configuration list for PBXProject "astologia hologia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A7C4D042FAB3DCA00422CA0 /* Debug */,
+				4A7C4D052FAB3DCA00422CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A7C4D062FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A7C4D072FAB3DCA00422CA0 /* Debug */,
+				4A7C4D082FAB3DCA00422CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A7C4D092FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologiaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A7C4D0A2FAB3DCA00422CA0 /* Debug */,
+				4A7C4D0B2FAB3DCA00422CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A7C4D0C2FAB3DCA00422CA0 /* Build configuration list for PBXNativeTarget "astologia hologiaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A7C4D0D2FAB3DCA00422CA0 /* Debug */,
+				4A7C4D0E2FAB3DCA00422CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F100000000000000000001D /* Widget build configurations */ = {isa = XCConfigurationList; buildConfigurations = (9F100000000000000000001E /* Widget Debug */, 9F100000000000000000001F /* Widget Release */, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = 4A7C4CDB2FAB3DC700422CA0 /* Project object */;
+}

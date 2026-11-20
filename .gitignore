@@ -1,0 +1,15 @@
+.DS_Store
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.xcresult/
+*.xcarchive/
+*.mobileprovision
+*.provisionprofile
+*.p12
+.env
+.env.*
+audit/
+__pycache__/
+tools/reference-assets/Prague_Astronomical_Clock.svg

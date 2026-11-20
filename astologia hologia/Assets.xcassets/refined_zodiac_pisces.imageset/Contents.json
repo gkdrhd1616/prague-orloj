@@ -1,0 +1,15 @@
+{
+  "images": [
+    {
+      "filename": "refined_zodiac_pisces.svg",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  },
+  "properties": {
+    "preserves-vector-representation": true
+  }
+}
