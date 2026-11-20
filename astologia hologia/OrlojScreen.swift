@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OrlojScreen: View {
-    let state: OrlojClockState
-    let readout: OrlojAstronomyReadout
+    let state: OrlojClockState?
+    let readout: OrlojAstronomyReadout?
     @Binding var timeState: OrlojTimeState
     @Binding var locationState: OrlojLocationState
     @Binding var isDrawerPresented: Bool
@@ -18,6 +18,7 @@ struct OrlojScreen: View {
     let isLocating: Bool
     let locationStatusMessage: String
     let selectLocationMode: (OrlojLocationMode) -> Void
+    var confirmManualLocation: () -> Void = {}
 
     var body: some View {
         GeometryReader { proxy in
@@ -31,13 +32,25 @@ struct OrlojScreen: View {
             ZStack {
                 OrlojBackdrop()
 
-                OrlojClockView(
-                    state: state,
-                    dialFocus: dialFocus
-                )
-                    .frame(width: clockSide, height: clockSide)
-                    .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
-                    .shadow(color: .black.opacity(0.44), radius: 26, y: 18)
+                if let state {
+                    OrlojClockView(state: state, dialFocus: dialFocus)
+                        .frame(width: clockSide, height: clockSide)
+                        .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
+                        .shadow(color: .black.opacity(0.44), radius: 26, y: 18)
+                } else {
+                    ContentUnavailableView {
+                        Label("Choose a location", systemImage: "location")
+                    } description: {
+                        Text(locationStatusMessage)
+                    } actions: {
+                        Button("Location settings") {
+                            selectedDrawerTab = .settings
+                            isDrawerPresented = true
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .foregroundStyle(OrlojDesignSystem.text)
+                }
 
                 VStack {
                     HStack {
@@ -87,7 +100,8 @@ struct OrlojScreen: View {
                             dialFocus: $dialFocus,
                             isLocating: isLocating,
                             locationStatusMessage: locationStatusMessage,
-                            selectLocationMode: selectLocationMode
+                            selectLocationMode: selectLocationMode,
+                            confirmManualLocation: confirmManualLocation
                         )
                         .frame(width: drawerWidth)
                         .padding(.vertical, 18)

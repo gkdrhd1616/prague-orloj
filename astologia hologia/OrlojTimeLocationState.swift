@@ -152,8 +152,8 @@ struct OrlojLocationState: Equatable {
         mode: .prague,
         basis: .praguePreset,
         label: "Prague Orloj",
-        latitude: 0,
-        longitude: 0,
+        latitude: OrlojCoordinates.prague.latitude,
+        longitude: OrlojCoordinates.prague.longitude,
         timezone: OrlojClockLocation.prague.timeZone.identifier,
         precision: .exact,
         horizontalAccuracyMeters: nil,
@@ -186,7 +186,7 @@ struct OrlojLocationState: Equatable {
         self.mode = mode
         self.basis = basis
         self.label = label
-        self.latitude = latitude.clamped(to: -66...66)
+        self.latitude = latitude.clamped(to: -90...90)
         self.longitude = longitude.clamped(to: -180...180)
         self.timezone = timezone
         self.precision = precision
@@ -221,7 +221,7 @@ struct OrlojLocationState: Equatable {
             OrlojCoordinates(latitude: latitude, longitude: longitude)
         }
         set {
-            latitude = newValue.latitude.clamped(to: -66...66)
+            latitude = newValue.latitude.clamped(to: -90...90)
             longitude = newValue.longitude.clamped(to: -180...180)
         }
     }
@@ -322,7 +322,7 @@ struct OrlojLocationState: Equatable {
     }
 
     mutating func updateLatitude(_ latitude: Double) {
-        self.latitude = latitude.clamped(to: -66...66)
+        self.latitude = latitude.clamped(to: -90...90)
         markManual()
     }
 

@@ -17,12 +17,24 @@ struct ContentView: View {
     @State private var hasResolvedLocation: Bool
     @State private var didRequestInitialLocation = false
     @StateObject private var locationProvider = OrlojLocationProvider()
+    private let isUITesting: Bool
 
     init() {
         let arguments = ProcessInfo.processInfo.arguments
-        let savedLocation = OrlojWidgetLocationSnapshot.current
-        _locationState = State(initialValue: Self.restoredLocation(from: savedLocation))
-        _hasResolvedLocation = State(initialValue: savedLocation != nil)
+        #if DEBUG
+        isUITesting = arguments.contains { $0.hasPrefix("-uiTesting") }
+        #else
+        isUITesting = false
+        #endif
+        if isUITesting {
+            let missing = arguments.contains("-uiTestingMissingLocation")
+            _locationState = State(initialValue: missing ? .currentLocationPending : .prague)
+            _hasResolvedLocation = State(initialValue: !missing)
+        } else {
+            let savedLocation = OrlojWidgetLocationSnapshot.current
+            _locationState = State(initialValue: Self.restoredLocation(from: savedLocation))
+            _hasResolvedLocation = State(initialValue: savedLocation != nil)
+        }
         _isDrawerPresented = State(initialValue: arguments.contains("-uiTestingOpenDrawer"))
         _selectedDrawerTab = State(initialValue: OrlojDrawerTab.launchArgumentValue(in: arguments) ?? .settings)
         #if DEBUG
@@ -35,13 +47,15 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TimelineView(.periodic(from: .now, by: 60)) { timeline in
-            let activeDate = timeState.resolvedDate(liveDate: timeline.date)
-            let state = state(for: activeDate)
+        TimelineView(.everyMinute) { _ in
+            // The first scheduled entry is rounded down; use the actual instant
+            // for the first drawing and when returning to the foreground.
+            let activeDate = timeState.resolvedDate(liveDate: .now)
+            let state = hasResolvedLocation ? state(for: activeDate) : nil
 
             OrlojScreen(
                 state: state,
-                readout: OrlojAstronomyReadout(state: state),
+                readout: state.map { OrlojAstronomyReadout(state: $0) },
                 timeState: $timeState,
                 locationState: locationSelection,
                 isDrawerPresented: $isDrawerPresented,
@@ -49,13 +63,15 @@ struct ContentView: View {
                 dialFocus: $dialFocus,
                 isLocating: locationProvider.isLocating,
                 locationStatusMessage: displayedLocationStatus,
-                selectLocationMode: selectLocationMode
+                selectLocationMode: selectLocationMode,
+                confirmManualLocation: { hasResolvedLocation = true }
             )
         }
         .onAppear(perform: requestInitialLocationIfNeeded)
-        .onChange(of: locationState) { _, newLocation in
-            guard hasResolvedLocation else { return }
-            saveWidgetLocation(newLocation)
+        .onChange(of: widgetLocation) { _, snapshot in
+            guard !isUITesting, let snapshot else { return }
+            snapshot.save()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -77,14 +93,16 @@ struct ContentView: View {
 
     private func requestInitialLocationIfNeeded() {
         guard !didRequestInitialLocation,
-              !ProcessInfo.processInfo.arguments.contains(where: { $0.hasPrefix("-uiTesting") }),
+              !isUITesting,
               locationState.mode == .device else { return }
         didRequestInitialLocation = true
         requestCurrentLocation()
     }
 
-    private func saveWidgetLocation(_ state: OrlojLocationState) {
-        let snapshot = OrlojWidgetLocationSnapshot(
+    private var widgetLocation: OrlojWidgetLocationSnapshot? {
+        guard hasResolvedLocation else { return nil }
+        let state = locationState
+        return OrlojWidgetLocationSnapshot(
             name: state.mode == .prague ? "Prague" : state.label,
             timeZoneIdentifier: state.mode == .prague
                 ? OrlojClockLocation.prague.timeZone.identifier
@@ -93,8 +111,6 @@ struct ContentView: View {
             longitude: state.mode == .prague ? OrlojCoordinates.prague.longitude : state.longitude,
             mode: state.mode.rawValue
         )
-        snapshot.save()
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func state(for date: Date) -> OrlojClockState {
@@ -122,7 +138,7 @@ struct ContentView: View {
                 hasResolvedLocation = true
             },
             failure: { message in
-                locationState.recordLocationRequestFailure(message)
+                locationState.recordLocationRequestFailure(hasResolvedLocation ? message : "Location unavailable. Allow location access or choose a location in Settings.")
             }
         )
     }
@@ -133,14 +149,11 @@ struct ContentView: View {
             locationProvider.cancelCurrentRequest()
             locationState.applyPraguePreset()
             hasResolvedLocation = true
-            saveWidgetLocation(locationState)
         case .device:
             requestCurrentLocation()
         case .manual:
             locationProvider.cancelCurrentRequest()
             locationState.markManual()
-            hasResolvedLocation = true
-            saveWidgetLocation(locationState)
         }
     }
 

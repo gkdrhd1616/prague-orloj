@@ -16,11 +16,13 @@ final class astologia_hologiaUITests: XCTestCase {
     @MainActor
     func testLaunchIsResponsive() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-uiTesting"]
         app.launch()
 
         XCTAssertTrue(app.buttons["Open controls"].waitForExistence(timeout: 8))
     }
 
+    #if os(iOS)
     @MainActor
     func testIPadRotationKeepsDialAndControlsVisible() throws {
         let app = XCUIApplication()
@@ -47,6 +49,25 @@ final class astologia_hologiaUITests: XCTestCase {
             add(attachment)
         }
         XCUIDevice.shared.orientation = .portrait
+    }
+
+    #endif
+
+    @MainActor
+    func testMissingLocationWaitsForConfirmedCoordinates() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-uiTestingMissingLocation"]
+        app.launch()
+        let dial = app.descendants(matching: .any)["orlojDial"]
+        let settings = app.buttons["Location settings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 8))
+        XCTAssertFalse(dial.exists)
+        settings.tap()
+        app.buttons["settingsChoice-Manual sky"].tap()
+        let confirm = app.buttons["Use these coordinates"]
+        XCTAssertTrue(confirm.waitForExistence(timeout: 4))
+        confirm.tap()
+        XCTAssertTrue(dial.waitForExistence(timeout: 4))
     }
 
     @MainActor

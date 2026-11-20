@@ -257,13 +257,13 @@ struct astologia_hologiaTests {
         #expect(abs(seoulDaylight - pragueDaylight) > 30)
     }
 
-    @Test func customCoordinatesAreClampedForOrlojGeometry() {
+    @Test func customCoordinatesPreserveHighLatitudesAndClampInvalidLongitude() {
         let state = OrlojCalculator.state(
             for: utcDate(year: 2026, month: 5, day: 6, hour: 12),
             coordinates: OrlojCoordinates(latitude: 89, longitude: 210)
         )
 
-        #expect(state.location.coordinates.latitude == 66)
+        #expect(state.location.coordinates.latitude == 89)
         #expect(state.location.coordinates.longitude == 180)
     }
 
@@ -416,12 +416,19 @@ struct astologia_hologiaTests {
 
         #expect(locationState.mode == .device)
         #expect(locationState.basis == .gps)
-        #expect(locationState.label == "Device location")
+        #expect(locationState.label == "Detected Place")
         #expect(locationState.coordinates == OrlojCoordinates(latitude: 10, longitude: 20))
         #expect(locationState.timezone == "Asia/Tokyo")
         #expect(locationState.precision == .precise)
         #expect(locationState.horizontalAccuracyMeters == 850)
         #expect(locationState.precisionLabel.contains("850 m"))
+    }
+
+    @Test func switchingPragueToManualRetainsTheDialCoordinates() {
+        var location = OrlojLocationState.prague
+        #expect(location.coordinates == .prague)
+        location.markManual()
+        #expect(location.resolvedLocation.coordinates == .prague)
     }
 
     @Test func failedDeviceRequestKeepsCommittedLocation() {

@@ -12,6 +12,11 @@ struct OrlojClockView: View {
     var dialFocus: OrlojDialFocusState = .display
     var compact = false
 
+    var goldenHandAngle: Angle {
+        let point = state.dialSunProjection
+        return .radians(atan2(point.x, point.y))
+    }
+
     var body: some View {
         Canvas { context, size in
             drawDial(in: &context, size: size)
@@ -311,7 +316,7 @@ struct OrlojClockView: View {
     private func drawSun(in context: inout GraphicsContext, geometry: OrlojDialGeometry) {
         let alpha = sunAlpha()
         let sunPoint = geometry.screenPoint(state.dialSunProjection)
-        let handEnd = geometry.extendedRadialPoint(through: sunPoint, radius: geometry.oldCzechInnerRadius)
+        let handEnd = geometry.polarPoint(radius: geometry.oldCzechInnerRadius, degrees: goldenHandAngle.degrees)
 
         drawLine(
             from: geometry.center,
@@ -343,14 +348,14 @@ struct OrlojClockView: View {
         )
         context.fill(circle(center: sunPoint, radius: geometry.radius * 0.031), with: .color(OrlojDesignSystem.shadowBrown.opacity(0.62 * alpha)))
         context.stroke(circle(center: sunPoint, radius: geometry.radius * 0.034), with: .color(OrlojDesignSystem.agedGoldEdge.opacity(0.42 * alpha)), lineWidth: geometry.radius * 0.003)
-        drawGoldenHand(through: sunPoint, in: &context, geometry: geometry, alpha: alpha)
+        drawGoldenHand(in: &context, geometry: geometry, alpha: alpha)
         drawSunIcon(at: sunPoint, radius: geometry.radius * 0.03, in: &context, alpha: alpha)
     }
 
-    private func drawGoldenHand(through sunPoint: CGPoint, in context: inout GraphicsContext, geometry: OrlojDialGeometry, alpha: Double) {
+    private func drawGoldenHand(in context: inout GraphicsContext, geometry: OrlojDialGeometry, alpha: Double) {
         var handContext = context
         handContext.translateBy(x: geometry.center.x, y: geometry.center.y)
-        handContext.rotate(by: .radians(atan2(sunPoint.x - geometry.center.x, geometry.center.y - sunPoint.y)))
+        handContext.rotate(by: goldenHandAngle)
         handContext.scaleBy(x: geometry.radius, y: geometry.radius)
 
         OrlojSolarOrnaments.hand(in: &handContext, alpha: alpha)
@@ -452,6 +457,8 @@ struct OrlojClockView: View {
                 width: geometry.radius * 0.006, alpha: alpha)
         }
 
+        // A sunset-aligned scale has no reading during polar day or night.
+        guard state.daylightWindow.kind == .normal else { return }
         for tick in 0..<96 {
             let degrees = state.sunsetAngleDegrees + Double(tick) * 3.75
             let isHour = tick % 4 == 0
@@ -556,7 +563,7 @@ struct OrlojClockView: View {
             )
         }
 
-        if layers.containsAny(.oldCzechRing, .outer24Numerals, .sunsetAlignmentMarker) {
+        if state.daylightWindow.kind == .normal, layers.containsAny(.oldCzechRing, .outer24Numerals, .sunsetAlignmentMarker) {
             context.stroke(circle(center: geometry.center, radius: geometry.oldCzechOuterRadius), with: .color(highlight.opacity(0.9)), lineWidth: geometry.radius * 0.008)
             context.stroke(circle(center: geometry.center, radius: geometry.oldCzechInnerRadius), with: .color(highlight.opacity(0.58)), lineWidth: geometry.radius * 0.006)
             context.stroke(circle(center: geometry.center, radius: geometry.oldCzechLabelRadius), with: .color(highlight.opacity(0.2)), style: StrokeStyle(lineWidth: geometry.radius * 0.022, lineCap: .round, lineJoin: .round))
@@ -572,7 +579,7 @@ struct OrlojClockView: View {
         if layers.containsAny(.sunMarker, .sunHand, .solarLongitudePoint, .eclipticPosition) {
             let sunPoint = geometry.screenPoint(state.dialSunProjection)
             let solarLongitudePoint = projectedEclipticPoint(longitude: state.dialSolarLongitudeDegrees, geometry: geometry)
-            let handEnd = geometry.extendedRadialPoint(through: sunPoint, radius: geometry.oldCzechInnerRadius)
+            let handEnd = geometry.polarPoint(radius: geometry.oldCzechInnerRadius, degrees: goldenHandAngle.degrees)
             drawLine(from: geometry.center, to: handEnd, in: &context, color: OrlojDesignSystem.shadowBrown.opacity(0.76), lineWidth: geometry.radius * 0.014)
             drawLine(from: geometry.center, to: handEnd, in: &context, color: highlight.opacity(0.74), lineWidth: geometry.radius * 0.007)
             drawLine(from: geometry.center, to: handEnd, in: &context, color: OrlojDesignSystem.ivoryText.opacity(0.36), lineWidth: geometry.radius * 0.002)

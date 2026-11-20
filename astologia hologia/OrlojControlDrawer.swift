@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OrlojControlDrawer: View {
-    let state: OrlojClockState
-    let readout: OrlojAstronomyReadout
+    let state: OrlojClockState?
+    let readout: OrlojAstronomyReadout?
     @Binding var timeState: OrlojTimeState
     @Binding var locationState: OrlojLocationState
     @Binding var isPresented: Bool
@@ -18,6 +18,7 @@ struct OrlojControlDrawer: View {
     let isLocating: Bool
     let locationStatusMessage: String
     let selectLocationMode: (OrlojLocationMode) -> Void
+    let confirmManualLocation: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -26,29 +27,35 @@ struct OrlojControlDrawer: View {
                 .padding(.top, 18)
                 .padding(.bottom, 14)
 
-            Picker("Drawer tab", selection: $selectedTab) {
-                ForEach(OrlojDrawerTab.allCases) { tab in
-                    Label(tab.rawValue, systemImage: tab.systemImage)
-                        .tag(tab)
+            if readout != nil {
+                Picker("Drawer tab", selection: $selectedTab) {
+                    ForEach(OrlojDrawerTab.allCases) { tab in
+                        Label(tab.rawValue, systemImage: tab.systemImage)
+                            .tag(tab)
+                    }
                 }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("drawerTabPicker")
+                .padding(.horizontal, 20)
+                .padding(.bottom, 12)
             }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("drawerTabPicker")
-            .padding(.horizontal, 20)
-            .padding(.bottom, 12)
 
             Divider()
                 .overlay(OrlojDesignSystem.textMuted.opacity(0.28))
 
             ScrollView(showsIndicators: false) {
                 Group {
-                    switch selectedTab {
-                    case .settings:
-                        settingsTab
-                    case .astronomy:
-                        astronomyTab
-                    case .guide:
-                        guideTab
+                    if let readout {
+                        switch selectedTab {
+                        case .settings:
+                            settingsTab
+                        case .astronomy:
+                            astronomyTab(readout)
+                        case .guide:
+                            guideTab
+                        }
+                    } else {
+                        locationSettingsSection
                     }
                 }
                 .padding(20)
@@ -72,11 +79,13 @@ struct OrlojControlDrawer: View {
                     .font(.headline)
                     .foregroundStyle(OrlojDesignSystem.text)
 
-                Text("\(readout.localDate) · \(readout.locationName)")
-                    .font(.caption)
-                    .foregroundStyle(OrlojDesignSystem.textMuted)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.76)
+                if let readout {
+                    Text("\(readout.localDate) · \(readout.locationName)")
+                        .font(.caption)
+                        .foregroundStyle(OrlojDesignSystem.textMuted)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.76)
+                }
             }
 
             Spacer()
@@ -137,7 +146,7 @@ struct OrlojControlDrawer: View {
                 systemImage: "calendar",
                 isActive: timeState.mode == .manual
             ) {
-                timeState.useManual(state.date)
+                timeState.useManual(state?.date ?? .now)
             }
 
             if timeState.mode == .manual {
@@ -191,6 +200,10 @@ struct OrlojControlDrawer: View {
 
             if locationState.mode == .manual {
                 manualLocationControls
+                if state == nil {
+                    Button("Use these coordinates", action: confirmManualLocation)
+                        .buttonStyle(.borderedProminent)
+                }
             }
         }
     }
@@ -216,7 +229,7 @@ struct OrlojControlDrawer: View {
                 title: "Latitude",
                 systemImage: "arrow.up.and.down",
                 value: latitudeSelection,
-                range: -66...66,
+                range: -90...90,
                 step: 0.1
             )
 
@@ -305,7 +318,7 @@ struct OrlojControlDrawer: View {
         }
     }
 
-    private var astronomyTab: some View {
+    private func astronomyTab(_ readout: OrlojAstronomyReadout) -> some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack {
                 DrawerSectionTitle("Current readout")
@@ -400,11 +413,13 @@ struct OrlojControlDrawer: View {
     }
 
     private var guideItems: [OrlojResolvedGuideItem] {
-        OrlojGuideCatalog.resolvedItems(readout: readout)
+        guard let readout else { return [] }
+        return OrlojGuideCatalog.resolvedItems(readout: readout)
     }
 
     private var selectedGuideItem: OrlojResolvedGuideItem? {
-        OrlojGuideCatalog.resolvedItem(for: dialFocus.activeGuideItemId, readout: readout)
+        guard let readout else { return nil }
+        return OrlojGuideCatalog.resolvedItem(for: dialFocus.activeGuideItemId, readout: readout)
     }
 
     private func inspect(_ item: OrlojResolvedGuideItem) {
@@ -478,7 +493,7 @@ struct OrlojControlDrawer: View {
 
     private var momentSelection: Binding<Date> {
         Binding(
-            get: { timeState.resolvedDate(liveDate: state.date) },
+            get: { timeState.resolvedDate(liveDate: state?.date ?? .now) },
             set: {
                 timeState.useManual($0)
             }

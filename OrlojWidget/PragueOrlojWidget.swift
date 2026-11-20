@@ -4,15 +4,9 @@ import WidgetKit
 private struct PragueOrlojEntry: TimelineEntry {
     let date: Date
     let location: OrlojWidgetLocationSnapshot?
-    let clockState: OrlojClockState?
-
-    init(date: Date, location: OrlojWidgetLocationSnapshot? = .current) {
-        self.date = date
-        self.location = location
-        self.clockState = Self.makeClockState(for: date, location: location)
-    }
-
-    private static func makeClockState(for date: Date, location: OrlojWidgetLocationSnapshot?) -> OrlojClockState? {
+    // Keep future entries small. The app's curve cache is shared by all dates
+    // at the same location; each view calculates only the state it displays.
+    var clockState: OrlojClockState? {
         guard let location else { return nil }
         let clockLocation: OrlojClockLocation
         if location.usesPragueMechanism {
@@ -30,24 +24,41 @@ private struct PragueOrlojEntry: TimelineEntry {
 
 private struct PragueOrlojProvider: TimelineProvider {
     func placeholder(in context: Context) -> PragueOrlojEntry {
-        PragueOrlojEntry(date: .now)
+        let place = OrlojClockLocation.prague
+        let sample = OrlojWidgetLocationSnapshot(
+            name: place.name, timeZoneIdentifier: place.timeZone.identifier,
+            latitude: place.coordinates.latitude, longitude: place.coordinates.longitude, mode: "prague"
+        )
+        return PragueOrlojEntry(date: .now, location: sample)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (PragueOrlojEntry) -> Void) {
-        completion(PragueOrlojEntry(date: .now))
+        if context.isPreview {
+            completion(placeholder(in: context))
+        } else {
+            completion(PragueOrlojEntry(date: .now, location: .current))
+        }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<PragueOrlojEntry>) -> Void) {
         let now = Date.now
-        let entry = PragueOrlojEntry(date: now)
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = entry.location?.timeZone ?? .autoupdatingCurrent
-        let refresh = calendar.nextDate(
-            after: now,
-            matching: DateComponents(second: 0),
-            matchingPolicy: .nextTime
-        ) ?? now.addingTimeInterval(60)
-        completion(Timeline(entries: [entry], policy: .after(refresh)))
+        let location = OrlojWidgetLocationSnapshot.current
+        var entries = [PragueOrlojEntry(date: now, location: location)]
+        guard location != nil else {
+            // Selecting a location in the app explicitly reloads the widget.
+            completion(Timeline(entries: entries, policy: .never))
+            return
+        }
+
+        // Schedule five-minute dial positions two hours ahead. Ask for more
+        // after one hour so a delayed reload still has positions to display.
+        let interval: TimeInterval = 5 * 60
+        let slot = floor(now.timeIntervalSinceReferenceDate / interval)
+        for offset in 1...24 {
+            let date = Date(timeIntervalSinceReferenceDate: (slot + Double(offset)) * interval)
+            entries.append(PragueOrlojEntry(date: date, location: location))
+        }
+        completion(Timeline(entries: entries, policy: .after(now.addingTimeInterval(3600))))
     }
 }
 
@@ -60,6 +71,9 @@ private struct PragueOrlojWidgetView: View {
                 if let state = entry.clockState {
                     OrlojClockView(state: state)
                         .frame(width: proxy.size.width, height: proxy.size.height)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Astronomical clock for \(state.location.name)")
+                        .accessibilityValue("Local time \(state.localTimeString), dial \(state.dialTimeString) \(state.dialTimeZoneLabel), \(state.skyPhaseLabel), \(state.lunar.phaseName)")
                 } else {
                     VStack(spacing: 5) {
                         Image(systemName: "location.circle")
@@ -72,20 +86,13 @@ private struct PragueOrlojWidgetView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(OrlojDesignSystem.background)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Open the astronomical clock app to set a location")
                 }
             }
             .frame(width: proxy.size.width, height: proxy.size.height)
         }
         .containerBackground(OrlojDesignSystem.background, for: .widget)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(accessibilityDescription)
-    }
-
-    private var accessibilityDescription: String {
-        guard let state = entry.clockState, let location = entry.location else {
-            return "Open the astronomical clock app to set a location"
-        }
-        return "Prague astronomical clock dial, current sky for \(location.name), local time \(state.localTimeString), apparent solar time \(state.dialTimeString)"
     }
 }
 

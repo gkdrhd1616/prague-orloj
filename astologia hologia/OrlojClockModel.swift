@@ -21,7 +21,7 @@ struct OrlojClockState {
     let twilightWindow: OrlojSolarWindow
     let daylightProgress: Double
     let babylonianHour: Int?
-    let oldCzechHour: Int
+    let oldCzechHour: Int?
     let solar: SolarPosition
     let sunriseSolarHourAngleDegrees: Double?
     let sunsetSolarHourAngleDegrees: Double?
@@ -236,11 +236,11 @@ struct OrlojClockState {
     }
 
     var sunriseTimeString: String {
-        formattedLocalMinutes(sunriseMinutes)
+        daylightWindow.kind == .normal ? formattedLocalMinutes(sunriseMinutes) : "—"
     }
 
     var sunsetTimeString: String {
-        formattedLocalMinutes(sunsetMinutes)
+        daylightWindow.kind == .normal ? formattedLocalMinutes(sunsetMinutes) : "—"
     }
 
     var dawnTimeString: String {
@@ -290,7 +290,8 @@ struct OrlojClockState {
     }
 
     var daylightProgressLabel: String {
-        "\(Int((daylightProgress * 100).rounded()))%"
+        guard daylightWindow.kind == .normal else { return "—" }
+        return "\(Int((daylightProgress * 100).rounded()))%"
     }
 
     var moonIlluminationLabel: String {
@@ -310,21 +311,23 @@ struct OrlojClockState {
     }
 
     var ancientDayBoundaryLabel: String {
-        isPragueMechanism
+        guard daylightWindow.kind == .normal else { return "No sunset today" }
+        return isPragueMechanism
             ? "Starts \(formattedLocalMinutes(dialSunsetMinutes)) CET"
             : "Starts \(formattedLocalMinutes(dialSunsetMinutes)) solar"
     }
 
     var babylonianHourLabel: String {
         guard let babylonianHour else {
-            return "Night"
+            return daylightWindow.kind == .alwaysAbove ? "Polar day" : "Night"
         }
 
         return "Hour \(babylonianHour)"
     }
 
     var oldCzechHourLabel: String {
-        "Hour \(oldCzechHour)"
+        guard let oldCzechHour else { return "—" }
+        return "Hour \(oldCzechHour)"
     }
 
     private func formattedLocalDate(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
@@ -365,7 +368,7 @@ struct OrlojCoordinates: Equatable {
 
     var normalized: OrlojCoordinates {
         OrlojCoordinates(
-            latitude: latitude.clamped(to: -66...66),
+            latitude: latitude.clamped(to: -90...90),
             longitude: longitude.clamped(to: -180...180)
         )
     }
@@ -840,16 +843,21 @@ enum OrlojCalculator {
             zenithDegrees: 108
         )
         let localMinutes = decimalHour * 60
-        let daylightDuration = daylightDuration(for: solarWindow)
-        let minutesSinceSunrise = solarWindow.startDate.map { date.timeIntervalSince($0) / 60 }
-            ?? minutesBetween(solarWindow.sunrise, localMinutes)
-        let isDaylight = solarWindow.kind == .normal && minutesSinceSunrise >= 0 && minutesSinceSunrise <= daylightDuration
-        let daylightProgress = isDaylight
-            ? (minutesSinceSunrise / daylightDuration).clamped(to: 0...1)
-            : 0
-        let babylonianHour = isDaylight
-            ? min(12, max(1, Int(floor(daylightProgress * 12)) + 1))
-            : nil
+        var activeWindow = solarWindow
+        // At an offset far from mean solar time, the daylight interval may
+        // straddle midnight. The current instant can belong to an adjacent transit.
+        if let rise = solarWindow.startDate, let set = solarWindow.endDate,
+           !calendar.isDate(rise, inSameDayAs: date) || !calendar.isDate(set, inSameDayAs: date),
+           date < rise || date > set,
+           let adjacent = calendar.date(byAdding: .day, value: date < rise ? -1 : 1, to: date) {
+            activeWindow = daylightWindow(for: adjacent, calendar: calendar, coordinates: coordinates, timeZone: location.timeZone)
+        }
+        let daylightDuration = daylightDuration(for: activeWindow)
+        let minutesSinceSunrise = activeWindow.startDate.map { date.timeIntervalSince($0) / 60 } ?? -1
+        let isDaylight = activeWindow.kind == .normal && daylightDuration > 0
+            && minutesSinceSunrise >= 0 && minutesSinceSunrise <= daylightDuration
+        let daylightProgress = isDaylight ? minutesSinceSunrise / daylightDuration : 0
+        let babylonianHour = isDaylight ? min(12, Int(daylightProgress * 12) + 1) : nil
         let julianDay = julianDay(from: date)
         let solar = solarPosition(julianDay: julianDay, coordinates: coordinates)
         let sunriseSolar = solarWindow.startDate.map {
@@ -863,10 +871,10 @@ enum OrlojCalculator {
         let sunsetDialMinutes = isPragueMechanism
             ? solarWindow.endDate.map { ($0.timeIntervalSince1970 / 60 + 60).wrappedMinutes }
             : sunsetSolar?.apparentSolarMinutes
-        let oldCzechHour = oldCzechHour(
+        let oldCzechHour = solarWindow.kind == .normal ? oldCzechHour(
             localMinutes: isPragueMechanism ? localMinutes + cetOffsetMinutes : solar.apparentSolarMinutes,
             sunsetMinutes: sunsetDialMinutes ?? solarWindow.sunset
-        )
+        ) : nil
         let lunar = lunarState(
             julianDay: julianDay,
             solarEclipticLongitude: solar.eclipticLongitudeDegrees,
@@ -936,14 +944,14 @@ enum OrlojCalculator {
     }
 
     static func unequalHourLabelPositions(latitudeDegrees: Double) -> [OrlojProjectionPoint] {
-        let latitude = degreesToRadians(latitudeDegrees.clamped(to: -66...66))
+        guard abs(latitudeDegrees) < 90 else { return [] }
+        let latitude = degreesToRadians(latitudeDegrees)
         // A fixed northern-solstice parallel puts the inscriptions near the
         // outer daylight field, independent of the displayed date and time.
         var declination = degreesToRadians(23.439291)
-        if latitude < 0 {
-            // At far-southern latitudes that parallel has a very short visible
-            // arc. Move inward until at least six ordinary hours are visible.
-            declination = min(declination, atan(cos(.pi / 4) / -tan(latitude)))
+        if latitude < 0 || latitudeDegrees > 66 {
+            // Choose a parallel that actually rises and sets at high latitudes.
+            declination = min(declination, atan(cos(.pi / 4) / abs(tan(latitude))))
         }
         let sunriseHourAngle = acos((-tan(latitude) * tan(declination)).clamped(to: -1...1))
         return (0..<12).map { index in
@@ -1179,7 +1187,17 @@ enum OrlojCalculator {
         timeZone: TimeZone,
         zenithDegrees: Double = 90
     ) -> OrlojSolarWindow {
-        let dayOfYear = calendar.ordinality(of: .day, in: .year, for: date) ?? 1
+        // Select the solar transit belonging to this civil date. Across the
+        // date line, longitude and the legal UTC offset may differ by a day.
+        var utcCalendar = Calendar(identifier: .gregorian)
+        utcCalendar.timeZone = .gmt
+        let wallClock = date.addingTimeInterval(Double(timeZone.secondsFromGMT(for: date)))
+        let nominalMidnightUTC = utcCalendar.startOfDay(for: wallClock)
+        let localNoon = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: date) ?? date
+        let offsetAtNoon = Double(timeZone.secondsFromGMT(for: localNoon)) / 60
+        let meanNoonMinutes = 720 - 4 * coordinates.longitude + offsetAtNoon
+        let midnightUTC = nominalMidnightUTC.addingTimeInterval(-floor(meanNoonMinutes / 1440) * 86400)
+        let dayOfYear = utcCalendar.ordinality(of: .day, in: .year, for: midnightUTC) ?? 1
         let gamma = 2 * .pi / 365 * (Double(dayOfYear) - 1)
         let equationOfTime = 229.18 * (
             0.000075
@@ -1208,24 +1226,14 @@ enum OrlojCalculator {
 
         let hourAngle = acos(hourAngleCosine)
         let hourAngleDegrees = radiansToDegrees(hourAngle)
-        let timezoneOffset = Double(timeZone.secondsFromGMT(for: date)) / 60
-        let sunrise = 720 - 4 * (coordinates.longitude + hourAngleDegrees) - equationOfTime + timezoneOffset
-        let sunset = 720 - 4 * (coordinates.longitude - hourAngleDegrees) - equationOfTime + timezoneOffset
-
-        // Build the event instant before wrapping its wall-clock minutes. The
-        // formula used the offset at `date`; subtract that same offset here so
-        // a DST change between now and sunset does not shift the physical event.
-        // Retaining unwrapped minutes also preserves events on an adjacent day.
-        var utcCalendar = Calendar(identifier: .gregorian)
-        utcCalendar.timeZone = .gmt
-        let nominalDay = utcCalendar.date(from: calendar.dateComponents([.year, .month, .day], from: date))
-        let sunriseDate = nominalDay?.addingTimeInterval((sunrise - timezoneOffset) * 60)
-        let sunsetDate = nominalDay?.addingTimeInterval((sunset - timezoneOffset) * 60)
-        let sunriseEventOffset = sunriseDate.map { Double(timeZone.secondsFromGMT(for: $0)) / 60 } ?? timezoneOffset
-        let sunsetEventOffset = sunsetDate.map { Double(timeZone.secondsFromGMT(for: $0)) / 60 } ?? timezoneOffset
+        let solarNoonUTC = 720 - 4 * coordinates.longitude - equationOfTime
+        let sunriseUTC = solarNoonUTC - 4 * hourAngleDegrees
+        let sunsetUTC = solarNoonUTC + 4 * hourAngleDegrees
+        let sunriseDate = midnightUTC.addingTimeInterval(sunriseUTC * 60)
+        let sunsetDate = midnightUTC.addingTimeInterval(sunsetUTC * 60)
         return .normal(
-            startMinutes: (sunrise - timezoneOffset + sunriseEventOffset).wrappedMinutes,
-            endMinutes: (sunset - timezoneOffset + sunsetEventOffset).wrappedMinutes,
+            startMinutes: (sunriseUTC + Double(timeZone.secondsFromGMT(for: sunriseDate)) / 60).wrappedMinutes,
+            endMinutes: (sunsetUTC + Double(timeZone.secondsFromGMT(for: sunsetDate)) / 60).wrappedMinutes,
             startDate: sunriseDate,
             endDate: sunsetDate
         )
