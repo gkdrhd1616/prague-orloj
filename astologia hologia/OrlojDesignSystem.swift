@@ -17,10 +17,13 @@ enum OrlojDesignSystem {
     static let night = Color(red: 0.035, green: 0.045, blue: 0.065)
     static let twilight = Color(red: 0.55, green: 0.27, blue: 0.21)
     static let daylight = Color(red: 0.20, green: 0.48, blue: 0.66)
-    static let plateDay = Color(red: 0.54, green: 0.73, blue: 0.81)
+    // Plate paint sampled from a 2013 daylight photograph of the dial and
+    // neutralised for the warm sunlight in it: teal sky, ochre twilight,
+    // charcoal night, slate-blue zodiac band and outer ring.
+    static let plateDay = Color(red: 0.50, green: 0.68, blue: 0.69)
     static let plateBelowHorizon = Color(red: 0.18, green: 0.095, blue: 0.075)
-    static let plateTwilight = Color(red: 0.65, green: 0.16, blue: 0.14)
-    static let plateNight = Color(red: 0.035, green: 0.045, blue: 0.065)
+    static let plateTwilight = Color(red: 0.79, green: 0.56, blue: 0.21)
+    static let plateNight = Color(red: 0.085, green: 0.092, blue: 0.11)
     static let earth = Color(red: 0.12, green: 0.31, blue: 0.39)
     static let gold = Color(red: 0.84, green: 0.68, blue: 0.30)
     static let sun = Color(red: 0.96, green: 0.84, blue: 0.49)
@@ -39,7 +42,8 @@ enum OrlojDesignSystem {
     static let ivoryText = Color(red: 0.92, green: 0.82, blue: 0.56)
     static let enamelDark = Color(red: 0.035, green: 0.029, blue: 0.023)
     static let enamelBlueBlack = Color(red: 0.055, green: 0.075, blue: 0.11)
-    static let zodiacBlue = Color(red: 0.065, green: 0.085, blue: 0.12)
+    static let zodiacBlue = Color(red: 0.36, green: 0.40, blue: 0.49)
+    static let outerRingSlate = Color(red: 0.36, green: 0.40, blue: 0.51)
     static let agedGoldEdge = Color(red: 0.64, green: 0.47, blue: 0.18)
     static let moonSilver = Color(red: 0.82, green: 0.84, blue: 0.80)
     static let moonDarkMetal = Color(red: 0.09, green: 0.086, blue: 0.078)
@@ -47,9 +51,32 @@ enum OrlojDesignSystem {
     static let wornGilding = Color(red: 0.62, green: 0.47, blue: 0.22)
     static let shadowBrown = Color(red: 0.09, green: 0.055, blue: 0.033)
     static let burntUmber = Color(red: 0.32, green: 0.135, blue: 0.075)
+    static let ironGrey = Color(red: 0.25, green: 0.26, blue: 0.27)
+    static let ironHighlight = Color(red: 0.62, green: 0.64, blue: 0.65)
 
     static let drawerCornerRadius: CGFloat = 8
     static let controlCornerRadius: CGFloat = 8
+}
+
+/// Text shown to people, looked up in the string catalog for the system
+/// language. English is the source; Korean is the translation. Text that has
+/// no catalog entry, such as a place name someone typed, is returned as is.
+nonisolated func orlojLocalized(_ english: String) -> String {
+    NSLocalizedString(english, bundle: OrlojLocalization.bundle, comment: "")
+}
+
+/// A catalog format such as "Hour %@", filled with values that are already
+/// formatted as text. Translations may reorder them with %1$@, %2$@.
+nonisolated func orlojLocalized(_ format: String, _ arguments: String...) -> String {
+    String(format: NSLocalizedString(format, bundle: OrlojLocalization.bundle, comment: ""),
+           arguments: arguments.map { $0 as CVarArg })
+}
+
+enum OrlojLocalization {
+    /// The bundle strings are looked up in. Unit tests point it at a bundle
+    /// without translations so they compare against the English source text
+    /// whatever language the simulator is set to.
+    nonisolated(unsafe) static var bundle: Bundle = .main
 }
 
 enum OrlojLayerFocus: String, CaseIterable, Identifiable {
@@ -65,6 +92,10 @@ enum OrlojLayerFocus: String, CaseIterable, Identifiable {
 
     var id: String {
         rawValue
+    }
+
+    var title: String {
+        orlojLocalized(rawValue)
     }
 
     var systemImage: String {
@@ -100,14 +131,18 @@ enum OrlojDialMode: String, CaseIterable, Identifiable {
         rawValue
     }
 
+    var title: String {
+        orlojLocalized(rawValue)
+    }
+
     var detail: String {
         switch self {
         case .display:
-            "Finished dial with minimal labels."
+            orlojLocalized("Finished dial with minimal labels.")
         case .guide:
-            "Teaching view for the selected concept."
+            orlojLocalized("Teaching view for the selected concept.")
         case .debug:
-            "Projection labels and technical readouts."
+            orlojLocalized("Projection labels and technical readouts.")
         }
     }
 }
@@ -143,6 +178,8 @@ enum OrlojGuideLayerID: String, CaseIterable, Identifiable {
     case zodiacZeroPoint
     case tropicCancer
     case tropicCapricorn
+    case earthDisk
+    case castShadows
     case debugProjectionLines
 
     var id: String {
@@ -161,6 +198,8 @@ enum OrlojGuideTopicID: String, CaseIterable, Identifiable {
     case unequalHours
     case siderealAries
     case tropics
+    case earthAndPlate
+    case lightAndShadow
 
     var id: String {
         rawValue
@@ -174,6 +213,10 @@ enum OrlojDrawerTab: String, CaseIterable, Identifiable {
 
     var id: String {
         rawValue
+    }
+
+    var title: String {
+        orlojLocalized(rawValue)
     }
 
     var systemImage: String {

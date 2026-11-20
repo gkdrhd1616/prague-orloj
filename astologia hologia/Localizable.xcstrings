@@ -1,0 +1,3108 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%1$@ %2$@ deg": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@°"
+          }
+        }
+      }
+    },
+    "%1$@ lit · %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 밝음 · %2$@"
+          }
+        }
+      }
+    },
+    "%1$@ shadows fall %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그림자가 %2$@ %1$@ 드리웁니다"
+          }
+        }
+      }
+    },
+    "%1$@ · %2$@ lit": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@ 밝음"
+          }
+        }
+      }
+    },
+    "%1$@ · daylight %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · 낮 %2$@ 경과"
+          }
+        }
+      }
+    },
+    "%1$@ · ±%2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · ±%2$@"
+          }
+        }
+      }
+    },
+    "%@ dec": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "적위 %@"
+          }
+        }
+      }
+    },
+    "%@ deg": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@°"
+          }
+        }
+      }
+    },
+    "%@ min": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@분"
+          }
+        }
+      }
+    },
+    "%@ rev": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@회전"
+          }
+        }
+      }
+    },
+    "%@ · low, warm Sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · 낮고 따뜻한 햇빛"
+          }
+        }
+      }
+    },
+    "%@d": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@일"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        }
+      }
+    },
+    "24 = sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 = 일몰"
+          }
+        }
+      }
+    },
+    "A gilded Sun slides along the golden hand and always sits on the zodiac ring, at the sign the Sun is in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금빛 태양은 금색 손을 따라 미끄러지며, 언제나 황도 고리 위 태양이 있는 별자리에 놓입니다."
+          }
+        }
+      }
+    },
+    "A half-silver, half-black sphere on its own hand shows where the Moon is in the zodiac and, by how much silver shows, its phase.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "따로 달린 바늘 끝의 반은 은색, 반은 검은색인 구가 황도대에서 달의 위치를, 그리고 보이는 은색의 양으로 달의 위상을 보여 줍니다."
+          }
+        }
+      }
+    },
+    "A painted map of the sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하늘을 그린 지도"
+          }
+        }
+      }
+    },
+    "A small gold star marks the vernal equinox, the zodiac's zero point. Against the Roman numerals it shows sidereal (star) time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작은 금색 별은 황도대의 기준점인 춘분점을 표시합니다. 로마 숫자에 대어 읽으면 항성시(별의 시간)가 됩니다."
+          }
+        }
+      }
+    },
+    "All": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체"
+          }
+        }
+      }
+    },
+    "Apparent solar time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시태양시"
+          }
+        }
+      }
+    },
+    "Apparent solar time at the selected coordinates; local civil time is shown separately": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택한 좌표의 시태양시이며, 현지 표준시는 따로 표시합니다"
+          }
+        }
+      }
+    },
+    "Approximate": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "대략"
+          }
+        }
+      }
+    },
+    "Approximate solar coordinates (US Naval Observatory)": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양 좌표 근사식 (미 해군천문대, 영문)"
+          }
+        }
+      }
+    },
+    "Aquarius": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "물병자리"
+          }
+        }
+      }
+    },
+    "Aries": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "양자리"
+          }
+        }
+      }
+    },
+    "Astronomy": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천문 정보"
+          }
+        }
+      }
+    },
+    "At ORTVS it rises; at OCCASVS it sets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ORTVS에서 해가 뜨고, OCCASVS에서 해가 집니다."
+          }
+        }
+      }
+    },
+    "Band before night boundary": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "밤 경계 앞의 띠"
+          }
+        }
+      }
+    },
+    "Basis: %@ · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기준: %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "Because the sky is projected onto a flat plate, the circle of the ecliptic lands off-centre: it touches the Tropic of Cancer on one side and the Tropic of Capricorn on the other. The ring turns once a sidereal day. Its gold ladder marks every 5° of longitude; each sign covers 30°.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하늘을 평평한 판에 투영했기 때문에 황도의 원은 중심에서 벗어나, 한쪽은 북회귀선에 다른 쪽은 남회귀선에 닿습니다. 고리는 항성일마다 한 바퀴 돕니다. 금색 빗살 눈금은 황경 5°마다 있고, 별자리 하나는 30°입니다."
+          }
+        }
+      }
+    },
+    "Below the horizon an ochre band marks twilight — AVRORA, dawn, on the left and CREPVSCVLVM, dusk, on the right. The black disk is full night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지평선 아래의 황토색 띠는 박명입니다. 왼쪽의 AVRORA는 새벽, 오른쪽의 CREPVSCVLVM은 해 질 녘입니다. 검은 원은 완전한 밤입니다."
+          }
+        }
+      }
+    },
+    "Between sunrise and sunset the day always has twelve of these temporal hours, so they are long in summer and short in winter. The curves bend because the Sun's daily path changes with the season. The Astronomy tab lists the current hour as Unequal / Babylonian.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해가 떠서 질 때까지는 언제나 이런 부정시가 12개 있으므로, 여름에는 길고 겨울에는 짧습니다. 태양의 하루 경로가 계절마다 달라지기 때문에 선이 휘어 있습니다. 천문 정보 탭에는 지금의 부정시가 '부정시 / 바빌로니아시'로 나옵니다."
+          }
+        }
+      }
+    },
+    "CET": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CET"
+          }
+        }
+      }
+    },
+    "Cancer": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "게자리"
+          }
+        }
+      }
+    },
+    "Cancer %@%%": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "북회귀선 쪽 %@%%"
+          }
+        }
+      }
+    },
+    "Canonical Old Town Hall reconstruction mode.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구시청사 시계를 그대로 재현하는 모드입니다."
+          }
+        }
+      }
+    },
+    "Capricorn": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "염소자리"
+          }
+        }
+      }
+    },
+    "Capricorn %@%%": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "남회귀선 쪽 %@%%"
+          }
+        }
+      }
+    },
+    "Checking device location...": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치를 확인하는 중..."
+          }
+        }
+      }
+    },
+    "Choose a location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 선택"
+          }
+        }
+      }
+    },
+    "Choose the moment represented by the dial.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼에 표시할 순간을 고릅니다."
+          }
+        }
+      }
+    },
+    "City preset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도시 프리셋"
+          }
+        }
+      }
+    },
+    "Close controls": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 닫기"
+          }
+        }
+      }
+    },
+    "Compare with the local time in the Astronomy tab to see the offset of solar or winter time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천문 정보 탭의 현지 시각과 비교하면 시태양시나 표준시와의 차이를 알 수 있습니다."
+          }
+        }
+      }
+    },
+    "Coordinates": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "좌표"
+          }
+        }
+      }
+    },
+    "Could not resolve the device location. Keeping the current location.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치를 확인하지 못했습니다. 현재 위치를 유지합니다."
+          }
+        }
+      }
+    },
+    "Count the ladder's divisions from the sign's edge to estimate the degree, 5° per step.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별자리 경계에서부터 빗살 눈금을 세어 도수를 어림합니다. 한 칸이 5°입니다."
+          }
+        }
+      }
+    },
+    "Current Location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 위치"
+          }
+        }
+      }
+    },
+    "Current basis": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 기준"
+          }
+        }
+      }
+    },
+    "Current readout": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 값"
+          }
+        }
+      }
+    },
+    "Current: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금: %@"
+          }
+        }
+      }
+    },
+    "Custom": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "직접 입력"
+          }
+        }
+      }
+    },
+    "Dawn, dusk and darkness": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새벽, 해 질 녘, 어둠"
+          }
+        }
+      }
+    },
+    "Day": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "낮"
+          }
+        }
+      }
+    },
+    "Daylight divided into 12": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "낮을 12등분"
+          }
+        }
+      }
+    },
+    "Daylight in twelve seasonal parts": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "낮을 계절에 따라 12등분"
+          }
+        }
+      }
+    },
+    "Debug": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "디버그"
+          }
+        }
+      }
+    },
+    "Device": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기"
+          }
+        }
+      }
+    },
+    "Device location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치"
+          }
+        }
+      }
+    },
+    "Device location not requested": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치를 요청하지 않았습니다"
+          }
+        }
+      }
+    },
+    "Device location unavailable. Keeping the current location.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치를 사용할 수 없습니다. 현재 위치를 유지합니다."
+          }
+        }
+      }
+    },
+    "Device returned an invalid location. Keeping the current location.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기가 잘못된 위치를 보냈습니다. 현재 위치를 유지합니다."
+          }
+        }
+      }
+    },
+    "Dial time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼 시각"
+          }
+        }
+      }
+    },
+    "Display": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시"
+          }
+        }
+      }
+    },
+    "Drawer tab": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탭"
+          }
+        }
+      }
+    },
+    "Earth and the fixed plate": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지구와 고정판"
+          }
+        }
+      }
+    },
+    "Eccentric projected ecliptic": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중심에서 벗어난 투영 황도"
+          }
+        }
+      }
+    },
+    "Ecliptic": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황경"
+          }
+        }
+      }
+    },
+    "Equator": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "적도"
+          }
+        }
+      }
+    },
+    "Exact": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정확"
+          }
+        }
+      }
+    },
+    "Face in shade: soft skylight only": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그늘: 은은한 하늘빛만 비침"
+          }
+        }
+      }
+    },
+    "Find 24 on the ring: when the hand reaches it, the Sun sets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고리에서 24를 찾습니다. 손이 거기에 닿으면 해가 집니다."
+          }
+        }
+      }
+    },
+    "Find the Sun below the horizon.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지평선 아래의 태양을 찾습니다."
+          }
+        }
+      }
+    },
+    "Find the Sun when it is in the blue part of the dial.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 다이얼의 파란 부분에 있을 때 찾습니다."
+          }
+        }
+      }
+    },
+    "Find the gilded Sun on the golden hand.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금색 손 위의 금빛 태양을 찾습니다."
+          }
+        }
+      }
+    },
+    "Find the golden hand with the Sun. Its tip on the gold Roman numerals gives the time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 달린 금색 손을 찾습니다. 손끝이 가리키는 금색 로마 숫자가 시각입니다."
+          }
+        }
+      }
+    },
+    "Find the sign under the Sun: the Sun is in that sign.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양 아래의 별자리를 찾습니다. 태양은 그 별자리에 있습니다."
+          }
+        }
+      }
+    },
+    "Find the silver-and-black sphere on the dark iron hand.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어두운 쇠 바늘 끝의 은색·검은색 구를 찾습니다."
+          }
+        }
+      }
+    },
+    "Find the small gold star near the Roman numerals.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로마 숫자 가까이에 있는 작은 금색 별을 찾습니다."
+          }
+        }
+      }
+    },
+    "Find where the golden hand crosses the outer ring of Gothic numerals.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금색 손이 고딕 숫자의 바깥 고리와 만나는 곳을 찾습니다."
+          }
+        }
+      }
+    },
+    "Finding current location…": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 위치를 찾는 중…"
+          }
+        }
+      }
+    },
+    "Finished dial with minimal labels.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "글자를 최소로 한 완성된 다이얼입니다."
+          }
+        }
+      }
+    },
+    "First quarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "상현달"
+          }
+        }
+      }
+    },
+    "Fixed astrolabe plate": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고정된 아스트롤라베 판"
+          }
+        }
+      }
+    },
+    "Fixed ordinary time scale": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고정된 보통 시간 눈금"
+          }
+        }
+      }
+    },
+    "Follow the golden hand to its tip on the Roman numerals.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금색 손을 따라 로마 숫자 위의 손끝까지 갑니다."
+          }
+        }
+      }
+    },
+    "Follow the hand outwards to the outer ring: its number counts hours since the last sunset.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손을 따라 바깥 고리까지 갑니다. 그 숫자는 마지막 일몰 뒤 몇 시간이 지났는지를 셉니다."
+          }
+        }
+      }
+    },
+    "Full": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보름달"
+          }
+        }
+      }
+    },
+    "GPS": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPS"
+          }
+        }
+      }
+    },
+    "Gemini": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "쌍둥이자리"
+          }
+        }
+      }
+    },
+    "Guide": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가이드"
+          }
+        }
+      }
+    },
+    "Hands, the Sun, the Moon and the zodiac ring stand in front of the plate and cast shadows. A high summer Sun throws long shadows straight down; a low winter Sun short ones. In the morning they fall to one side and in the afternoon to the other. When the Sun is behind the wall or below the horizon, only soft skylight remains.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바늘, 태양, 달, 황도 고리는 판 앞에 떠 있어 그림자를 드리웁니다. 높은 여름 해는 바로 아래로 긴 그림자를, 낮은 겨울 해는 짧은 그림자를 만듭니다. 오전에는 한쪽으로, 오후에는 다른 쪽으로 떨어집니다. 해가 벽 뒤나 지평선 아래에 있으면 은은한 하늘빛만 남습니다."
+          }
+        }
+      }
+    },
+    "Highlights %@ on the dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼에서 %@ 항목을 강조합니다"
+          }
+        }
+      }
+    },
+    "Historical Prague astronomical clock location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 천문시계의 실제 위치"
+          }
+        }
+      }
+    },
+    "Horizon": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지평선"
+          }
+        }
+      }
+    },
+    "Hour %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@시"
+          }
+        }
+      }
+    },
+    "Hours counted from sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일몰부터 세는 시간"
+          }
+        }
+      }
+    },
+    "How to read it": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "읽는 법"
+          }
+        }
+      }
+    },
+    "How to read the dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼 읽는 법"
+          }
+        }
+      }
+    },
+    "How to read time (Prague City Tourism)": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간 읽는 법 (프라하 관광청, 영문)"
+          }
+        }
+      }
+    },
+    "In Prague the hand ends in a small gilded hand with an outstretched finger; the dial never switches to summer time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하에서는 바늘 끝에 손가락을 뻗은 작은 금빛 손이 달려 있고, 다이얼은 서머타임으로 바뀌지 않습니다."
+          }
+        }
+      }
+    },
+    "In four steps": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "네 단계로 읽기"
+          }
+        }
+      }
+    },
+    "In medieval Bohemia the day began at sunset. Because sunset moves through the year, the whole outer ring turns slowly so that 24 always meets the hand at sunset. The same golden hand then reads 1, 2, 3… for each hour after it. The app finds sunset on the geometric horizon, without atmospheric refraction.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중세 보헤미아에서는 하루가 일몰에 시작했습니다. 일몰 시각은 일 년 내내 바뀌므로, 바깥 고리 전체가 천천히 돌아 24가 늘 일몰에 손과 만납니다. 그 뒤 같은 금색 손이 한 시간마다 1, 2, 3…을 가리킵니다. 앱은 대기 굴절을 빼고 기하학적 지평선으로 일몰을 계산합니다."
+          }
+        }
+      }
+    },
+    "In the black disk it is night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검은 원 안이면 밤입니다."
+          }
+        }
+      }
+    },
+    "In the ochre band it is dawn (left) or dusk (right).": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황토색 띠 안이면 새벽(왼쪽)이나 해 질 녘(오른쪽)입니다."
+          }
+        }
+      }
+    },
+    "Last quarter": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하현달"
+          }
+        }
+      }
+    },
+    "Latitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위도"
+          }
+        }
+      }
+    },
+    "Layer focus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "강조할 요소"
+          }
+        }
+      }
+    },
+    "Learn about %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 알아보기"
+          }
+        }
+      }
+    },
+    "Leo": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사자자리"
+          }
+        }
+      }
+    },
+    "Libra": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천칭자리"
+          }
+        }
+      }
+    },
+    "Light and shadow": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빛과 그림자"
+          }
+        }
+      }
+    },
+    "Light on the dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼에 비치는 빛"
+          }
+        }
+      }
+    },
+    "Live now": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 시각"
+          }
+        }
+      }
+    },
+    "Local time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현지 시각"
+          }
+        }
+      }
+    },
+    "Location basis: Manual": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 기준: 수동"
+          }
+        }
+      }
+    },
+    "Location basis: Prague preset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 기준: 프라하 프리셋"
+          }
+        }
+      }
+    },
+    "Location mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 모드"
+          }
+        }
+      }
+    },
+    "Location settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 설정"
+          }
+        }
+      }
+    },
+    "Location unavailable. Allow location access or choose a location in Settings.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치를 알 수 없습니다. 위치 접근을 허용하거나 설정에서 위치를 고르세요."
+          }
+        }
+      }
+    },
+    "Long": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "길게"
+          }
+        }
+      }
+    },
+    "Long shadows mean the Sun is high or off to the side and grazes the wall; short ones mean it shines almost straight at the face.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그림자가 길면 해가 높거나 옆에 있어 벽을 비스듬히 비추는 것이고, 짧으면 거의 정면에서 비추는 것입니다."
+          }
+        }
+      }
+    },
+    "Longitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "경도"
+          }
+        }
+      }
+    },
+    "Look at the direction of the hands' shadows: they point away from the Sun.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바늘 그림자의 방향을 봅니다. 그림자는 태양 반대쪽을 향합니다."
+          }
+        }
+      }
+    },
+    "Look at what is painted behind the Sun: blue sky is day, the ochre band is dawn or dusk, black is night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양 뒤에 칠해진 색을 봅니다. 파란 하늘은 낮, 황토색 띠는 새벽이나 해 질 녘, 검은색은 밤입니다."
+          }
+        }
+      }
+    },
+    "Manual": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수동"
+          }
+        }
+      }
+    },
+    "Manual moment": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지정 시각"
+          }
+        }
+      }
+    },
+    "Manual sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수동 설정 하늘"
+          }
+        }
+      }
+    },
+    "Manual time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "직접 지정"
+          }
+        }
+      }
+    },
+    "Mean solar": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "평균태양시"
+          }
+        }
+      }
+    },
+    "Medium": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알맞게"
+          }
+        }
+      }
+    },
+    "Mode: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모드: %@"
+          }
+        }
+      }
+    },
+    "Mode: My Sky manual": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모드: 나의 하늘(수동)"
+          }
+        }
+      }
+    },
+    "Mode: Prague Orloj": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모드: 프라하 오를로이"
+          }
+        }
+      }
+    },
+    "Moon": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "달"
+          }
+        }
+      }
+    },
+    "Moon phase": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "달의 위상"
+          }
+        }
+      }
+    },
+    "My Sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나의 하늘"
+          }
+        }
+      }
+    },
+    "My Sky redraws the horizon and twilight for your location; the hand then follows the real Sun, so it reads apparent solar time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나의 하늘 모드는 지평선과 박명을 내 위치에 맞게 다시 그립니다. 손은 실제 태양을 따라가므로 시태양시를 가리킵니다."
+          }
+        }
+      }
+    },
+    "My Sky: device location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나의 하늘: 기기 위치"
+          }
+        }
+      }
+    },
+    "My device sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "내 기기 위치의 하늘"
+          }
+        }
+      }
+    },
+    "N": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "북"
+          }
+        }
+      }
+    },
+    "Near the outer gold circle: around the June solstice. Near the inner: around December.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바깥 금색 원 가까이면 6월 하지 무렵, 안쪽 원 가까이면 12월 동지 무렵입니다."
+          }
+        }
+      }
+    },
+    "New": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭"
+          }
+        }
+      }
+    },
+    "Next": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음"
+          }
+        }
+      }
+    },
+    "Night": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "밤"
+          }
+        }
+      }
+    },
+    "Night: no direct sunlight": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "밤: 직사광선 없음"
+          }
+        }
+      }
+    },
+    "No astronomical night": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "천문학적 밤 없음"
+          }
+        }
+      }
+    },
+    "No crisp shadows means the face is in shade or it is night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "또렷한 그림자가 없으면 면이 그늘에 있거나 밤입니다."
+          }
+        }
+      }
+    },
+    "No sunset today": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘은 일몰 없음"
+          }
+        }
+      }
+    },
+    "No twilight crossing": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "박명 경계 통과 없음"
+          }
+        }
+      }
+    },
+    "Note the colour behind it: day, twilight or night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 뒤의 색을 봅니다. 낮, 박명, 밤 중 하나입니다."
+          }
+        }
+      }
+    },
+    "ORTVS and OCCASVS are Latin for rising and setting, written in the classical V for U.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ORTVS와 OCCASVS는 '떠오름'과 '짐'을 뜻하는 라틴어로, 고전 표기대로 U를 V로 씁니다."
+          }
+        }
+      }
+    },
+    "Old Czech time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "옛 체코 시간"
+          }
+        }
+      }
+    },
+    "On the Prague Orloj": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이에서는"
+          }
+        }
+      }
+    },
+    "On the clock the curves and numerals are painted on the fixed plate and only apply while the Sun is above the horizon.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실제 시계에서 곡선과 숫자는 고정판에 칠해져 있고, 태양이 지평선 위에 있을 때만 쓰입니다."
+          }
+        }
+      }
+    },
+    "On the clock the ring is a separate gilded part standing in front of the plate, so it casts its own shadow.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실제 시계에서 고리는 판 앞에 떠 있는 별도의 금빛 부품이라 자기 그림자를 드리웁니다."
+          }
+        }
+      }
+    },
+    "On the clock the sphere is a hollow ball turned by a mechanism inside it as the Moon's hand moves away from the Sun's.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실제 시계의 구는 속이 빈 공으로, 달의 바늘이 태양의 손에서 멀어질수록 안쪽 장치가 공을 돌립니다."
+          }
+        }
+      }
+    },
+    "Open controls": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 열기"
+          }
+        }
+      }
+    },
+    "Personal sky from a one-time device location request.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치를 한 번 받아 나만의 하늘을 계산합니다."
+          }
+        }
+      }
+    },
+    "Personal sky from city, coordinate, and timezone controls.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도시·좌표·시간대를 직접 정해 나만의 하늘을 계산합니다."
+          }
+        }
+      }
+    },
+    "Personal sky from device location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치로 계산한 나만의 하늘"
+          }
+        }
+      }
+    },
+    "Personal sky from manual location": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "직접 입력한 위치로 계산한 나만의 하늘"
+          }
+        }
+      }
+    },
+    "Pisces": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "물고기자리"
+          }
+        }
+      }
+    },
+    "Polar day": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백야"
+          }
+        }
+      }
+    },
+    "Position and phase": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치와 위상"
+          }
+        }
+      }
+    },
+    "Prague": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하"
+          }
+        }
+      }
+    },
+    "Prague Orloj": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이"
+          }
+        }
+      }
+    },
+    "Prague Orloj astronomical dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이 천문 다이얼"
+          }
+        }
+      }
+    },
+    "Prague Orloj mode shows the clock as it runs in Prague: the hand keeps Central European Time all year and the sky is Prague's.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이 모드는 프라하에서 실제로 움직이는 시계를 보여 줍니다. 손은 일 년 내내 중앙유럽 표준시를 따르고, 하늘은 프라하의 하늘입니다."
+          }
+        }
+      }
+    },
+    "Prague Orloj preset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이 프리셋"
+          }
+        }
+      }
+    },
+    "Prague astronomical clock (Wikipedia)": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 천문시계 (위키백과, 영문)"
+          }
+        }
+      }
+    },
+    "Prague dial · CET (UTC+1), without daylight saving · idealized reconstruction": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 다이얼 · CET(UTC+1), 서머타임 없음 · 이상화한 재현"
+          }
+        }
+      }
+    },
+    "Prague's plate is drawn for the city's latitude. In My Sky the app redraws it for your location.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하의 판은 그 도시의 위도에 맞춰 그려져 있습니다. 나의 하늘 모드에서는 앱이 내 위치에 맞게 다시 그립니다."
+          }
+        }
+      }
+    },
+    "Precise": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정밀"
+          }
+        }
+      }
+    },
+    "Previous": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이전"
+          }
+        }
+      }
+    },
+    "Projection labels and technical readouts.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "투영 보조선과 기술 수치를 표시합니다."
+          }
+        }
+      }
+    },
+    "Read every moving part against it.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "움직이는 모든 부분을 이 판에 대어 읽습니다."
+          }
+        }
+      }
+    },
+    "Read how much silver faces you: that is the phase.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "은색이 얼마나 보이는지 읽습니다. 그것이 위상입니다."
+          }
+        }
+      }
+    },
+    "Read its position on the Roman scale as you would the hand: that is local sidereal time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손을 읽듯 로마 숫자 눈금 위의 위치를 읽습니다. 그것이 현지 항성시입니다."
+          }
+        }
+      }
+    },
+    "Read the black number of the band between the curves it sits in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 들어 있는 두 곡선 사이 칸의 검은 숫자를 읽습니다."
+          }
+        }
+      }
+    },
+    "Read the numeral: top half of the dial for daytime hours, bottom half for night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "숫자를 읽습니다. 다이얼 위쪽 절반은 낮 시간, 아래쪽 절반은 밤 시간입니다."
+          }
+        }
+      }
+    },
+    "Read the zodiac sign beneath it for the Moon's place in the sky.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 아래 별자리로 하늘에서 달의 위치를 읽습니다."
+          }
+        }
+      }
+    },
+    "Read the zodiac sign beneath the Sun for the season, and the silver-and-black sphere for the Moon's phase.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양 아래의 별자리로 계절을, 은색과 검은색으로 된 구로 달의 위상을 읽습니다."
+          }
+        }
+      }
+    },
+    "Read the zodiac sign under it for the season.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 아래 별자리로 계절을 읽습니다."
+          }
+        }
+      }
+    },
+    "Reading guide": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "읽는 법"
+          }
+        }
+      }
+    },
+    "Reading the time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간 읽기"
+          }
+        }
+      }
+    },
+    "Return to Display": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시 모드로 돌아가기"
+          }
+        }
+      }
+    },
+    "Returns to the finished display mode and hides guide callouts": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완성된 다이얼 보기로 돌아가고 가이드 설명을 숨깁니다"
+          }
+        }
+      }
+    },
+    "Roman time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로마 숫자 시간"
+          }
+        }
+      }
+    },
+    "S": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "남"
+          }
+        }
+      }
+    },
+    "Sagittarius": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "궁수자리"
+          }
+        }
+      }
+    },
+    "Scorpio": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전갈자리"
+          }
+        }
+      }
+    },
+    "Seasons and tropics": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계절과 회귀선"
+          }
+        }
+      }
+    },
+    "See how far the Sun sits from the centre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 중심에서 얼마나 떨어져 있는지 봅니다."
+          }
+        }
+      }
+    },
+    "Seoul": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서울"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
+          }
+        }
+      }
+    },
+    "Shadows follow the real Sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실제 태양을 따라 움직이는 그림자"
+          }
+        }
+      }
+    },
+    "Short": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "짧게"
+          }
+        }
+      }
+    },
+    "Shows this element on the dial": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼에서 이 요소를 보여 줍니다"
+          }
+        }
+      }
+    },
+    "Sidereal": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항성시"
+          }
+        }
+      }
+    },
+    "Sidereal time follows the stars rather than the Sun. The star pointer turns with the zodiac ring, a little faster than the Sun's hand: it gains about four minutes a day and one whole turn a year. At the March equinox the star and the Sun point the same way.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "항성시는 태양이 아니라 별을 따릅니다. 별 바늘은 황도 고리와 함께 태양의 손보다 조금 빨리 돌아, 하루에 약 4분, 일 년에 한 바퀴를 앞서 갑니다. 3월 춘분에는 별과 태양이 같은 쪽을 가리킵니다."
+          }
+        }
+      }
+    },
+    "Sky for %1$@ · %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@의 하늘 · %2$@"
+          }
+        }
+      }
+    },
+    "Sky for %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@의 하늘"
+          }
+        }
+      }
+    },
+    "Sky: %1$@ · %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하늘: %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "Sky: %1$@ · altitude %2$@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하늘: %1$@ · 고도 %2$@"
+          }
+        }
+      }
+    },
+    "Sources": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "출처"
+          }
+        }
+      }
+    },
+    "Star time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별의 시간"
+          }
+        }
+      }
+    },
+    "Start the tour": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "둘러보기 시작"
+          }
+        }
+      }
+    },
+    "Starts %@ CET": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CET %@에 시작"
+          }
+        }
+      }
+    },
+    "Starts %@ solar": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시태양시 %@에 시작"
+          }
+        }
+      }
+    },
+    "Summer outward, winter inward": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여름엔 바깥, 겨울엔 안쪽"
+          }
+        }
+      }
+    },
+    "Sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양"
+          }
+        }
+      }
+    },
+    "Sun crosses ORTVS and OCCASVS": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 ORTVS와 OCCASVS를 지남"
+          }
+        }
+      }
+    },
+    "Sun on the ecliptic": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황도 위의 태양"
+          }
+        }
+      }
+    },
+    "Sun, Moon and zodiac": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해, 달, 황도대"
+          }
+        }
+      }
+    },
+    "Sunlight on the clock face": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시계 면에 비치는 햇빛"
+          }
+        }
+      }
+    },
+    "Sunrise / Sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일출 / 일몰"
+          }
+        }
+      }
+    },
+    "Sunrise and sunset": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해돋이와 해넘이"
+          }
+        }
+      }
+    },
+    "Taurus": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황소자리"
+          }
+        }
+      }
+    },
+    "Teaching view for the selected concept.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고른 개념을 설명하는 보기입니다."
+          }
+        }
+      }
+    },
+    "That is the current hour of daylight, counted from sunrise.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그것이 해돋이부터 센 지금의 낮 시간입니다."
+          }
+        }
+      }
+    },
+    "That number is the hours elapsed since the last sunset.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 숫자가 마지막 일몰 뒤 지난 시간입니다."
+          }
+        }
+      }
+    },
+    "The Gothic numerals, zodiac signs and globe are traced from donchico's CC0 drawing of the dial; colours and proportions follow a 2013 photograph of the clock.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고딕 숫자, 별자리 문양, 지구는 donchico의 CC0 다이얼 도안에서 가져왔고, 색과 비율은 2013년에 찍은 시계 사진을 따릅니다."
+          }
+        }
+      }
+    },
+    "The Moon circles the zodiac in about 27 days, so its hand falls behind the Sun's by roughly 50 minutes a day. The sphere turns as the gap between them grows: all black at new Moon, half and half at the quarters, all silver at full Moon. In Prague mode the Moon is kept on the zodiac track; My Sky also includes its calculated latitude.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "달은 약 27일 만에 황도대를 한 바퀴 돌기 때문에, 달의 바늘은 하루에 50분쯤 태양의 손보다 뒤처집니다. 둘 사이가 벌어질수록 구가 돌아, 삭에는 모두 검고 상현·하현에는 반반, 보름에는 모두 은색입니다. 프라하 모드에서는 달을 황도 위에 두고, 나의 하늘 모드에서는 계산한 황위까지 반영합니다."
+          }
+        }
+      }
+    },
+    "The Orloj is on the town hall's south wall, so the face is in direct sun from morning to late afternoon and in shade on summer evenings, when the Sun sets in the north-west.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오를로이는 시청 남쪽 벽에 있어서, 아침부터 늦은 오후까지 직사광을 받고, 해가 북서쪽으로 지는 여름 저녁에는 그늘이 집니다."
+          }
+        }
+      }
+    },
+    "The Prague Orloj was installed on the Old Town Hall tower in 1410, built by the clockmaker Mikuláš of Kadaň with the astronomer Jan Šindel. It is the oldest astronomical clock still working. The calendar dial below it and the moving figures were added later and are not shown here.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프라하 오를로이는 1410년 구시청사 탑에 설치되었습니다. 시계공 카단의 미쿨라시와 천문학자 얀 신델이 만들었고, 지금도 움직이는 천문시계 가운데 가장 오래되었습니다. 아래의 달력판과 움직이는 인형들은 나중에 더해진 것으로, 이 앱에는 나오지 않습니다."
+          }
+        }
+      }
+    },
+    "The Roman scale is fixed and the golden hand makes one turn a day. In Prague mode the hand keeps Central European Time (UTC+1) all year, so in summer it reads an hour behind the clocks in town. In My Sky it follows the calculated Sun, so XII at the top is the moment the Sun crosses your meridian. Your modern local time is listed separately in the Astronomy tab.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로마 숫자 눈금은 고정되어 있고 금색 손은 하루에 한 바퀴 돕니다. 프라하 모드에서 손은 일 년 내내 중앙유럽 표준시(UTC+1)를 따르므로, 여름에는 시내 시계보다 한 시간 늦습니다. 나의 하늘 모드에서는 계산한 태양을 따라가므로, 위쪽 XII는 태양이 그곳의 자오선을 지나는 순간입니다. 오늘날의 현지 시각은 천문 정보 탭에 따로 나옵니다."
+          }
+        }
+      }
+    },
+    "The Sun's yearly path": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 1년 동안 지나는 길"
+          }
+        }
+      }
+    },
+    "The band reaches from the horizon down to the circle where the Sun is 18° below it, the end of astronomical twilight. While the Sun crosses the band the sky is brightening or fading; inside the black disk the sky is fully dark.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "띠는 지평선에서 태양이 지평선 아래 18°에 있는 원, 즉 천문 박명이 끝나는 곳까지 이어집니다. 태양이 띠를 지나는 동안 하늘이 밝아지거나 어두워지고, 검은 원 안에서는 하늘이 완전히 어둡습니다."
+          }
+        }
+      }
+    },
+    "The band's colour has changed between restorations; this app follows a 2013 photograph.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "띠의 색은 복원 때마다 달라졌습니다. 이 앱은 2013년 사진을 따릅니다."
+          }
+        }
+      }
+    },
+    "The blue globe in the centre is the Earth. The painted plate around it does not move: it is the local sky, drawn like a medieval astrolabe.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가운데의 파란 구는 지구입니다. 그 둘레에 칠해진 판은 움직이지 않으며, 중세 아스트롤라베처럼 그린 그곳의 하늘입니다."
+          }
+        }
+      }
+    },
+    "The curved gold lines across the blue sky divide each day's daylight into twelve parts, numbered 1–12 in black.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파란 하늘을 가로지르는 휜 금색 선들은 그날의 낮을 12부분으로 나눕니다. 각 부분에는 1–12의 검은 숫자가 있습니다."
+          }
+        }
+      }
+    },
+    "The dial is a mechanical astrolabe: a fixed painted map of the sky with moving pointers on top. The Sun's position against the painted regions and the rings around them tells the time, the season and whether it is day, twilight or night.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 다이얼은 기계식 아스트롤라베입니다. 하늘을 그린 고정판 위에서 바늘들이 움직입니다. 칠해진 영역과 둘레의 고리에 대한 태양의 위치로 시각, 계절, 그리고 지금이 낮인지 박명인지 밤인지를 읽습니다."
+          }
+        }
+      }
+    },
+    "The dial is lit as if it hung on Prague's Old Town Hall: on a wall facing the equator, under the real Sun for this place and time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다이얼은 프라하 구시청사에 걸린 것처럼, 적도 쪽을 향한 벽에서 이 장소와 시각의 실제 태양을 받습니다."
+          }
+        }
+      }
+    },
+    "The edge of the blue sky is the horizon. ORTVS on the left marks sunrise in the east; OCCASVS on the right marks sunset in the west.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파란 하늘의 가장자리가 지평선입니다. 왼쪽의 ORTVS는 동쪽의 해돋이, 오른쪽의 OCCASVS는 서쪽의 해넘이를 나타냅니다."
+          }
+        }
+      }
+    },
+    "The golden hand and its Sun": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금색 손과 태양"
+          }
+        }
+      }
+    },
+    "The golden hand points to the gold Roman numerals I–XII, which run twice around the dial: XII at the top is noon, XII at the bottom is midnight.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "금색 손은 다이얼을 두 바퀴 도는 금색 로마 숫자 I–XII를 가리킵니다. 위쪽 XII가 정오, 아래쪽 XII가 자정입니다."
+          }
+        }
+      }
+    },
+    "The hand also carries an iron counterweight tail on the opposite side of the arbor.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손의 회전축 반대편에는 쇠로 된 균형추 꼬리도 달려 있습니다."
+          }
+        }
+      }
+    },
+    "The hand gives the time; the Sun's place along the hand gives the season, and the painted background behind it shows whether it is day, twilight or night. The app's Prague mode is an idealised reconstruction, not a simulation of the clock's gear train; the Astronomy tab always shows the calculated real Sun.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손은 시각을, 손 위 태양의 자리는 계절을 알려 주고, 태양 뒤에 칠해진 배경은 지금이 낮인지 박명인지 밤인지 보여 줍니다. 앱의 프라하 모드는 시계의 톱니바퀴를 그대로 흉내 낸 것이 아니라 이상화한 재현입니다. 천문 정보 탭은 언제나 계산한 실제 태양을 보여 줍니다."
+          }
+        }
+      }
+    },
+    "The numerals are painted in Schwabacher script on the outermost ring.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "숫자는 맨 바깥 고리에 슈바바허 서체로 쓰여 있습니다."
+          }
+        }
+      }
+    },
+    "The off-centre ring is the ecliptic, the Sun's path through the stars, drawn in the same projection as the sky behind it. Its signs run anticlockwise.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중심에서 벗어난 고리는 태양이 별 사이를 지나는 길인 황도이며, 뒤의 하늘과 같은 투영으로 그려졌습니다. 별자리는 시계 반대 방향으로 놓여 있습니다."
+          }
+        }
+      }
+    },
+    "The outer ring of Gothic numerals counts the hours since sunset. Its 24 sits under the hand at the moment the Sun sets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고딕 숫자가 적힌 바깥 고리는 일몰 뒤 지난 시간을 셉니다. 해가 지는 순간 고리의 24가 손 아래에 옵니다."
+          }
+        }
+      }
+    },
+    "The painted sky": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그려진 하늘"
+          }
+        }
+      }
+    },
+    "The plate projects the sky onto the plane of the equator. Lines of constant altitude become circles, which is why the horizon and the edge of night are drawn as off-centre arcs. Everything that moves — hands, ring, Sun and Moon — turns over this fixed map.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "판은 하늘을 적도면에 투영합니다. 고도가 같은 선은 원이 되므로, 지평선과 밤의 경계가 중심에서 벗어난 호로 그려집니다. 바늘, 고리, 태양, 달처럼 움직이는 것은 모두 이 고정된 지도 위에서 돕니다."
+          }
+        }
+      }
+    },
+    "The star rides on the zodiac ring's pointer, so it moves with the ring rather than with the Sun.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별은 황도 고리의 바늘에 달려 있어, 태양이 아니라 고리와 함께 움직입니다."
+          }
+        }
+      }
+    },
+    "The two tropics are the circles the Sun follows on the solstices; the equator lies between them. Farther out on the plate means a longer arc above the horizon, which is why summer days are long and the Sun climbs high.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 회귀선은 하지와 동지에 태양이 따라가는 원이고, 적도는 그 사이에 있습니다. 판에서 바깥쪽일수록 지평선 위의 호가 길어서, 여름에는 낮이 길고 해가 높이 뜹니다."
+          }
+        }
+      }
+    },
+    "The vernal equinox pointer": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "춘분점을 가리키는 별"
+          }
+        }
+      }
+    },
+    "Through the year the Sun slides along its hand: outward towards the Tropic of Cancer in northern summer, inward towards the Tropic of Capricorn in winter.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양은 일 년 동안 손을 따라 움직입니다. 북반구의 여름에는 바깥쪽 북회귀선으로, 겨울에는 안쪽 남회귀선으로 갑니다."
+          }
+        }
+      }
+    },
+    "Time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간"
+          }
+        }
+      }
+    },
+    "Time Zone": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간대"
+          }
+        }
+      }
+    },
+    "Time rings": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시간 고리"
+          }
+        }
+      }
+    },
+    "Treat the plate as your sky: the top is where the Sun stands at noon, the left edge of the blue is the eastern horizon and the right edge the western.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "판을 내 하늘이라고 생각합니다. 위쪽은 정오에 태양이 있는 곳, 파란 영역의 왼쪽 가장자리는 동쪽 지평선, 오른쪽 가장자리는 서쪽 지평선입니다."
+          }
+        }
+      }
+    },
+    "Twilight": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "박명"
+          }
+        }
+      }
+    },
+    "Twilight and night": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "박명과 밤"
+          }
+        }
+      }
+    },
+    "Two sets of twelve ordinary hours": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12시간 두 바퀴의 보통 시간"
+          }
+        }
+      }
+    },
+    "UTC": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UTC"
+          }
+        }
+      }
+    },
+    "Unequal / Babylonian": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부정시 / 바빌로니아시"
+          }
+        }
+      }
+    },
+    "Unequal hours": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "부정시"
+          }
+        }
+      }
+    },
+    "Unspecified": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지정 안 됨"
+          }
+        }
+      }
+    },
+    "Use the current clock time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 시각을 사용합니다."
+          }
+        }
+      }
+    },
+    "Use these coordinates": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 좌표 사용"
+          }
+        }
+      }
+    },
+    "Using device location · ±%@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기 위치 사용 중 · ±%@"
+          }
+        }
+      }
+    },
+    "Using saved location · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장된 위치 사용 중 · %@"
+          }
+        }
+      }
+    },
+    "Vernal equinox reference": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "춘분점 기준"
+          }
+        }
+      }
+    },
+    "Viewing mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보기 모드"
+          }
+        }
+      }
+    },
+    "Virgo": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "처녀자리"
+          }
+        }
+      }
+    },
+    "Waning crescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그믐달"
+          }
+        }
+      }
+    },
+    "Waning gibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기우는 달"
+          }
+        }
+      }
+    },
+    "Watch the Sun near the edge of the blue area.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파란 영역 가장자리 근처의 태양을 봅니다."
+          }
+        }
+      }
+    },
+    "Waxing crescent": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "초승달"
+          }
+        }
+      }
+    },
+    "Waxing gibbous": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차오르는 달"
+          }
+        }
+      }
+    },
+    "When the Sun reaches the horizon on the left it rises; on the right it sets. The horizon's curve depends on latitude, so My Sky redraws it for your location. The Astronomy tab gives the calculated times.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 왼쪽 지평선에 닿으면 해가 뜨고, 오른쪽에 닿으면 해가 집니다. 지평선의 곡선은 위도에 따라 달라서, 나의 하늘 모드에서는 내 위치에 맞게 다시 그립니다. 계산한 시각은 천문 정보 탭에 나옵니다."
+          }
+        }
+      }
+    },
+    "Why the Sun moves in and out": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "태양이 안팎으로 움직이는 이유"
+          }
+        }
+      }
+    },
+    "Zodiac": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황도대"
+          }
+        }
+      }
+    },
+    "Zodiac ring": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "황도 고리"
+          }
+        }
+      }
+    },
+    "down and to the left": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "왼쪽 아래로"
+          }
+        }
+      }
+    },
+    "down and to the right": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오른쪽 아래로"
+          }
+        }
+      }
+    },
+    "equation of time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "균시차"
+          }
+        }
+      }
+    },
+    "local star time": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현지 항성시"
+          }
+        }
+      }
+    },
+    "solar": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시태양시"
+          }
+        }
+      }
+    },
+    "straight down": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "바로 아래로"
+          }
+        }
+      }
+    },
+    "visible day": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보이는 낮"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

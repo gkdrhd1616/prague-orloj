@@ -10,8 +10,12 @@ enum OrlojMoonRenderer {
         alpha: Double,
         phaseAngleDegrees: Double,
         illumination: Double,
-        supportAngleRadians: Double = 0
+        supportAngleRadians: Double = 0,
+        lightDirection: CGSize = CGSize(width: -0.57, height: -0.82)
     ) {
+        // The reflections on the lacquer and silver sit on the side facing the light.
+        let glint = CGPoint(x: center.x + lightDirection.width * radius * 0.48,
+                            y: center.y + lightDirection.height * radius * 0.48)
         guard radius.isFinite, radius > 0, alpha.isFinite, alpha > 0 else { return }
         let sphere = Path(ellipseIn: CGRect(
             x: center.x - radius, y: center.y - radius,
@@ -42,7 +46,7 @@ enum OrlojMoonRenderer {
                 .init(color: Color(red: 0.014, green: 0.018, blue: 0.023), location: 0.78),
                 .init(color: .black, location: 1)
             ]),
-            center: CGPoint(x: center.x - radius * 0.28, y: center.y - radius * 0.4),
+            center: glint,
             startRadius: 0,
             endRadius: radius * 1.55
         ))
@@ -57,7 +61,7 @@ enum OrlojMoonRenderer {
                 .init(color: Color(red: 0.27, green: 0.32, blue: 0.36), location: 0.88),
                 .init(color: Color(red: 0.12, green: 0.15, blue: 0.18), location: 1)
             ]),
-            center: CGPoint(x: center.x - radius * 0.26, y: center.y - radius * 0.36),
+            center: glint,
             startRadius: 0,
             endRadius: radius * 1.65
         ))

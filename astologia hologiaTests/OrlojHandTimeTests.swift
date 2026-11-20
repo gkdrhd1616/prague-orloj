@@ -4,6 +4,10 @@ import Testing
 @testable import astologia_hologia
 
 struct OrlojHandTimeTests {
+    init() {
+        OrlojLocalization.useSourceLanguageForTests()
+    }
+
     @Test func seoulGoldenHandAtCivilNoonAgreesWithIndependentSolarTime() throws {
         let date = try #require(ISO8601DateFormatter().date(from: "2026-11-20T12:00:00+09:00"))
         let state = OrlojCalculator.state(for: date, location: .seoul)

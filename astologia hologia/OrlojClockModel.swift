@@ -33,6 +33,15 @@ struct OrlojClockState {
         location.id == OrlojClockLocation.prague.id
     }
 
+    /// Sunlight on the dial's face for this place and moment.
+    var dialLighting: OrlojDialLighting {
+        OrlojDialLighting(
+            sunAltitudeDegrees: solar.altitudeDegrees,
+            sunAzimuthDegrees: solar.azimuthDegrees,
+            latitudeDegrees: location.coordinates.latitude
+        )
+    }
+
     private var dialOffsetMinutes: Double {
         isPragueMechanism ? 60 - Double(location.timeZone.secondsFromGMT(for: date)) / 60 : 0
     }
@@ -69,13 +78,13 @@ struct OrlojClockState {
     }
 
     var dialTimeZoneLabel: String {
-        isPragueMechanism ? "CET" : "solar"
+        isPragueMechanism ? orlojLocalized("CET") : orlojLocalized("solar")
     }
 
     var dialTimeBasisDescription: String {
         isPragueMechanism
-            ? "Prague dial · CET (UTC+1), without daylight saving · idealized reconstruction"
-            : "Apparent solar time at the selected coordinates; local civil time is shown separately"
+            ? orlojLocalized("Prague dial · CET (UTC+1), without daylight saving · idealized reconstruction")
+            : orlojLocalized("Apparent solar time at the selected coordinates; local civil time is shown separately")
     }
 
     var civilAngleDegrees: Double {
@@ -181,13 +190,13 @@ struct OrlojClockState {
 
     var skyPhaseLabel: String {
         if solar.altitudeDegrees >= 0 {
-            return "Day"
+            return orlojLocalized("Day")
         }
         if solar.altitudeDegrees >= -18 {
-            return "Twilight"
+            return orlojLocalized("Twilight")
         }
 
-        return "Night"
+        return orlojLocalized("Night")
     }
 
     var localTimeString: String {
@@ -203,7 +212,7 @@ struct OrlojClockState {
     }
 
     var sunAltitudeLabel: String {
-        "\(Int(solar.altitudeDegrees.rounded())) deg"
+        orlojLocalized("%@ deg", "\(Int(solar.altitudeDegrees.rounded()))")
     }
 
     var solarDeclinationLabel: String {
@@ -213,18 +222,20 @@ struct OrlojClockState {
     var solarTropicPositionLabel: String {
         let percent = Int((abs(solarDeclinationRatio) * 100).rounded())
         if abs(solarDeclinationRatio) < 0.04 {
-            return "Equator"
+            return orlojLocalized("Equator")
         }
 
-        return solarDeclinationRatio > 0 ? "Cancer \(percent)%" : "Capricorn \(percent)%"
+        return solarDeclinationRatio > 0
+            ? orlojLocalized("Cancer %@%%", "\(percent)")
+            : orlojLocalized("Capricorn %@%%", "\(percent)")
     }
 
     var solarEclipticLongitudeLabel: String {
-        String(format: "%.1f deg", OrlojCalculator.normalizedDegrees(solar.eclipticLongitudeDegrees))
+        orlojLocalized("%@ deg", String(format: "%.1f", OrlojCalculator.normalizedDegrees(solar.eclipticLongitudeDegrees)))
     }
 
     var zodiacDegreeLabel: String {
-        String(format: "%@ %.1f deg", zodiacSign.name, zodiacDegreeInSign)
+        orlojLocalized("%1$@ %2$@ deg", orlojLocalized(zodiacSign.name), String(format: "%.1f", zodiacDegreeInSign))
     }
 
     var siderealTimeString: String {
@@ -232,7 +243,7 @@ struct OrlojClockState {
     }
 
     var equationOfTimeLabel: String {
-        String(format: "%+.0f min", solar.equationOfTimeMinutes)
+        orlojLocalized("%@ min", String(format: "%+.0f", solar.equationOfTimeMinutes))
     }
 
     var sunriseTimeString: String {
@@ -268,9 +279,9 @@ struct OrlojClockState {
         case .normal:
             break
         case .alwaysAbove:
-            return "No astronomical night"
+            return orlojLocalized("No astronomical night")
         case .alwaysBelow:
-            return "No twilight crossing"
+            return orlojLocalized("No twilight crossing")
         }
 
         return "\(duskTimeString)-\(dawnTimeString)"
@@ -281,9 +292,9 @@ struct OrlojClockState {
         case .normal:
             break
         case .alwaysAbove:
-            return "No astronomical night"
+            return orlojLocalized("No astronomical night")
         case .alwaysBelow:
-            return "No twilight crossing"
+            return orlojLocalized("No twilight crossing")
         }
 
         return "\(dawnTimeString) / \(duskTimeString)"
@@ -299,40 +310,41 @@ struct OrlojClockState {
     }
 
     var moonAgeLabel: String {
-        "\(Int(lunar.ageDays.rounded()))d"
+        orlojLocalized("%@d", "\(Int(lunar.ageDays.rounded()))")
     }
 
     var moonRevolutionLabel: String {
-        String(format: "%.2f rev", lunar.revolutionFraction)
+        orlojLocalized("%@ rev", String(format: "%.2f", lunar.revolutionFraction))
     }
 
     var moonPhaseAngleLabel: String {
-        String(format: "%.0f deg", lunar.phaseAngleDegrees)
+        orlojLocalized("%@ deg", String(format: "%.0f", lunar.phaseAngleDegrees))
     }
 
     var ancientDayBoundaryLabel: String {
-        guard daylightWindow.kind == .normal else { return "No sunset today" }
+        guard daylightWindow.kind == .normal else { return orlojLocalized("No sunset today") }
         return isPragueMechanism
-            ? "Starts \(formattedLocalMinutes(dialSunsetMinutes)) CET"
-            : "Starts \(formattedLocalMinutes(dialSunsetMinutes)) solar"
+            ? orlojLocalized("Starts %@ CET", formattedLocalMinutes(dialSunsetMinutes))
+            : orlojLocalized("Starts %@ solar", formattedLocalMinutes(dialSunsetMinutes))
     }
 
     var babylonianHourLabel: String {
         guard let babylonianHour else {
-            return daylightWindow.kind == .alwaysAbove ? "Polar day" : "Night"
+            return daylightWindow.kind == .alwaysAbove ? orlojLocalized("Polar day") : orlojLocalized("Night")
         }
 
-        return "Hour \(babylonianHour)"
+        return orlojLocalized("Hour %@", "\(babylonianHour)")
     }
 
     var oldCzechHourLabel: String {
         guard let oldCzechHour else { return "—" }
-        return "Hour \(oldCzechHour)"
+        return orlojLocalized("Hour %@", "\(oldCzechHour)")
     }
 
     private func formattedLocalDate(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        // Dates read in the person's language and conventions.
+        formatter.locale = .autoupdatingCurrent
         formatter.timeZone = location.timeZone
         formatter.dateStyle = dateStyle
         formatter.timeStyle = timeStyle
@@ -351,11 +363,11 @@ struct OrlojClockState {
 
     private func signedDegreesLabel(_ degrees: Double) -> String {
         if abs(degrees) < 0.05 {
-            return "0.0 deg"
+            return orlojLocalized("%@ deg", "0.0")
         }
 
-        let hemisphere = degrees > 0 ? "N" : "S"
-        return String(format: "%@ %.1f deg", hemisphere, abs(degrees))
+        let hemisphere = degrees > 0 ? orlojLocalized("N") : orlojLocalized("S")
+        return orlojLocalized("%1$@ %2$@ deg", hemisphere, String(format: "%.1f", abs(degrees)))
     }
 }
 
@@ -946,9 +958,9 @@ enum OrlojCalculator {
     static func unequalHourLabelPositions(latitudeDegrees: Double) -> [OrlojProjectionPoint] {
         guard abs(latitudeDegrees) < 90 else { return [] }
         let latitude = degreesToRadians(latitudeDegrees)
-        // A fixed northern-solstice parallel puts the inscriptions near the
-        // outer daylight field, independent of the displayed date and time.
-        var declination = degreesToRadians(23.439291)
+        // A fixed parallel just inside the Roman numerals, where the dial
+        // paints its 1–12, independent of the displayed date and time.
+        var declination = degreesToRadians(15)
         if latitude < 0 || latitudeDegrees > 66 {
             // Choose a parallel that actually rises and sets at high latitudes.
             declination = min(declination, atan(cos(.pi / 4) / abs(tan(latitude))))

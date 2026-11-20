@@ -1,5 +1,171 @@
 import SwiftUI
 
+/// Sunlight on the dial, as if it hung where the Orloj does: on a wall facing
+/// the equator (the Old Town Hall's south wall in Prague). Derived from the
+/// Sun's altitude and azimuth at the dial's location and moment, so the
+/// shadows lengthen, swing and soften with the hour and the season.
+///
+/// Screen vectors use x to the right and y downwards. `shadowShift` is the
+/// shadow's displacement per unit of relief (both in dial radii) for a part
+/// standing in front of the plate.
+struct OrlojDialLighting: Equatable {
+    /// Shadow displacement per unit of relief.
+    var shadowShift: CGSize
+    /// Opacity of a cast shadow on the painted plate.
+    var shadowOpacity: Double
+    /// 0 for the crisp shadows of direct sun, 1 for diffuse skylight.
+    var shadowSoftness: Double
+    /// 0 when the face is in shade or it is night, 1 in full direct sun.
+    var sunlit: Double
+    /// 0 at night, 1 in daylight (whether or not the sun reaches the face).
+    var daylight: Double
+    /// 0 for a high sun, towards 1 for low, golden light on the face.
+    var warmth: Double
+    /// Unit screen vector pointing towards the light.
+    var lightDirection: CGSize
+
+    /// The fixed upper-left light the dial used before lighting followed the Sun.
+    static let studio = OrlojDialLighting(
+        shadowShift: CGSize(width: 0.4, height: 0.9),
+        shadowOpacity: 0.42,
+        shadowSoftness: 0.3,
+        sunlit: 0,
+        daylight: 1,
+        warmth: 0,
+        lightDirection: CGSize(width: -0.406, height: -0.914)
+    )
+
+    init(
+        shadowShift: CGSize,
+        shadowOpacity: Double,
+        shadowSoftness: Double,
+        sunlit: Double,
+        daylight: Double,
+        warmth: Double,
+        lightDirection: CGSize
+    ) {
+        self.shadowShift = shadowShift
+        self.shadowOpacity = shadowOpacity
+        self.shadowSoftness = shadowSoftness
+        self.sunlit = sunlit
+        self.daylight = daylight
+        self.warmth = warmth
+        self.lightDirection = lightDirection
+    }
+
+    /// - Parameters:
+    ///   - sunAltitudeDegrees: Sun's altitude above the horizon.
+    ///   - sunAzimuthDegrees: Sun's azimuth, from north through east.
+    ///   - latitudeDegrees: Observer latitude; the wall faces the equator.
+    init(sunAltitudeDegrees: Double, sunAzimuthDegrees: Double, latitudeDegrees: Double) {
+        guard sunAltitudeDegrees.isFinite, sunAzimuthDegrees.isFinite else {
+            self = .studio
+            return
+        }
+        let wallAzimuth = latitudeDegrees >= 0 ? Double.pi : 0
+        let altitude = sunAltitudeDegrees * .pi / 180
+        let azimuth = sunAzimuthDegrees * .pi / 180
+        let east = cos(altitude) * sin(azimuth)
+        let north = cos(altitude) * cos(azimuth)
+        let up = sin(altitude)
+        // Components of the direction to the Sun along the wall's outward
+        // normal and along the viewer's right as they face the wall.
+        let normal = east * sin(wallAzimuth) + north * cos(wallAzimuth)
+        let right = -east * cos(wallAzimuth) + north * sin(wallAzimuth)
+
+        let aboveHorizon = Self.smoothstep(-0.5, 3, sunAltitudeDegrees)
+        let facing = Self.smoothstep(0.02, 0.2, normal)
+        let sunlit = aboveHorizon * facing
+
+        // A part at relief h throws its shadow h·(-right, up)/normal across the
+        // wall. Grazing light is clamped so shadows stay on the face.
+        let safeNormal = max(normal, 0.08)
+        var direct = CGSize(width: -right / safeNormal, height: up / safeNormal)
+        let length = hypot(direct.width, direct.height)
+        let maximumLength = 2.6
+        if length > maximumLength {
+            direct = CGSize(width: direct.width / length * maximumLength, height: direct.height / length * maximumLength)
+        }
+        // Without direct sun, the open sky above lights the face from above.
+        let skylight = CGSize(width: 0, height: 0.35)
+
+        let toSun = CGSize(width: right, height: -up)
+        let toSunLength = hypot(toSun.width, toSun.height)
+        let sunDirection = toSunLength > 0.05
+            ? CGSize(width: toSun.width / toSunLength, height: toSun.height / toSunLength)
+            : CGSize(width: 0, height: -1)
+        let blended = CGSize(
+            width: sunDirection.width * sunlit,
+            height: sunDirection.height * sunlit - (1 - sunlit)
+        )
+        let blendedLength = max(0.0001, hypot(blended.width, blended.height))
+
+        self.init(
+            shadowShift: CGSize(
+                width: skylight.width + (direct.width - skylight.width) * sunlit,
+                height: skylight.height + (direct.height - skylight.height) * sunlit
+            ),
+            shadowOpacity: 0.24 + 0.32 * sunlit,
+            shadowSoftness: 1 - sunlit,
+            sunlit: sunlit,
+            daylight: Self.smoothstep(-10, 1, sunAltitudeDegrees),
+            warmth: sunlit * (1 - Self.smoothstep(3, 22, sunAltitudeDegrees)),
+            lightDirection: CGSize(width: blended.width / blendedLength, height: blended.height / blendedLength)
+        )
+    }
+
+    /// A short description of the light for the reading guide. Directions
+    /// are as the viewer sees the face, so they hold for either hemisphere.
+    var summary: String {
+        if daylight < 0.5 {
+            return orlojLocalized("Night: no direct sunlight")
+        }
+        if sunlit < 0.5 {
+            return orlojLocalized("Face in shade: soft skylight only")
+        }
+        let length = hypot(shadowShift.width, shadowShift.height)
+        let size = length < 0.5 ? "Short" : (length < 1.3 ? "Medium" : "Long")
+        let side: String
+        if shadowShift.width < -0.2 {
+            side = "down and to the left"
+        } else if shadowShift.width > 0.2 {
+            side = "down and to the right"
+        } else {
+            side = "straight down"
+        }
+        let shadows = orlojLocalized("%1$@ shadows fall %2$@", orlojLocalized(size), orlojLocalized(side))
+        return warmth > 0.3 ? orlojLocalized("%@ · low, warm Sun", shadows) : shadows
+    }
+
+    /// Shadow displacement, in dial radii, for a part `relief` radii in front of the plate.
+    func shadowOffset(relief: CGFloat) -> CGSize {
+        CGSize(width: shadowShift.width * relief, height: shadowShift.height * relief)
+    }
+
+    /// The same light described in a context rotated by `degrees`. Ratios
+    /// such as `shadowShift` do not change with a uniform scale.
+    func rotatedForLocalFrame(degrees: Double) -> OrlojDialLighting {
+        var copy = self
+        copy.shadowShift = Self.local(shadowShift, rotationDegrees: degrees, scale: 1)
+        copy.lightDirection = Self.local(lightDirection, rotationDegrees: degrees, scale: 1)
+        return copy
+    }
+
+    /// A screen-space vector expressed in a context rotated by `rotationDegrees`
+    /// and scaled by `scale`, for drawing a shadow inside a local frame.
+    static func local(_ vector: CGSize, rotationDegrees: Double, scale: CGFloat) -> CGSize {
+        let angle = -rotationDegrees * .pi / 180
+        let x = vector.width * CGFloat(cos(angle)) - vector.height * CGFloat(sin(angle))
+        let y = vector.width * CGFloat(sin(angle)) + vector.height * CGFloat(cos(angle))
+        return CGSize(width: x / scale, height: y / scale)
+    }
+
+    private static func smoothstep(_ edge0: Double, _ edge1: Double, _ value: Double) -> Double {
+        let t = min(max((value - edge0) / (edge1 - edge0), 0), 1)
+        return t * t * (3 - 2 * t)
+    }
+}
+
 /// Fixed, scale-independent surface detail. The grain is cached and never changes
 /// with the clock tick, so the painted plate does not shimmer during time travel.
 enum OrlojDialMaterials {
@@ -49,16 +215,33 @@ enum OrlojDialMaterials {
         surface.stroke(brushMarks, with: .color(.white.opacity(0.042 * strength)), lineWidth: 0.00028)
     }
 
-    static func raisedRim(_ path: Path, in context: inout GraphicsContext, bounds: CGRect, width: CGFloat, alpha: Double = 1) {
+    /// Gilding whose bright band faces the light.
+    static func gilding(in bounds: CGRect, light: OrlojDialLighting) -> GraphicsContext.Shading {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let reach = hypot(bounds.width, bounds.height) / 2
+        let direction = light.lightDirection
+        return .linearGradient(gold,
+            startPoint: CGPoint(x: center.x + direction.width * reach, y: center.y + direction.height * reach),
+            endPoint: CGPoint(x: center.x - direction.width * reach, y: center.y - direction.height * reach))
+    }
+
+    static func raisedRim(_ path: Path, in context: inout GraphicsContext, bounds: CGRect, width: CGFloat, alpha: Double = 1,
+                          light: OrlojDialLighting = .studio) {
         var metal = context
         metal.opacity *= alpha
+        // The rim stands about two of its widths off the plate.
+        let shift = light.shadowOffset(relief: width * 2)
+        let shiftLength = hypot(shift.width, shift.height)
+        let limit = width * 2.4
+        let scale = shiftLength > limit ? limit / shiftLength : 1
         var shadow = metal
-        shadow.translateBy(x: width * 0.45, y: width * 0.8)
-        shadow.stroke(path, with: .color(.black.opacity(0.48)), lineWidth: width * 1.5)
-        metal.stroke(path, with: gilding(in: bounds), lineWidth: width)
-        var light = metal
-        light.translateBy(x: -width * 0.14, y: -width * 0.2)
-        light.stroke(path, with: .color(Color(red: 1, green: 0.94, blue: 0.73).opacity(0.54)), lineWidth: width * 0.24)
+        shadow.translateBy(x: shift.width * scale, y: shift.height * scale)
+        shadow.stroke(path, with: .color(.black.opacity(0.48 * light.shadowOpacity / OrlojDialLighting.studio.shadowOpacity)),
+            lineWidth: width * (1.5 + light.shadowSoftness * 0.6))
+        metal.stroke(path, with: gilding(in: bounds, light: light), lineWidth: width)
+        var glint = metal
+        glint.translateBy(x: light.lightDirection.width * width * 0.24, y: light.lightDirection.height * width * 0.24)
+        glint.stroke(path, with: .color(Color(red: 1, green: 0.94, blue: 0.73).opacity(0.38 + 0.26 * light.sunlit)), lineWidth: width * 0.24)
     }
 
     static func brushedGold(in context: inout GraphicsContext, clip: Path, bounds: CGRect, strength: Double = 1) {

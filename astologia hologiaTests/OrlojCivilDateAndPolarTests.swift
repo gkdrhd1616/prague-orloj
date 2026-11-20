@@ -3,6 +3,10 @@ import Testing
 @testable import astologia_hologia
 
 struct OrlojCivilDateAndPolarTests {
+    init() {
+        OrlojLocalization.useSourceLanguageForTests()
+    }
+
     @Test func apiaDaylightUsesItsOwnCivilDateAcrossTheDateLine() throws {
         let zone = try #require(TimeZone(identifier: "Pacific/Apia"))
         let date = try #require(ISO8601DateFormatter().date(from: "2026-06-21T12:00:00+13:00"))

@@ -42,6 +42,7 @@ struct OrlojAstronomyReadout {
     let ancientDayBoundary: String
     let babylonianHour: String
     let daylightProgress: String
+    let lighting: String
 
     init(state: OrlojClockState) {
         isPragueMechanism = state.isPragueMechanism
@@ -50,7 +51,7 @@ struct OrlojAstronomyReadout {
         dialTimeBasis = state.dialTimeBasisDescription
         localTime = state.localTimeString
         localDate = state.localDateString
-        locationName = state.location.name
+        locationName = orlojLocalized(state.location.name)
         timeZone = state.timeZoneAbbreviation
         coordinates = "\(state.location.coordinates.latitudeLabel), \(state.location.coordinates.longitudeLabel)"
         sunrise = state.sunriseTimeString
@@ -67,9 +68,9 @@ struct OrlojAstronomyReadout {
         zodiacDegree = state.zodiacDegreeLabel
         siderealTime = state.siderealTimeString
         equationOfTime = state.equationOfTimeLabel
-        zodiacName = state.zodiacSign.name
+        zodiacName = orlojLocalized(state.zodiacSign.name)
         zodiacReading = state.zodiacSign.reading
-        moonPhase = state.lunar.phaseName
+        moonPhase = orlojLocalized(state.lunar.phaseName)
         moonIllumination = state.moonIlluminationLabel
         moonAge = state.moonAgeLabel
         moonRevolution = state.moonRevolutionLabel
@@ -78,6 +79,7 @@ struct OrlojAstronomyReadout {
         ancientDayBoundary = state.ancientDayBoundaryLabel
         babylonianHour = state.babylonianHourLabel
         daylightProgress = state.daylightProgressLabel
+        lighting = state.dialLighting.summary
     }
 
     var primaryMetrics: [OrlojReadoutMetric] {
@@ -103,7 +105,7 @@ struct OrlojAstronomyReadout {
                 systemImage: "sun.horizon",
                 title: "Sunrise / Sunset",
                 value: "\(sunrise) / \(sunset)",
-                detail: "visible day",
+                detail: orlojLocalized("visible day"),
                 guideTopic: .horizon,
                 prominence: .primary
             ),
@@ -121,13 +123,13 @@ struct OrlojAstronomyReadout {
 
     var astronomyMetrics: [OrlojReadoutMetric] {
         [
-            OrlojReadoutMetric(systemImage: "sun.max", title: "Sun", value: sunAltitude, detail: "\(solarDeclination) dec", guideTopic: .sun, prominence: .primary),
+            OrlojReadoutMetric(systemImage: "sun.max", title: "Sun", value: sunAltitude, detail: orlojLocalized("%@ dec", solarDeclination), guideTopic: .sun, prominence: .primary),
             OrlojReadoutMetric(systemImage: "circle.dashed", title: "Ecliptic", value: solarEclipticLongitude, detail: zodiacDegree, guideTopic: .zodiacRing, prominence: .secondary),
-            OrlojReadoutMetric(systemImage: "scope", title: "Sidereal", value: siderealTime, detail: "local star time", guideTopic: .siderealAries, prominence: .secondary),
-            OrlojReadoutMetric(systemImage: "moonphase.waxing.gibbous", title: "Moon", value: moonPhase, detail: "\(moonIllumination) lit · \(moonPhaseAngle)", guideTopic: .moon, prominence: .primary),
+            OrlojReadoutMetric(systemImage: "scope", title: "Sidereal", value: siderealTime, detail: orlojLocalized("local star time"), guideTopic: .siderealAries, prominence: .secondary),
+            OrlojReadoutMetric(systemImage: "moonphase.waxing.gibbous", title: "Moon", value: moonPhase, detail: orlojLocalized("%1$@ lit · %2$@", moonIllumination, moonPhaseAngle), guideTopic: .moon, prominence: .primary),
             OrlojReadoutMetric(systemImage: "clock", title: "Old Czech time", value: oldCzechHour, detail: ancientDayBoundary, guideTopic: .oldCzechTime, prominence: .primary),
             OrlojReadoutMetric(systemImage: "rays", title: "Unequal / Babylonian", value: babylonianHour, detail: daylightProgress, guideTopic: .unequalHours, prominence: .secondary),
-            OrlojReadoutMetric(systemImage: "plus.forwardslash.minus", title: "Mean solar", value: equationOfTime, detail: "equation of time", guideTopic: .romanTime, prominence: .secondary),
+            OrlojReadoutMetric(systemImage: "plus.forwardslash.minus", title: "Mean solar", value: equationOfTime, detail: orlojLocalized("equation of time"), guideTopic: .romanTime, prominence: .secondary),
             OrlojReadoutMetric(systemImage: "location", title: "Coordinates", value: coordinates, detail: timeZone, guideTopic: nil, prominence: .secondary)
         ]
     }
@@ -140,13 +142,30 @@ enum OrlojReadoutProminence: Equatable {
 
 struct OrlojReadoutMetric: Identifiable {
     var id: String {
-        "\(title)-\(value)-\(detail)"
+        "\(key)-\(value)-\(detail)"
     }
 
     let systemImage: String
-    let title: String
+    /// English name, also used for accessibility identifiers so UI tests
+    /// find the row in any language.
+    let key: String
     let value: String
     let detail: String
     let guideTopic: OrlojGuideTopicID?
     let prominence: OrlojReadoutProminence
+
+    init(systemImage: String, title: String, value: String, detail: String,
+         guideTopic: OrlojGuideTopicID?, prominence: OrlojReadoutProminence) {
+        self.systemImage = systemImage
+        self.key = title
+        self.value = value
+        self.detail = detail
+        self.guideTopic = guideTopic
+        self.prominence = prominence
+    }
+
+    /// The name shown in the system language.
+    var title: String {
+        orlojLocalized(key)
+    }
 }

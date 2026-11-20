@@ -5,7 +5,8 @@ import SwiftUI
 /// platform's serif font. These proportions are optical, not surveyed dimensions.
 enum OrlojRomanNumerals {
     static func draw(_ numeral: String, at center: CGPoint, height: CGFloat,
-                     rotationDegrees: Double, in context: inout GraphicsContext, alpha: Double) {
+                     rotationDegrees: Double, in context: inout GraphicsContext, alpha: Double,
+                     light: OrlojDialLighting = .studio) {
         guard let outline = outlines[numeral] else { return }
         var metal = context
         metal.opacity *= alpha
@@ -14,17 +15,21 @@ enum OrlojRomanNumerals {
         metal.scaleBy(x: height, y: height)
 
         // A shallow offset describes gilded strips raised slightly off the plate.
+        // Relief about 4% of the numeral's height, cast in the light's direction.
+        let local = light.rotatedForLocalFrame(degrees: rotationDegrees)
+        let contact = local.shadowOffset(relief: 0.042)
         var shadow = metal
-        shadow.translateBy(x: 0.018, y: 0.025)
-        shadow.fill(outline, with: .color(.black.opacity(0.47)))
+        shadow.translateBy(x: contact.width, y: contact.height)
+        shadow.fill(outline, with: .color(.black.opacity(0.47 * (0.6 + 0.7 * light.sunlit))))
+        let toLight = local.lightDirection
         metal.fill(outline, with: .linearGradient(
             Gradient(stops: [
                 .init(color: Color(red: 0.98, green: 0.91, blue: 0.68), location: 0),
                 .init(color: Color(red: 0.85, green: 0.72, blue: 0.40), location: 0.45),
                 .init(color: Color(red: 0.66, green: 0.51, blue: 0.24), location: 0.75),
                 .init(color: Color(red: 0.93, green: 0.82, blue: 0.55), location: 1)
-            ]), startPoint: CGPoint(x: outline.boundingRect.minX, y: -0.5),
-            endPoint: CGPoint(x: outline.boundingRect.maxX, y: 0.5)))
+            ]), startPoint: CGPoint(x: outline.boundingRect.midX + toLight.width * 0.5, y: toLight.height * 0.5),
+            endPoint: CGPoint(x: outline.boundingRect.midX - toLight.width * 0.5, y: -toLight.height * 0.5)))
         metal.stroke(outline, with: .color(OrlojDesignSystem.darkBrass.opacity(0.6)), lineWidth: 0.008)
     }
 

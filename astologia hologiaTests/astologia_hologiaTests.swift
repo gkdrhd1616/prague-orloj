@@ -12,6 +12,10 @@ import Testing
 @testable import astologia_hologia
 
 struct astologia_hologiaTests {
+    init() {
+        OrlojLocalization.useSourceLanguageForTests()
+    }
+
     @Test func springSunFallsInAries() {
         let state = OrlojCalculator.state(for: utcDate(year: 2026, month: 3, day: 22, hour: 12))
 
@@ -501,6 +505,8 @@ struct astologia_hologiaTests {
         #expect(OrlojGuideCatalog.item(for: .unequalHours)?.targetLayers.contains(.unequalHourLines) == true)
         #expect(OrlojGuideCatalog.item(for: .siderealAries)?.targetLayers.contains(.ariesStar) == true)
         #expect(OrlojGuideCatalog.item(for: .tropics)?.targetLayers.contains(.tropicCancer) == true)
+        #expect(OrlojGuideCatalog.item(for: .earthAndPlate)?.targetLayers.contains(.earthDisk) == true)
+        #expect(OrlojGuideCatalog.item(for: .lightAndShadow)?.targetLayers.contains(.castShadows) == true)
         #expect(OrlojGuideCatalog.items.allSatisfy { !$0.targetLayers.isEmpty })
     }
 
@@ -576,9 +582,9 @@ struct astologia_hologiaTests {
                 #expect(altitude > 0)
                 #expect(temporalHour > Double(index))
                 #expect(temporalHour < Double(index + 1))
-                // Production projection scale is 0.43 of the dial radius;
-                // the Roman inscriptions sit at 0.765 of that radius.
-                #expect(point.radius * 0.43 + 0.052 / 2 < 0.765 - 0.06)
+                // Production projection scale is 0.52 of the dial radius; the
+                // Roman numerals reach in to 0.781 - 0.047 of that radius.
+                #expect(point.radius * 0.52 + 0.052 / 2 < 0.734 - 0.02)
             }
         }
     }

@@ -19,7 +19,7 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
     }
 
     @Published var isLocating = false
-    @Published var statusMessage = "Device location not requested"
+    @Published var statusMessage = orlojLocalized("Device location not requested")
 
     private lazy var manager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -42,7 +42,7 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
         applyLocation = apply
         applyFailure = failure
         isLocating = true
-        statusMessage = "Checking device location..."
+        statusMessage = orlojLocalized("Checking device location...")
 
         switch manager.authorizationStatus {
         case .notDetermined:
@@ -52,9 +52,9 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
             requestPhase = .requestingLocation
             manager.requestLocation()
         case .denied, .restricted:
-            finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
         @unknown default:
-            finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
         }
     }
 
@@ -80,11 +80,11 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
             requestPhase = .requestingLocation
             manager.requestLocation()
         case .denied, .restricted:
-            finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
         case .notDetermined:
             break
         @unknown default:
-            finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
         }
     }
 
@@ -94,11 +94,11 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
             return
         }
         guard let location = locations.last else {
-            finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
             return
         }
         guard location.horizontalAccuracy >= 0 else {
-            finishWithFailure(requestID: requestID, message: "Device returned an invalid location. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Device returned an invalid location. Keeping the current location."))
             return
         }
 
@@ -111,7 +111,7 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
               requestPhase == .requestingLocation else {
             return
         }
-        finishWithFailure(requestID: requestID, message: "Device location unavailable. Keeping the current location.")
+        finishWithFailure(requestID: requestID, message: orlojLocalized("Device location unavailable. Keeping the current location."))
     }
 
     private func resolve(_ location: CLLocation, requestID: UUID) {
@@ -122,7 +122,7 @@ final class OrlojLocationProvider: NSObject, ObservableObject, CLLocationManager
         let precision = Self.precision(for: manager.accuracyAuthorization)
         let horizontalAccuracy = location.horizontalAccuracy
         guard let request = MKReverseGeocodingRequest(location: location) else {
-            finishWithFailure(requestID: requestID, message: "Could not resolve the device location. Keeping the current location.")
+            finishWithFailure(requestID: requestID, message: orlojLocalized("Could not resolve the device location. Keeping the current location."))
             return
         }
         reverseGeocodingRequest = request

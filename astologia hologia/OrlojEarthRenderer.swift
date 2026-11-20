@@ -3,7 +3,7 @@ import SwiftUI
 /// Blue globe and curved gold graticule visible in the June 2019 reference.
 /// The viewing tilt is an optical reconstruction, not a survey of the painting.
 enum OrlojEarthRenderer {
-    static func draw(center: CGPoint, radius: CGFloat, in context: inout GraphicsContext) {
+    static func draw(center: CGPoint, radius: CGFloat, in context: inout GraphicsContext, light: OrlojDialLighting = .studio) {
         let disk = Path(ellipseIn: CGRect(x: center.x - radius, y: center.y - radius,
             width: radius * 2, height: radius * 2))
         context.fill(disk, with: .linearGradient(
@@ -19,7 +19,7 @@ enum OrlojEarthRenderer {
         let lines = graticule.applying(transform)
         globe.stroke(lines, with: .color(OrlojDesignSystem.darkBrass.opacity(0.7)), lineWidth: radius * 0.015)
         globe.stroke(lines, with: .color(Color(red: 0.91, green: 0.80, blue: 0.49).opacity(0.9)), lineWidth: radius * 0.007)
-        OrlojDialMaterials.raisedRim(disk, in: &context, bounds: disk.boundingRect, width: radius * 0.016)
+        OrlojDialMaterials.raisedRim(disk, in: &context, bounds: disk.boundingRect, width: radius * 0.016, light: light)
     }
 
     private static let graticule: Path = {

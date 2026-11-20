@@ -8,6 +8,9 @@
 import XCTest
 
 final class astologia_hologiaUITests: XCTestCase {
+    /// The app follows the system language; these tests read English labels.
+    static let englishArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+
 
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -16,7 +19,7 @@ final class astologia_hologiaUITests: XCTestCase {
     @MainActor
     func testLaunchIsResponsive() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-uiTesting"]
+        app.launchArguments = Self.englishArguments + ["-uiTesting"]
         app.launch()
 
         XCTAssertTrue(app.buttons["Open controls"].waitForExistence(timeout: 8))
@@ -26,7 +29,7 @@ final class astologia_hologiaUITests: XCTestCase {
     @MainActor
     func testIPadRotationKeepsDialAndControlsVisible() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-uiTestingDate", "2026-09-26T01:55:00Z"]
+        app.launchArguments = Self.englishArguments + ["-uiTestingDate", "2026-09-26T01:55:00Z"]
         XCUIDevice.shared.orientation = .portrait
         app.launch()
         let dial = app.descendants(matching: .any)["orlojDial"]
@@ -56,7 +59,7 @@ final class astologia_hologiaUITests: XCTestCase {
     @MainActor
     func testMissingLocationWaitsForConfirmedCoordinates() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-uiTestingMissingLocation"]
+        app.launchArguments = Self.englishArguments + ["-uiTestingMissingLocation"]
         app.launch()
         let dial = app.descendants(matching: .any)["orlojDial"]
         let settings = app.buttons["Location settings"]
@@ -123,7 +126,7 @@ final class astologia_hologiaUITests: XCTestCase {
     @MainActor
     private func launchWithDrawer(tab: String) -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments = ["-uiTestingOpenDrawer", "-uiTestingDrawerTab", tab]
+        app.launchArguments = Self.englishArguments + ["-uiTestingOpenDrawer", "-uiTestingDrawerTab", tab]
         app.launch()
         XCTAssertTrue(app.staticTexts["Astologia Hologia"].waitForExistence(timeout: 8))
         return app
