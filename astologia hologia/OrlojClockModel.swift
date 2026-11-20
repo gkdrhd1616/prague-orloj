@@ -946,9 +946,9 @@ enum OrlojCalculator {
     static func unequalHourLabelPositions(latitudeDegrees: Double) -> [OrlojProjectionPoint] {
         guard abs(latitudeDegrees) < 90 else { return [] }
         let latitude = degreesToRadians(latitudeDegrees)
-        // A fixed parallel just inside the Roman numerals, where the dial
-        // paints its 1–12, independent of the displayed date and time.
-        var declination = degreesToRadians(15)
+        // A fixed northern-solstice parallel puts the inscriptions near the
+        // outer daylight field, independent of the displayed date and time.
+        var declination = degreesToRadians(23.439291)
         if latitude < 0 || latitudeDegrees > 66 {
             // Choose a parallel that actually rises and sets at high latitudes.
             declination = min(declination, atan(cos(.pi / 4) / abs(tan(latitude))))

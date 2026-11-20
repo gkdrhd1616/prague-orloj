@@ -576,9 +576,9 @@ struct astologia_hologiaTests {
                 #expect(altitude > 0)
                 #expect(temporalHour > Double(index))
                 #expect(temporalHour < Double(index + 1))
-                // Production projection scale is 0.52 of the dial radius; the
-                // Roman numerals reach in to 0.781 - 0.047 of that radius.
-                #expect(point.radius * 0.52 + 0.052 / 2 < 0.734 - 0.02)
+                // Production projection scale is 0.43 of the dial radius;
+                // the Roman inscriptions sit at 0.765 of that radius.
+                #expect(point.radius * 0.43 + 0.052 / 2 < 0.765 - 0.06)
             }
         }
     }

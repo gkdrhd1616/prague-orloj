@@ -288,23 +288,23 @@ struct OrlojClockView: View {
         let track = eclipticCircle(geometry: geometry)
         // The painted signs sit inside the ladder. The ladder itself is the
         // projected ecliptic and remains tangent to the two tropic circles.
-        let eclipticPath = circle(center: track.center, radius: track.radius - geometry.radius * zodiacBandInset)
+        let eclipticPath = circle(center: track.center, radius: track.radius - geometry.radius * 0.083)
 
         // The ring stands well clear of the painted plate; its slots let the
         // light through, so the shadow is of the band and the ladder's rims.
-        let ringShadow = annulusPath(center: track.center, innerRadius: track.radius - geometry.radius * (zodiacBandInset + 0.072), outerRadius: track.radius)
+        let ringShadow = annulusPath(center: track.center, innerRadius: track.radius - geometry.radius * 0.156, outerRadius: track.radius)
         castShadow(relief: 0.02, geometry: geometry, alpha: alpha * 0.85, in: &context) { shadow in
             shadow.fill(ringShadow, with: .color(.black), style: FillStyle(eoFill: true))
         }
         var gildedBand = context
         gildedBand.opacity *= alpha
         gildedBand.stroke(eclipticPath, with: OrlojDialMaterials.gilding(in: eclipticPath.boundingRect, light: geometry.lighting),
-            lineWidth: geometry.radius * 0.143)
+            lineWidth: geometry.radius * 0.13)
         context.stroke(eclipticPath, with: .color(OrlojDesignSystem.zodiacBlue.opacity(0.98 * alpha)),
-            lineWidth: geometry.radius * 0.125)
+            lineWidth: geometry.radius * 0.112)
         var enamel = context
         enamel.opacity *= alpha
-        enamel.clip(to: eclipticPath.strokedPath(StrokeStyle(lineWidth: geometry.radius * 0.125)))
+        enamel.clip(to: eclipticPath.strokedPath(StrokeStyle(lineWidth: geometry.radius * 0.112)))
         OrlojDialMaterials.paintedSurface(in: &enamel, bounds: eclipticPath.boundingRect.insetBy(dx: -geometry.radius * 0.06, dy: -geometry.radius * 0.06), strength: 0.7)
         drawEclipticLadder(in: &context, geometry: geometry, alpha: alpha)
 
@@ -518,7 +518,7 @@ struct OrlojClockView: View {
         let track = eclipticCircle(geometry: geometry)
         let center = track.center
         let trackRadius = track.radius
-        let innerRadius = trackRadius - geometry.radius * ladderWidth
+        let innerRadius = trackRadius - geometry.radius * 0.03
         let outerRadius = trackRadius
 
         // On the Orloj the ladder is a solid gilded comb: broad bars with dark
@@ -561,12 +561,6 @@ struct OrlojClockView: View {
         }
     }
 
-    /// On the dial the ladder is about half as wide as the painted sign band
-    /// inside it; both are measured from the same photograph as the projection.
-    private var ladderWidth: CGFloat { 0.055 }
-    /// Distance from the ladder's outer edge to the middle of the sign band.
-    private var zodiacBandInset: CGFloat { ladderWidth + 0.0625 }
-
     /// Unit vector from the ladder centre towards the projected ecliptic longitude.
     private func ladderDirection(longitude: Double, center: CGPoint, geometry: OrlojDialGeometry) -> CGPoint {
         let point = projectedEclipticPoint(longitude: longitude, geometry: geometry)
@@ -585,7 +579,7 @@ struct OrlojClockView: View {
     private func zodiacBandPoint(longitude: Double, geometry: OrlojDialGeometry) -> CGPoint {
         let point = projectedEclipticPoint(longitude: longitude, geometry: geometry)
         let track = eclipticCircle(geometry: geometry)
-        let scale = (track.radius - geometry.radius * zodiacBandInset) / track.radius
+        let scale = (track.radius - geometry.radius * 0.083) / track.radius
         return CGPoint(x: track.center.x + (point.x - track.center.x) * scale, y: track.center.y + (point.y - track.center.y) * scale)
     }
 
@@ -1020,12 +1014,10 @@ struct OrlojClockView: View {
         let ink = OrlojDesignSystem.ink.opacity(0.9)
 
         let labels: [(text: String, east: Bool, dialDistance: CGFloat, belowHorizon: Bool, size: CGFloat, fallbackDegrees: Double)] = [
-            // Distances and letter heights measured on the photographed dial,
-            // as fractions of the painted plate and the dial radius.
-            ("ORTVS", true, plateRadius * 0.74, false, geometry.radius * 0.044, 288),
-            ("OCCASVS", false, plateRadius * 0.70, false, geometry.radius * 0.044, 72),
-            ("AVRORA", true, plateRadius * 0.74, true, geometry.radius * 0.04, 236),
-            ("CREPVSCVLVM", false, plateRadius * 0.74, true, geometry.radius * 0.04, 124)
+            ("ORTVS", true, plateRadius * 0.70, false, geometry.radius * 0.03, 288),
+            ("OCCASVS", false, plateRadius * 0.70, false, geometry.radius * 0.03, 72),
+            ("AVRORA", true, plateRadius * 0.84, true, geometry.radius * 0.027, 236),
+            ("CREPVSCVLVM", false, plateRadius * 0.84, true, geometry.radius * 0.025, 124)
         ]
 
         for label in labels {
@@ -1086,51 +1078,37 @@ struct OrlojClockView: View {
         // Horizon centre lies on the dial's vertical axis; offset h downward.
         let h = arcCenter.y - geometry.center.y
         guard abs(h) > 0.5 else { return nil }
-
-        /// Angle around the arc centre of the point on a circle of `radius`
-        /// about that centre lying `dialDistance` from the dial's centre.
-        func crossing(_ radius: CGFloat) -> CGFloat? {
-            let y = (h * h + dialDistance * dialDistance - radius * radius) / (2 * h)
-            guard abs(y) < dialDistance else { return nil }
-            let x = sqrt(dialDistance * dialDistance - y * y) * (east ? -1 : 1)
-            return atan2(y - h, x)
-        }
+        let y = (h * h + dialDistance * dialDistance - horizonRadius * horizonRadius) / (2 * h)
+        guard abs(y) < dialDistance else { return nil }
+        let x = sqrt(dialDistance * dialDistance - y * y) * (east ? -1 : 1)
+        let angle = atan2(y - h, x)
 
         // Which side of the horizon circle is the sky above the horizon.
         let aboveIsOutside: CGFloat = horizon.lowerAltitudeIsInside ? 1 : -1
-        guard !belowHorizon else {
-            // Middle of the twilight band, between horizon and astronomical
-            // night, at the measured distance from the dial's centre. The band's
-            // width changes along it, so settle the two together.
-            guard var angle = crossing(horizonRadius) else { return nil }
-            var radius = horizonRadius
-            for _ in 0..<4 {
-                var bandEdge = horizonRadius - aboveIsOutside * size * 3
-                if case .circle(let nightCircle) = night {
-                    let nightCenter = geometry.screenPoint(nightCircle.center)
-                    let nightRadius = geometry.screenLength(nightCircle.radius)
-                    let direction = CGPoint(x: cos(angle), y: sin(angle))
-                    let offset = CGPoint(x: arcCenter.x - nightCenter.x, y: arcCenter.y - nightCenter.y)
-                    let b = offset.x * direction.x + offset.y * direction.y
-                    let c = offset.x * offset.x + offset.y * offset.y - nightRadius * nightRadius
-                    let discriminant = b * b - c
-                    if discriminant >= 0 {
-                        let roots = [-b - sqrt(discriminant), -b + sqrt(discriminant)].filter { $0 > 0 }
-                        if let nearest = roots.min(by: { abs($0 - horizonRadius) < abs($1 - horizonRadius) }) {
-                            bandEdge = nearest
-                        }
+        let radius: CGFloat
+        if belowHorizon {
+            // Middle of the twilight band, between horizon and astronomical night.
+            var bandEdge = horizonRadius - aboveIsOutside * size * 3
+            if case .circle(let nightCircle) = night {
+                let nightCenter = geometry.screenPoint(nightCircle.center)
+                let nightRadius = geometry.screenLength(nightCircle.radius)
+                let direction = CGPoint(x: cos(angle), y: sin(angle))
+                let offset = CGPoint(x: arcCenter.x - nightCenter.x, y: arcCenter.y - nightCenter.y)
+                let b = offset.x * direction.x + offset.y * direction.y
+                let c = offset.x * offset.x + offset.y * offset.y - nightRadius * nightRadius
+                let discriminant = b * b - c
+                if discriminant >= 0 {
+                    let roots = [-b - sqrt(discriminant), -b + sqrt(discriminant)].filter { $0 > 0 }
+                    if let nearest = roots.min(by: { abs($0 - horizonRadius) < abs($1 - horizonRadius) }) {
+                        bandEdge = nearest
                     }
                 }
-                radius = (horizonRadius + bandEdge) / 2
-                guard let next = crossing(radius) else { break }
-                angle = next
             }
-            guard radius > size else { return nil }
-            return (arcCenter, radius, angle)
+            radius = (horizonRadius + bandEdge) / 2
+        } else {
+            radius = horizonRadius + aboveIsOutside * size * 0.85
         }
-
-        let radius = horizonRadius + aboveIsOutside * size * 0.85
-        guard radius > size, let angle = crossing(radius) else { return nil }
+        guard radius > size else { return nil }
         return (arcCenter, radius, angle)
     }
 
@@ -1146,8 +1124,7 @@ struct OrlojClockView: View {
         color: Color,
         tracking: CGFloat
     ) {
-        // Painted Roman capitals of even, moderate weight.
-        let font = Font.system(size: max(6, size), weight: .medium, design: .serif)
+        let font = Font.system(size: max(6, size), weight: .semibold, design: .serif)
         let glyphs = string.map { character in
             context.resolve(Text(String(character)).font(font).foregroundStyle(color))
         }
@@ -1393,7 +1370,7 @@ struct OrlojClockView: View {
         let dy = after.y - before.y
         let length = max(1, hypot(dx, dy))
         let normal = CGPoint(x: -dy / length, y: dx / length)
-        let half = geometry.radius * 0.061
+        let half = geometry.radius * 0.055
         drawLine(
             from: CGPoint(x: point.x - normal.x * half * 1.08, y: point.y - normal.y * half * 1.08),
             to: CGPoint(x: point.x + normal.x * half * 1.08, y: point.y + normal.y * half * 1.08),
@@ -1832,10 +1809,7 @@ private struct OrlojDialGeometry {
         side = min(size.width, size.height)
         center = CGPoint(x: size.width / 2, y: size.height / 2)
         radius = side * 0.48
-        // Measured on a front-on photograph of the dial from the arbor: the
-        // ecliptic ladder touches the tropics at 0.95 and 0.41 of the painted
-        // plate's radius, which puts the equator at 0.62 of it.
-        projectionScale = radius * 0.52
+        projectionScale = radius * 0.43
     }
 
     var astrolabeProjectionRadius: Double {
